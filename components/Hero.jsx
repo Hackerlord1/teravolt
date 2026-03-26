@@ -205,9 +205,9 @@ export default function Hero() {
             {/* ✅ Subtitle row — text + badge */}
             <div className="hero-subtitle-row">
               <p className="hero-subtitle-new">
-                <span>Web Design Agency</span>
+                <span>Full stack Web Design</span>
                 {' '}&amp;{' '}
-                <span>Full Stack Hosting.</span>
+                <span> Web Hosting Agency.</span>
               </p>
 
               {/* ✅ Badge moved here — after subtitle text */}
