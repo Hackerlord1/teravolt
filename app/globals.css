@@ -1207,7 +1207,7 @@ nav, main, footer {
 .code-text {
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  color: #ff0000;
+  color: #171717;
   line-height: 1.65;
   white-space: pre-wrap;
   word-break: break-word;
