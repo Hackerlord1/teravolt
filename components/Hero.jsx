@@ -207,7 +207,7 @@ export default function Hero() {
               <p className="hero-subtitle-new">
                 <span>Full stack Web Design</span>
                 {' '}&amp;{' '}
-                <span> Web Hosting Agency.</span>
+                <span>Hosting Agency.</span>
               </p>
 
               {/* ✅ Badge moved here — after subtitle text */}
