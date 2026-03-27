@@ -63,7 +63,7 @@ function getActivePlan(pages) {
 }
 
 export default function Pricing() {
-  const [pageIndex, setPageIndex] = useState(4)
+  const [pageIndex, setPageIndex] = useState(0)
   const pages = PAGE_OPTIONS[pageIndex]
   const sliderPercent = (pageIndex / (PAGE_OPTIONS.length - 1)) * 100
   const activePlan = getActivePlan(pages)
