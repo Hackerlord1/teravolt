@@ -4,8 +4,8 @@ import Navbar from '@/components/Navbar'
 import BackToTop from '@/components/BackToTop'
 
 export const metadata = {
-  title: 'Teravolt',
-  description: 'Web Design & Development Studio',
+  title: 'Teravolt Digital — Web Design & Development Studio',
+  description: 'Teravolt Digital Solutions helps businesses succeed online with web design, graphics, and smart digital services.',
 }
 
 export default function RootLayout({ children }) {
