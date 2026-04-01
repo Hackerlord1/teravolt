@@ -20,7 +20,6 @@ export default function Footer() {
         </svg>
       ),
     },
-    
     {
       id: 'reddit',
       label: 'u/Wise-Mess36',
