@@ -5,8 +5,8 @@ import PlanModal from './PlanModal' // ✅ import modal
 const plans = [
   {
     name: 'Basic',
-    basePrice: 18390,
-    extraPerPage: 5256,
+    basePrice: 8000,        // 1 page = 8,000 KSH
+    extraPerPage: 2500,     // each additional page +2,500
     desc: 'Perfect for small projects and simple websites.',
     features: [
       'Responsive Design',
@@ -20,8 +20,8 @@ const plans = [
   },
   {
     name: 'Standard',
-    basePrice: 48164,
-    extraPerPage: 8760,
+    basePrice: 20000,       // 1 page = 20,000 KSH
+    extraPerPage: 4000,     // each additional page +4,000
     desc: 'Best for growing businesses with more needs.',
     features: [
       'Advanced SEO & Analytics',
@@ -35,8 +35,8 @@ const plans = [
   },
   {
     name: 'Pro',
-    basePrice: 57796,
-    extraPerPage: 7008,
+    basePrice: 35000,       // 1 page = 35,000 KSH
+    extraPerPage: 5500,     // each additional page +5,500
     desc: 'Ideal for larger businesses that need scalability.',
     features: [
       'E-commerce Integration',
