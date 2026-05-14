@@ -1,52 +1,74 @@
 'use client'
+import { useState } from 'react'
 
 export default function Contact() {
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    alert('Thanks! We\'ll get back to you soon. 🚀')
+    setLoading(true)
+
+    const formData = new FormData(e.target)
+
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      project: formData.get('project'),
+      message: formData.get('message'),
+    }
+
+    try {
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+
+      if (res.ok) {
+        alert('✅ Message sent successfully!')
+        e.target.reset()
+      } else {
+        alert('❌ Something went wrong.')
+      }
+    } catch (err) {
+      alert('❌ Network error.')
+    }
+
+    setLoading(false)
   }
 
   return (
     <section id="contact" className="section">
       <p className="section-label">// Get In Touch</p>
+
       <div className="contact-grid">
         <div className="contact-info">
-          <h2 className="section-title">Let&apos;s <span>Work</span> Together</h2>
+          <h2 className="section-title">
+            Let&apos;s <span>Work</span> Together
+          </h2>
+
           <h3>Email</h3>
-          <p>hello@teravolt.com</p>
+          <p>admin@teravoltdigital.website</p>
+
           <h3>Phone</h3>
           <p>+254 79122 0335</p>
+
           <h3>Location</h3>
           <p>Remote — Worldwide</p>
         </div>
 
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <input type="text" placeholder="Project Type (e.g. Website + Hosting)" />
-          <textarea rows="5" placeholder="Tell us about your project..." required></textarea>
+          <input name="name" type="text" placeholder="Your Name" required />
+          <input name="email" type="email" placeholder="Your Email" required />
+          <input name="project" type="text" placeholder="Project Type (e.g. Website + Hosting)" />
+          <textarea name="message" rows="5" placeholder="Tell us about your project..." required></textarea>
 
-          {/* ✅ Animated Send Message button */}
-          <button type="submit" className="submit-btn">
-
-            {/* Layer 1 — default visible */}
-            <span className="submit-span-mother">
-              {'Send Message ↗'.split('').map((char, i) => (
-                <span key={i} style={{ animationDelay: `${i * 0.02}s` }}>
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
-              ))}
+          <button type="submit" className="submit-btn" disabled={loading}>
+            <span>
+              {loading ? 'Sending...' : 'Send Message ↗'}
             </span>
-
-            {/* Layer 2 — slides in on hover */}
-            <span className="submit-span-mother2">
-              {'Send Message ↗'.split('').map((char, i) => (
-                <span key={i} style={{ animationDelay: `${i * 0.02}s` }}>
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
-              ))}
-            </span>
-
           </button>
         </form>
       </div>
