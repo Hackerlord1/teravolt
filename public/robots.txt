@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.teravoltdigital.website/sitemap.xml
+Sitemap: https://teravoltdigital.website/sitemap.xml

@@ -3,7 +3,7 @@ import { projects } from "@/lib/projectsData";
 import { servicesData } from "@/lib/servicesData";
 
 export default function sitemap() {
-  const baseUrl = "https://www.teravoltdigital.website";
+  const baseUrl = "https://teravoltdigital.website";
 
   return [
     {
