@@ -2,19 +2,17 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import AnimatedText from './AnimatedText'
+import { THEME_KEY, NAV_SECTIONS } from '@/lib/constants'
 
 function AnimatedLink({ href, text }) {
   return (
     <a href={href} className="nav-link animated-link">
       <span className="span-mother">
-        {text.split('').map((char, i) => (
-          <span key={i}>{char === ' ' ? '\u00A0' : char}</span>
-        ))}
+        <AnimatedText text={text} />
       </span>
       <span className="span-mother2">
-        {text.split('').map((char, i) => (
-          <span key={i}>{char === ' ' ? '\u00A0' : char}</span>
-        ))}
+        <AnimatedText text={text} />
       </span>
     </a>
   )
@@ -28,14 +26,10 @@ function AnimatedNavLink({ href, text, isActive, onClick }) {
       className={`nav-link animated-link ${isActive ? 'nav-link--active' : ''}`}
     >
       <span className="span-mother">
-        {text.split('').map((char, i) => (
-          <span key={i}>{char === ' ' ? '\u00A0' : char}</span>
-        ))}
+        <AnimatedText text={text} />
       </span>
       <span className="span-mother2">
-        {text.split('').map((char, i) => (
-          <span key={i}>{char === ' ' ? '\u00A0' : char}</span>
-        ))}
+        <AnimatedText text={text} />
       </span>
     </Link>
   )
@@ -61,14 +55,10 @@ function SmartLink({ sectionId, text, isHome }) {
       className="nav-link animated-link"
     >
       <span className="span-mother">
-        {text.split('').map((char, i) => (
-          <span key={i}>{char === ' ' ? '\u00A0' : char}</span>
-        ))}
+        <AnimatedText text={text} />
       </span>
       <span className="span-mother2">
-        {text.split('').map((char, i) => (
-          <span key={i}>{char === ' ' ? '\u00A0' : char}</span>
-        ))}
+        <AnimatedText text={text} />
       </span>
     </a>
   )
@@ -147,9 +137,8 @@ export default function Navbar() {
   const isBlogPage = pathname.startsWith('/blog')
   const isPortfolioPage = pathname.startsWith('/portfolio')
 
-  // Theme init
   useEffect(() => {
-    const saved = localStorage.getItem('teravolt-theme')
+    const saved = localStorage.getItem(THEME_KEY)
     if (saved === 'dark') {
       setDark(true)
       document.documentElement.setAttribute('data-theme', 'dark')
@@ -160,14 +149,12 @@ export default function Navbar() {
     setMounted(true)
   }, [])
 
-  // Theme sync
   useEffect(() => {
     if (!mounted) return
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
-    localStorage.setItem('teravolt-theme', dark ? 'dark' : 'light')
+    localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light')
   }, [dark, mounted])
 
-  // Hash scroll
   useEffect(() => {
     if (isHome && window.location.hash) {
       const id = window.location.hash.replace('#', '')
@@ -178,14 +165,12 @@ export default function Navbar() {
     }
   }, [isHome, pathname])
 
-  // Scroll state
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Lock body when menu open
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden'
@@ -195,7 +180,6 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
-  // Close on ESC
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') setMenuOpen(false)
@@ -204,7 +188,6 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', handleEsc)
   }, [])
 
-  // Close on route change
   useEffect(() => {
     setMenuOpen(false)
   }, [pathname])
@@ -224,29 +207,20 @@ export default function Navbar() {
 
   const closeMenu = () => setMenuOpen(false)
 
-  const navSections = [
-    { id: 'services', text: 'Services' },
-    { id: 'pricing', text: 'Packages' },
-    { id: 'about', text: 'About' },
-    { id: 'contact', text: 'Contact' },
-  ]
-
   return (
     <>
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} ref={navRef}>
 
-        {/* LEFT — Logo */}
         <Link href="/" className="nav-logo">
           Tera<span>volt</span>
         </Link>
 
-        {/* CENTER — Pill (desktop) */}
         <div className="nav-pill">
           <ul className="nav-links">
             <li>
               <AnimatedNavLink href="/" text="Home" isActive={isHome} />
             </li>
-            {navSections.map((section) => (
+            {NAV_SECTIONS.map((section) => (
               <li key={section.id}>
                 <SmartLink
                   sectionId={section.id}
@@ -272,7 +246,6 @@ export default function Navbar() {
           </ul>
         </div>
 
-        {/* RIGHT */}
         <div className="nav-right">
           <ThemeToggle
             dark={dark}
@@ -280,7 +253,6 @@ export default function Navbar() {
             mounted={mounted}
           />
 
-          {/* Connect (desktop) */}
           <a
             href="/#contact"
             onClick={handleConnect}
@@ -289,19 +261,14 @@ export default function Navbar() {
             <span className="connect-dot" aria-hidden="true" />
             <span className="connect-animated">
               <span className="span-mother" aria-hidden="true">
-                {'Talk to Us ↗'.split('').map((char, i) => (
-                  <span key={i}>{char === ' ' ? '\u00A0' : char}</span>
-                ))}
+                <AnimatedText text="Talk to Us ↗" />
               </span>
               <span className="span-mother2">
-                {'Talk to Us ↗'.split('').map((char, i) => (
-                  <span key={i}>{char === ' ' ? '\u00A0' : char}</span>
-                ))}
+                <AnimatedText text="Talk to Us ↗" />
               </span>
             </span>
           </a>
 
-          {/* Hamburger (mobile) */}
           <button
             className="nav-hamburger"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -314,24 +281,17 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* ======================== */}
-      {/* BACKDROP                 */}
-      {/* ======================== */}
       <div
         className={`nav-overlay-backdrop ${menuOpen ? 'nav-overlay-backdrop--visible' : ''}`}
         onClick={closeMenu}
         aria-hidden="true"
       />
 
-      {/* ======================== */}
-      {/* DROPDOWN OVERLAY MENU    */}
-      {/* ======================== */}
       <div className={`nav-overlay-menu ${menuOpen ? 'nav-overlay-menu--open' : ''}`}>
 
-        {/* Links */}
         <div className="nav-overlay-links">
           <MobileNavLink href="/" text="Home" onNav={closeMenu} />
-          {navSections.map((section) => (
+          {NAV_SECTIONS.map((section) => (
             <MobileSmartLink
               key={section.id}
               sectionId={section.id}
@@ -344,7 +304,6 @@ export default function Navbar() {
           <MobileNavLink href="/blog" text="Blog" onNav={closeMenu} />
         </div>
 
-        {/* Footer */}
         <div className="nav-overlay-footer">
           <div className="nav-overlay-theme">
             <span className="nav-overlay-theme-label">Theme</span>

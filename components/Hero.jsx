@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useReducer } from 'react'
 import LogoScroll from './LogoScroll'
 
 const CYCLING_WORDS = [
@@ -114,10 +114,32 @@ const imgObserver = new IntersectionObserver(
 images.forEach(img => imgObserver.observe(img))`,
 ]
 
+function codeReducer(state, action) {
+  switch (action.type) {
+    case 'TYPE':
+      return { ...state, charIndex: state.charIndex + 1 }
+    case 'DELETE':
+      return { ...state, charIndex: state.charIndex - 1 }
+    case 'SWITCH_SNIPPET':
+      return { ...state, snippetIndex: (state.snippetIndex + 1) % CODE_SNIPPETS.length, charIndex: 0, isDeleting: false }
+    case 'START_DELETE':
+      return { ...state, isDeleting: true }
+    case 'START_TYPE':
+      return { ...state, isDeleting: false }
+    default:
+      return state
+  }
+}
+
 export default function Hero() {
   const codeRef = useRef(null)
-  const [wordIndex, setWordIndex]   = useState(0)
-  const [animState, setAnimState]   = useState('visible')
+  const [wordIndex, setWordIndex] = useState(0)
+  const [animState, setAnimState] = useState('visible')
+  const [codeState, dispatch] = useReducer(codeReducer, {
+    snippetIndex: 0,
+    charIndex: 0,
+    isDeleting: false,
+  })
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -134,37 +156,28 @@ export default function Hero() {
   useEffect(() => {
     const el = codeRef.current
     if (!el) return
-    let snippetIndex = 0
-    let charIndex    = 0
-    let isDeleting   = false
-    let timeout
 
-    const type = () => {
-      const current = CODE_SNIPPETS[snippetIndex]
-      if (!isDeleting) {
-        charIndex++
-        el.textContent = current.slice(0, charIndex)
-        if (charIndex === current.length) {
-          isDeleting = true
-          timeout = setTimeout(type, 2500)
-          return
-        }
-        timeout = setTimeout(type, 18)
+    const current = CODE_SNIPPETS[codeState.snippetIndex]
+    el.textContent = current.slice(0, codeState.charIndex)
+
+    let timeout
+    if (!codeState.isDeleting) {
+      if (codeState.charIndex === current.length) {
+        timeout = setTimeout(() => dispatch({ type: 'START_DELETE' }), 2500)
       } else {
-        charIndex--
-        el.textContent = current.slice(0, charIndex)
-        if (charIndex === 0) {
-          isDeleting   = false
-          snippetIndex = (snippetIndex + 1) % CODE_SNIPPETS.length
-          timeout      = setTimeout(type, 400)
-          return
-        }
-        timeout = setTimeout(type, 8)
+        timeout = setTimeout(() => dispatch({ type: 'TYPE' }), 18)
+      }
+    } else {
+      if (codeState.charIndex === 0) {
+        dispatch({ type: 'SWITCH_SNIPPET' })
+        timeout = setTimeout(() => dispatch({ type: 'START_TYPE' }), 400)
+      } else {
+        timeout = setTimeout(() => dispatch({ type: 'DELETE' }), 8)
       }
     }
-    timeout = setTimeout(type, 800)
+
     return () => clearTimeout(timeout)
-  }, [])
+  }, [codeState])
 
   const currentWord = CYCLING_WORDS[wordIndex]
 
@@ -175,22 +188,18 @@ export default function Hero() {
         <section id="home" className="hero">
           <div className="hero-left">
 
-            {/* LINE 1 — "GRAPHICS" */}
             <div className="hero-line-graphics">
               <span className="hero-graphics-text">GRAPHICS ,</span>
             </div>
 
-            {/* LINE 2 — Big orange "WEB/DESIGN" (badge removed from here) */}
             <div className="hero-line-main">
               <span className="hero-big-orange">WEB / DESIGN</span>
             </div>
 
-            {/* LINE 3 — Big black "& HOSTING" */}
             <div className="hero-line-black">
               <span className="hero-big-black">&amp; HOSTING</span>
             </div>
 
-            {/* LINE 4 — Animated cycling word */}
             <div className="hero-line-animated">
               <span
                 className={`hero-word-swap ${animState} ${
@@ -202,7 +211,6 @@ export default function Hero() {
               <span className="hero-word-dot">.</span>
             </div>
 
-            {/* ✅ Subtitle row — text + badge */}
             <div className="hero-subtitle-row">
               <p className="hero-subtitle-new">
                 <span>Full stack Web Design</span>
@@ -210,7 +218,6 @@ export default function Hero() {
                 <span>Hosting Agency.</span>
               </p>
 
-              {/* ✅ Badge moved here — after subtitle text */}
               <div className="hero-badge hero-badge--inline">
                 <span className="badge-number">50+</span>
                 <span className="badge-star">⭐</span>
