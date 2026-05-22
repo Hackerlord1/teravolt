@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { servicesData, serviceCategoryCounts } from '@/lib/servicesData'
 
+const socials = [];
 
 
 export default function ServiceSidebar({ isOpen, onClose }) {
