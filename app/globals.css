@@ -3303,7 +3303,7 @@ nav, main, footer {
   left: 0;
   width: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 3000;
 }
 
 .portfolio-pin {
@@ -4089,7 +4089,7 @@ input::placeholder, textarea::placeholder {
   position: fixed;
   top: 5.8rem;
   left: 1rem;
-  z-index: 997;
+  z-index: 3000;
   align-items: center;
   gap: 0.5rem;
   padding: 0.55rem 1.1rem;
@@ -4172,7 +4172,7 @@ input::placeholder, textarea::placeholder {
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  z-index: 998;
+  z-index: 3000;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s ease;
