@@ -288,7 +288,7 @@ nav, main, footer {
   border: none;
   box-shadow: none;
   backdrop-filter: none;
-  z-index: 1000;
+  z-index: 3000;
   transition: all 0.4s ease;
 }
 
@@ -4089,7 +4089,7 @@ input::placeholder, textarea::placeholder {
   position: fixed;
   top: 5.8rem;
   left: 1rem;
-  z-index: 3000;
+  z-index: 1000;
   align-items: center;
   gap: 0.5rem;
   padding: 0.55rem 1.1rem;
@@ -4172,7 +4172,7 @@ input::placeholder, textarea::placeholder {
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  z-index: 3000;
+  z-index: 1000;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s ease;
@@ -4214,7 +4214,7 @@ input::placeholder, textarea::placeholder {
     background: var(--bg);
     border-right: 1px solid var(--border);
     border-bottom: none;
-    z-index: 999;
+    z-index: 1000;
     padding: 0;
     overflow: hidden;
     transform: translateX(-105%);
