@@ -3718,6 +3718,7 @@ input::placeholder, textarea::placeholder {
 .blog-sidebar {
   border-right: 1px solid var(--border);
   padding: 0; /* FIXED: was "padding: -4rem 0" (invalid) */
+  z-index: 3000
 }
 
 .blog-sidebar-inner {
