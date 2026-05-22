@@ -7,7 +7,8 @@ export default function BlogSidebar({ posts }) {
 
   const categories = [...new Set(posts.map((p) => p.category))]
 
-  
+  const socials = [];
+
 
   return (
     <aside className="blog-sidebar blog-sidebar--compact">

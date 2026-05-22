@@ -38,7 +38,8 @@ export default function ProjectSidebar({ projects, isOpen, onClose }) {
     onClose?.()
   }, [pathname])
 
-  
+  const socials = [];
+
 
   return (
     <>
