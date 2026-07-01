@@ -1,7 +1,9 @@
 'use client'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function Contact() {
+  const { t } = useTranslation(['common'])
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {

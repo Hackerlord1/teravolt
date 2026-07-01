@@ -2,21 +2,10 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
 import AnimatedText from './AnimatedText'
 import { THEME_KEY, NAV_SECTIONS } from '@/lib/constants'
-
-function AnimatedLink({ href, text }) {
-  return (
-    <a href={href} className="nav-link animated-link">
-      <span className="span-mother">
-        <AnimatedText text={text} />
-      </span>
-      <span className="span-mother2">
-        <AnimatedText text={text} />
-      </span>
-    </a>
-  )
-}
+import i18n from "@/lib/i18n"; // ✅ ADDED
 
 function AnimatedNavLink({ href, text, isActive, onClick }) {
   return (
@@ -49,11 +38,7 @@ function SmartLink({ sectionId, text, isHome }) {
   }
 
   return (
-    <a
-      href={`/#${sectionId}`}
-      onClick={handleClick}
-      className="nav-link animated-link"
-    >
+    <a href={`/#${sectionId}`} onClick={handleClick} className="nav-link animated-link">
       <span className="span-mother">
         <AnimatedText text={text} />
       </span>
@@ -64,61 +49,14 @@ function SmartLink({ sectionId, text, isHome }) {
   )
 }
 
-/* ---- Mobile plain links ---- */
-function MobileSmartLink({ sectionId, text, isHome, onNav }) {
-  const router = useRouter()
-
-  const handleClick = (e) => {
-    e.preventDefault()
-    onNav()
-    if (isHome) {
-      setTimeout(() => {
-        const el = document.getElementById(sectionId)
-        if (el) el.scrollIntoView({ behavior: 'smooth' })
-      }, 400)
-    } else {
-      router.push(`/#${sectionId}`)
-    }
-  }
-
-  return (
-    <a href={`/#${sectionId}`} onClick={handleClick} className="mobile-nav-link">
-      <span>{text}</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="9 18 15 12 9 6" />
-      </svg>
-    </a>
-  )
-}
-
-function MobileNavLink({ href, text, onNav }) {
-  return (
-    <Link href={href} onClick={onNav} className="mobile-nav-link">
-      <span>{text}</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="9 18 15 12 9 6" />
-      </svg>
-    </Link>
-  )
-}
-
 function ThemeToggle({ dark, onToggle, mounted }) {
   return (
     <button
       className={`theme-track ${dark ? 'theme-track--dark' : 'theme-track--light'}`}
       onClick={onToggle}
-      aria-label="Toggle dark mode"
-      role="switch"
-      aria-checked={dark}
     >
-      <span className="theme-track-icons">
-        <span className="theme-track-moon">🌙</span>
-        <span className="theme-track-sun">☀️</span>
-      </span>
       <span className="theme-track-thumb">
-        <span className="theme-track-thumb-icon">
-          {mounted ? (dark ? '☀️' : '🌙') : '🌙'}
-        </span>
+        {mounted ? (dark ? '☀️' : '🌙') : '🌙'}
       </span>
     </button>
   )
@@ -127,11 +65,32 @@ function ThemeToggle({ dark, onToggle, mounted }) {
 export default function Navbar() {
   const pathname = usePathname()
   const router = useRouter()
+  const { t, i18n: i18nInstance } = useTranslation()
+
   const [dark, setDark] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const navRef = useRef(null)
+
+  // ✅ LANGUAGE STATE
+  const [lang, setLang] = useState(i18n.language)
+
+  const languages = [
+    { code: "en", label: "EN" },
+    { code: "fr", label: "FR" },
+    { code: "pt", label: "PT" },
+    { code: "es", label: "ES" },
+    { code: "de", label: "DE" },
+    { code: "it", label: "IT" },
+    { code: "nl", label: "NL" },
+    { code: "sw", label: "SW" },
+    { code: "zh", label: "ZH" }
+  ]
+
+  const changeLang = (lng) => {
+    i18n.changeLanguage(lng)
+    localStorage.setItem("lang", lng)
+    setLang(lng)
+  }
 
   const isHome = pathname === '/'
   const isBlogPage = pathname.startsWith('/blog')
@@ -139,13 +98,8 @@ export default function Navbar() {
 
   useEffect(() => {
     const saved = localStorage.getItem(THEME_KEY)
-    if (saved === 'dark') {
-      setDark(true)
-      document.documentElement.setAttribute('data-theme', 'dark')
-    } else {
-      setDark(false)
-      document.documentElement.setAttribute('data-theme', 'light')
-    }
+    setDark(saved === 'dark')
+    document.documentElement.setAttribute('data-theme', saved === 'dark' ? 'dark' : 'light')
     setMounted(true)
   }, [])
 
@@ -155,174 +109,138 @@ export default function Navbar() {
     localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light')
   }, [dark, mounted])
 
-  useEffect(() => {
-    if (isHome && window.location.hash) {
-      const id = window.location.hash.replace('#', '')
-      setTimeout(() => {
-        const el = document.getElementById(id)
-        if (el) el.scrollIntoView({ behavior: 'smooth' })
-      }, 100)
-    }
-  }, [isHome, pathname])
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
-
-  useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === 'Escape') setMenuOpen(false)
-    }
-    window.addEventListener('keydown', handleEsc)
-    return () => window.removeEventListener('keydown', handleEsc)
-  }, [])
-
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [pathname])
-
   const handleConnect = (e) => {
     e.preventDefault()
-    setMenuOpen(false)
     if (isHome) {
-      setTimeout(() => {
-        const el = document.getElementById('contact')
-        if (el) el.scrollIntoView({ behavior: 'smooth' })
-      }, 400)
+      const el = document.getElementById('contact')
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
     } else {
       router.push('/#contact')
     }
   }
 
-  const closeMenu = () => setMenuOpen(false)
-
   return (
     <>
-      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} ref={navRef}>
+      <nav className="navbar">
 
+        {/* LOGO */}
         <Link href="/" className="nav-logo">
           Tera<span>volt</span>
         </Link>
 
+        {/* LINKS */}
         <div className="nav-pill">
           <ul className="nav-links">
-            <li>
-              <AnimatedNavLink href="/" text="Home" isActive={isHome} />
-            </li>
+            <li><AnimatedNavLink href="/" text={t('navbar:home')} isActive={isHome} /></li>
+
             {NAV_SECTIONS.map((section) => (
               <li key={section.id}>
-                <SmartLink
-                  sectionId={section.id}
-                  text={section.text}
-                  isHome={isHome}
-                />
+                <SmartLink sectionId={section.id} text={t(`navbar:${section.id}`)} isHome={isHome} />
               </li>
             ))}
+
             <li>
-              <AnimatedNavLink
-                href="/portfolio"
-                text="Work"
-                isActive={isPortfolioPage}
-              />
+              <AnimatedNavLink href="/portfolio" text={t('navbar:work')} isActive={isPortfolioPage} />
             </li>
+
             <li>
-              <AnimatedNavLink
-                href="/blog"
-                text="Blog"
-                isActive={isBlogPage}
-              />
+              <AnimatedNavLink href="/blog" text={t('navbar:blog')} isActive={isBlogPage} />
             </li>
           </ul>
         </div>
 
+        {/* RIGHT SIDE */}
         <div className="nav-right">
+
           <ThemeToggle
             dark={dark}
             onToggle={() => setDark(!dark)}
             mounted={mounted}
           />
 
+          {/* ✅ TALK TO US now translated */}
           <a
             href="/#contact"
             onClick={handleConnect}
             className="connect-btn connect-btn--desktop"
           >
-            <span className="connect-dot" aria-hidden="true" />
+            <span className="connect-dot" />
             <span className="connect-animated">
-              <span className="span-mother" aria-hidden="true">
-                <AnimatedText text="Talk to Us ↗" />
+              <span className="span-mother">
+                <AnimatedText text={t('navbar:talk')} />
               </span>
               <span className="span-mother2">
-                <AnimatedText text="Talk to Us ↗" />
+                <AnimatedText text={t('navbar:talk')} />
               </span>
             </span>
           </a>
 
+          {/* ✅ LANGUAGE SWITCH (DESKTOP) */}
+          <select
+            onChange={(e) => changeLang(e.target.value)}
+            value={lang}
+            className="nav-lang-select"
+          >
+            {languages.map((l) => (
+              <option key={l.code} value={l.code}>
+                {l.label}
+              </option>
+            ))}
+          </select>
+
           <button
             className="nav-hamburger"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           >
-            <span className={`hamburger-line hamburger-line--1 ${menuOpen ? 'open' : ''}`} />
-            <span className={`hamburger-line hamburger-line--2 ${menuOpen ? 'open' : ''}`} />
-            <span className={`hamburger-line hamburger-line--3 ${menuOpen ? 'open' : ''}`} />
+            ☰
           </button>
         </div>
       </nav>
 
-      <div
-        className={`nav-overlay-backdrop ${menuOpen ? 'nav-overlay-backdrop--visible' : ''}`}
-        onClick={closeMenu}
-        aria-hidden="true"
-      />
+      {/* MOBILE MENU */}
+      {menuOpen && (
+        <div className="nav-overlay-menu">
 
-      <div className={`nav-overlay-menu ${menuOpen ? 'nav-overlay-menu--open' : ''}`}>
-
-        <div className="nav-overlay-links">
-          <MobileNavLink href="/" text="Home" onNav={closeMenu} />
-          {NAV_SECTIONS.map((section) => (
-            <MobileSmartLink
-              key={section.id}
-              sectionId={section.id}
-              text={section.text}
-              isHome={isHome}
-              onNav={closeMenu}
-            />
-          ))}
-          <MobileNavLink href="/portfolio" text="Work" onNav={closeMenu} />
-          <MobileNavLink href="/blog" text="Blog" onNav={closeMenu} />
-        </div>
-
-        <div className="nav-overlay-footer">
-          <div className="nav-overlay-theme">
-            <span className="nav-overlay-theme-label">Theme</span>
-            <ThemeToggle
-              dark={dark}
-              onToggle={() => setDark(!dark)}
-              mounted={mounted}
-            />
+          <div className="nav-overlay-links">
+            <Link href="/" onClick={() => setMenuOpen(false)}>{t('navbar:home')}</Link>
+            <Link href="/portfolio" onClick={() => setMenuOpen(false)}>{t('navbar:work')}</Link>
+            <Link href="/blog" onClick={() => setMenuOpen(false)}>{t('navbar:blog')}</Link>
           </div>
-          <a
-            href="/#contact"
-            onClick={handleConnect}
-            className="nav-overlay-cta"
-          >
-            <span className="connect-dot" aria-hidden="true" />
-            Talk to Us ↗
-          </a>
+
+          <div className="nav-overlay-footer">
+
+            {/* ✅ YOUR EXACT REQUIREMENT POSITION */}
+            <div className="nav-overlay-theme">
+
+              <span>Teravolt</span>
+
+              {/* ✅ LANGUAGE BETWEEN LOGO & TOGGLE */}
+              <select
+                onChange={(e) => changeLang(e.target.value)}
+                value={lang}
+                className="nav-lang-select"
+              >
+                {languages.map((l) => (
+                  <option key={l.code} value={l.code}>
+                    {l.label}
+                  </option>
+                ))}
+              </select>
+
+              <ThemeToggle
+                dark={dark}
+                onToggle={() => setDark(!dark)}
+                mounted={mounted}
+              />
+            </div>
+
+            <a href="/#contact" onClick={handleConnect}>
+              {t('navbar:talk')}
+            </a>
+
+          </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

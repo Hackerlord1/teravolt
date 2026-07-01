@@ -1,9 +1,22 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// ✅ Prevents this route from being statically generated during build
+export const dynamic = 'force-dynamic'
 
 export async function POST(req) {
   try {
+    // ✅ Check if API key exists first
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not configured')
+      return Response.json(
+        { success: false, error: 'Email service is not configured. Please contact support.' },
+        { status: 500 }
+      )
+    }
+
+    // ✅ Initialize Resend only when needed
+    const resend = new Resend(process.env.RESEND_API_KEY)
+    
     const body = await req.json()
 
     const {
@@ -57,13 +70,21 @@ export async function POST(req) {
       html
     })
 
-    return Response.json({ success: true, data })
+    return Response.json({ 
+      success: true, 
+      data,
+      message: 'Email sent successfully!'
+    })
 
   } catch (error) {
     console.error('EMAIL ERROR:', error)
 
     return Response.json(
-      { success: false, error: 'Failed to send email' },
+      { 
+        success: false, 
+        error: 'Failed to send email',
+        details: error.message 
+      },
       { status: 500 }
     )
   }

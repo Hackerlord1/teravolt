@@ -1,15 +1,24 @@
 'use client'
 import { useEffect, useRef, useState, useReducer } from 'react'
+import { useTranslation } from 'react-i18next'
 import LogoScroll from './LogoScroll'
 
-const CYCLING_WORDS = [
-  { text: 'WEBSITES',    color: 'black'  },
-  { text: 'EXPERIENCES', color: 'orange' },
-  { text: 'SOLUTIONS',   color: 'black'  },
-  { text: 'PLATFORMS',   color: 'orange' },
-  { text: 'PRODUCTS',    color: 'black'  },
-  { text: 'BRANDS',      color: 'orange' },
-]
+function codeReducer(state, action) {
+  switch (action.type) {
+    case 'TYPE':
+      return { ...state, charIndex: state.charIndex + 1 }
+    case 'DELETE':
+      return { ...state, charIndex: state.charIndex - 1 }
+    case 'SWITCH_SNIPPET':
+      return { ...state, snippetIndex: (state.snippetIndex + 1) % CODE_SNIPPETS.length, charIndex: 0, isDeleting: false }
+    case 'START_DELETE':
+      return { ...state, isDeleting: true }
+    case 'START_TYPE':
+      return { ...state, isDeleting: false }
+    default:
+      return state
+  }
+}
 
 const CODE_SNIPPETS = [
   `// Smooth scroll navigation
@@ -114,24 +123,8 @@ const imgObserver = new IntersectionObserver(
 images.forEach(img => imgObserver.observe(img))`,
 ]
 
-function codeReducer(state, action) {
-  switch (action.type) {
-    case 'TYPE':
-      return { ...state, charIndex: state.charIndex + 1 }
-    case 'DELETE':
-      return { ...state, charIndex: state.charIndex - 1 }
-    case 'SWITCH_SNIPPET':
-      return { ...state, snippetIndex: (state.snippetIndex + 1) % CODE_SNIPPETS.length, charIndex: 0, isDeleting: false }
-    case 'START_DELETE':
-      return { ...state, isDeleting: true }
-    case 'START_TYPE':
-      return { ...state, isDeleting: false }
-    default:
-      return state
-  }
-}
-
 export default function Hero() {
+  const { t } = useTranslation(['hero'])
   const codeRef = useRef(null)
   const [wordIndex, setWordIndex] = useState(0)
   const [animState, setAnimState] = useState('visible')
@@ -141,17 +134,26 @@ export default function Hero() {
     isDeleting: false,
   })
 
+  const cyclingWords = [
+    { text: t('websites'), color: 'black' },
+    { text: t('experiences'), color: 'orange' },
+    { text: t('solutions'), color: 'black' },
+    { text: t('platforms'), color: 'orange' },
+    { text: t('products'), color: 'black' },
+    { text: t('brands'), color: 'orange' },
+  ]
+
   useEffect(() => {
     const interval = setInterval(() => {
       setAnimState('exit')
       setTimeout(() => {
-        setWordIndex(prev => (prev + 1) % CYCLING_WORDS.length)
+        setWordIndex(prev => (prev + 1) % cyclingWords.length)
         setAnimState('enter')
         setTimeout(() => setAnimState('visible'), 50)
       }, 380)
     }, 2800)
     return () => clearInterval(interval)
-  }, [])
+  }, [cyclingWords.length])
 
   useEffect(() => {
     const el = codeRef.current
@@ -179,7 +181,7 @@ export default function Hero() {
     return () => clearTimeout(timeout)
   }, [codeState])
 
-  const currentWord = CYCLING_WORDS[wordIndex]
+  const currentWord = cyclingWords[wordIndex]
 
   return (
     <>
@@ -189,15 +191,15 @@ export default function Hero() {
           <div className="hero-left">
 
             <div className="hero-line-graphics">
-              <span className="hero-graphics-text">GRAPHICS ,</span>
+              <span className="hero-graphics-text">{t('graphics')},</span>
             </div>
 
             <div className="hero-line-main">
-              <span className="hero-big-orange">WEB / DESIGN</span>
+              <span className="hero-big-orange">{t('web_design')}</span>
             </div>
 
             <div className="hero-line-black">
-              <span className="hero-big-black">&amp; HOSTING</span>
+              <span className="hero-big-black">&amp; {t('and_hosting')}</span>
             </div>
 
             <div className="hero-line-animated">
@@ -213,15 +215,15 @@ export default function Hero() {
 
             <div className="hero-subtitle-row">
               <p className="hero-subtitle-new">
-                <span>Full stack Web Design</span>
+                <span>{t('tagline_part1')}</span>
                 {' '}&amp;{' '}
-                <span>Hosting Agency.</span>
+                <span>{t('tagline_part2')}.</span>
               </p>
 
               <div className="hero-badge hero-badge--inline">
                 <span className="badge-number">50+</span>
                 <span className="badge-star">⭐</span>
-                <span className="badge-text">Projects Completed</span>
+                <span className="badge-text">{t('projects_badge')}</span>
               </div>
             </div>
 
@@ -229,7 +231,7 @@ export default function Hero() {
 
           <div className="scroll-indicator">
             <div className="scroll-line" />
-            <span>Scroll</span>
+            <span>{t('scroll_text')}</span>
           </div>
         </section>
 

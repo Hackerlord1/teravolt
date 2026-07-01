@@ -1,10 +1,12 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 import { servicesData, serviceCategories } from '@/lib/servicesData'
 import ServiceSidebar from '@/components/services/ServiceSidebar'
 
 export default function ServicesPage() {
+  const { t } = useTranslation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
@@ -35,32 +37,32 @@ export default function ServicesPage() {
 
         {/* Header */}
         <div className="blog-page-header">
-          <p className="section-label">// What We Offer</p>
+          <p className="section-label">{t('services_label')}</p>
           <h1 className="blog-page-title">
-            Our <span>Services</span>
+            {t('services_title')} <span>{t('services_title_span')}</span>
           </h1>
           <p className="blog-page-subtitle">
-            Explore our full range of digital services — from web development to performance optimization.
-            <strong> Click any service to view case studies.</strong>
+            {t('services_subtitle')}
+            <strong> {t('services_cta')}</strong>
           </p>
 
           {/* Stats */}
           <div className="blog-stats-row">
             <div className="blog-stat">
               <span className="blog-stat-number">{servicesData.length}</span>
-              <span className="blog-stat-label">Services</span>
+              <span className="blog-stat-label">{t('services_count')}</span>
             </div>
             <div className="blog-stat-divider" />
             <div className="blog-stat">
               <span className="blog-stat-number">
                 {servicesData.reduce((sum, s) => sum + s.caseStudies.length, 0)}
               </span>
-              <span className="blog-stat-label">Case Studies</span>
+              <span className="blog-stat-label">{t('case_studies_count')}</span>
             </div>
             <div className="blog-stat-divider" />
             <div className="blog-stat">
               <span className="blog-stat-number">{serviceCategories.length}</span>
-              <span className="blog-stat-label">Categories</span>
+              <span className="blog-stat-label">{t('categories_count')}</span>
             </div>
           </div>
         </div>
@@ -80,8 +82,8 @@ export default function ServicesPage() {
               </div>
 
               {/* Body */}
-              <h2 className="service-listing-title">{service.title}</h2>
-              <p className="service-listing-desc">{service.description}</p>
+              <h2 className="service-listing-title">{t(service.titleKey)}</h2>
+              <p className="service-listing-desc">{t(service.descriptionKey)}</p>
 
               {/* Tools Preview */}
               <div className="service-listing-tools">
@@ -98,10 +100,10 @@ export default function ServicesPage() {
               {/* Footer */}
               <div className="service-listing-footer">
                 <span className="service-listing-count">
-                  {service.caseStudies.length} case stud{service.caseStudies.length !== 1 ? 'ies' : 'y'}
+                  {service.caseStudies.length} {service.caseStudies.length !== 1 ? t('case_studies') : t('case_stud')}
                 </span>
                 <span className="service-listing-arrow">
-                  View Details
+                  {t('view_details')}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                     <path d="M7 7h10v10" />
                     <path d="M7 17L17 7" />
@@ -114,9 +116,9 @@ export default function ServicesPage() {
 
         {/* CTA */}
         <div className="service-page-cta">
-          <p>Can't find what you're looking for?</p>
+          <p>{t('cant_find')}</p>
           <Link href="/#contact" className="pricing-talk-link">
-            Let's talk about your project →
+            {t('lets_talk_project')}
           </Link>
         </div>
 

@@ -1,66 +1,68 @@
 'use client'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 
-const services = [
-  {
-    number: '01',
-    icon: '🌐',
-    title: 'Web Development',
-    desc: 'Web development is the process of building, programming and maintaining websites and web applications that live on the internet.',
-    details: 'From simple landing pages to complex web applications, we build fast, scalable and SEO-friendly websites tailored to your business needs.',
-    tools: ['React', 'Next.js', 'Node.js', 'TypeScript'],
-    slug: '/services/web-development',
-  },
-  {
-    number: '02',
-    icon: '🎨',
-    title: 'Graphics Design',
-    desc: 'Creative design solutions to enhance visual communication and brand identity.',
-    details: 'We craft compelling visual identities — logos, brand guidelines, marketing materials and digital assets that make your brand stand out.',
-    tools: ['Illustrator', 'Photoshop', 'Canva', 'After Effects'],
-    slug: '/services/graphics-design',
-  },
-  {
-    number: '03',
-    icon: '🎯',
-    title: 'UI/UX Design',
-    desc: 'UI/UX design focuses on creating a smooth, intuitive user experience.',
-    details: 'We design user interfaces that are beautiful, functional and conversion-focused. Every pixel is intentional, every interaction is smooth.',
-    tools: ['Figma', 'Adobe XD', 'Framer', 'Maze'],
-    slug: '/services/ui-ux-design',
-  },
-  {
-    number: '04',
-    icon: '📱',
-    title: 'Mobile App',
-    desc: 'Mobile app development involves creating software for mobile devices.',
-    details: 'We build cross-platform mobile apps for iOS and Android using React Native — one codebase, native performance, seamless experience.',
-    tools: ['React Native', 'Expo', 'Firebase', 'Swift'],
-    slug: '/services/mobile-app',
-  },
-  {
-    number: '05',
-    icon: '☁️',
-    title: 'Web Hosting',
-    desc: 'Reliable, lightning-fast SSD hosting with 99.99% uptime guarantee.',
-    details: 'We provide managed hosting solutions with daily backups, SSL certificates, CDN integration and 24/7 monitoring so you never go offline.',
-    tools: ['AWS', 'Vercel', 'Cloudflare', 'Docker'],
-    slug: '/services/web-hosting',
-  },
-  {
-    number: '06',
-    icon: '⚡',
-    title: 'Performance Optimization',
-    desc: 'Speed audits, Core Web Vitals fixes and CDN integration.',
-    details: 'We audit your site, fix bottlenecks and optimize every layer — images, code, server response — to achieve perfect Lighthouse scores.',
-    tools: ['Lighthouse', 'WebPageTest', 'Webpack', 'CDN'],
-    slug: '/services/performance',
-  },
-]
-
 export default function Services() {
+  const { t } = useTranslation(['services'])
   const [openIndex, setOpenIndex] = useState(null)
+
+  const services = [
+    {
+      number: '01',
+      icon: '🌐',
+      title: t('web_development'),
+      desc: t('web_dev_desc'),
+      details: t('web_dev_detail'),
+      tools: ['React', 'Next.js', 'Node.js', 'TypeScript'],
+      slug: '/services/web-development',
+    },
+    {
+      number: '02',
+      icon: '🎨',
+      title: t('graphics_design'),
+      desc: t('graphics_desc'),
+      details: t('graphics_detail'),
+      tools: ['Illustrator', 'Photoshop', 'Canva', 'After Effects'],
+      slug: '/services/graphics-design',
+    },
+    {
+      number: '03',
+      icon: '🎯',
+      title: t('ui_ux'),
+      desc: t('ui_ux_desc'),
+      details: t('ui_ux_detail'),
+      tools: ['Figma', 'Adobe XD', 'Framer', 'Maze'],
+      slug: '/services/ui-ux-design',
+    },
+    {
+      number: '04',
+      icon: '📱',
+      title: t('mobile_app'),
+      desc: t('mobile_desc'),
+      details: t('mobile_detail'),
+      tools: ['React Native', 'Expo', 'Firebase', 'Swift'],
+      slug: '/services/mobile-app',
+    },
+    {
+      number: '05',
+      icon: '☁️',
+      title: t('web_hosting'),
+      desc: t('hosting_desc'),
+      details: t('hosting_detail'),
+      tools: ['AWS', 'Vercel', 'Cloudflare', 'Docker'],
+      slug: '/services/web-hosting',
+    },
+    {
+      number: '06',
+      icon: '⚡',
+      title: t('performance'),
+      desc: t('perf_desc'),
+      details: t('perf_detail'),
+      tools: ['Lighthouse', 'WebPageTest', 'Webpack', 'CDN'],
+      slug: '/services/performance',
+    },
+  ]
 
   const handleToggle = (i) => {
     setOpenIndex(openIndex === i ? null : i)
@@ -72,9 +74,9 @@ export default function Services() {
       {/* Header */}
       <div className="services-header">
         <p className="section-label" style={{ textAlign: 'center' }}>
-          WHAT WE OFFER
+          {t('what_we_offer')}
         </p>
-        <h2 className="services-main-title">Expertise</h2>
+        <h2 className="services-main-title">{t('expertise')}</h2>
       </div>
 
       {/* Accordion List */}
@@ -138,7 +140,7 @@ export default function Services() {
 
                 {/* CTA */}
                 <Link href={service.slug} className="accordion-cta">
-                  View Case Studies
+                  {t('view_case_studies')}
                   <svg width="16" height="16" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor"
                     strokeWidth="2" strokeLinecap="round">

@@ -3,10 +3,12 @@ import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 import { getServiceBySlug, servicesData } from '@/lib/servicesData'
 import ServiceSidebar from '@/components/services/ServiceSidebar'
 
 export default function ServiceDetailPage() {
+  const { t } = useTranslation(['services'])
   const { slug } = useParams()
   const service = getServiceBySlug(slug)
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -58,9 +60,9 @@ export default function ServiceDetailPage() {
         <div className="service-hero">
           <span className="service-hero-number">SERVICE {service.number}</span>
           <span className="service-hero-icon">{service.icon}</span>
-          <h1 className="service-hero-title">{service.title}</h1>
-          <p className="service-hero-subtitle">{service.subtitle}</p>
-          <p className="service-hero-desc">{service.fullDescription}</p>
+          <h1 className="service-hero-title">{t(service.titleKey)}</h1>
+          <p className="service-hero-subtitle">{t(service.subtitleKey)}</p>
+          <p className="service-hero-desc">{t(service.fullDescriptionKey)}</p>
 
           {/* Tools */}
           <div className="service-hero-tools">
@@ -82,16 +84,14 @@ export default function ServiceDetailPage() {
             {service.process.map((step, i) => (
               <div key={i} className="service-process-card">
                 <span className="service-process-step">{step.step}</span>
-                <h3 className="service-process-name">{step.title}</h3>
-                <p className="service-process-desc">{step.desc}</p>
+                <h3 className="service-process-name">{t(step.titleKey)}</h3>
+                <p className="service-process-desc">{t(step.descKey)}</p>
               </div>
             ))}
           </div>
         </section>
 
         <hr className="blog-post-divider" />
-
-        
 
       </main>
     </div>
