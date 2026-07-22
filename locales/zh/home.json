@@ -1,0 +1,190 @@
+{
+  "navbar": {
+    "home": "主页",
+    "services": "服务",
+    "pricing": "包裹",
+    "about": "关于",
+    "contact": "联系",
+    "work": "工作",
+    "blog": "博客",
+    "talk": "联系我们 ↗"
+  },
+  "hero": {
+    "graphics": "图形",
+    "web_design": "网页 / 设计",
+    "and_hosting": "托管",
+    "websites": "网站",
+    "experiences": "体验",
+    "solutions": "解决方案",
+    "platforms": "平台",
+    "products": "产品",
+    "brands": "品牌",
+    "tagline_part1": "全栈网页设计",
+    "tagline_part2": "托管机构",
+    "projects_badge": "已完成的项目",
+    "scroll_text": "滚动",
+    "partners_prefix": "合作作为",
+    "partners_highlight": "网页设计与托管机构",
+    "partners_suffix": "与团队在："
+  },
+  "services": {
+    "what_we_offer": "我们提供的",
+    "expertise": "专业知识",
+    "web_development": "网页开发",
+    "web_dev_desc": "从简单的登陆页面到复杂的 Web 应用程序，我们都能构建快速、可扩展且对 SEO 友好的网站，以满足您的业务需求。",
+    "web_dev_detail": "我们专注于使用尖端技术构建现代、高性能的 Web 应用程序。我们的团队负责从初始架构到部署和优化的所有环节。",
+    "graphics_design": "平面设计",
+    "graphics_desc": "我们精心打造引人注目的视觉形象——包括徽标、品牌指南、营销材料和数字资产，让您的品牌脱颖而出。",
+    "graphics_detail": "出色的设计不仅仅是美学——它能传达您的品牌价值，建立信任并促使行动。",
+    "ui_ux": "UI/UX 设计",
+    "ui_ux_desc": "我们设计用户界面，使其美观、实用且专注于转化。每一个像素都经过精心设计，每一次互动都流畅无比。",
+    "ui_ux_detail": "用户体验不仅仅是吸引人的界面，更是理解行为、减少阻碍并引导用户达成目标。",
+    "mobile_app": "移动应用开发",
+    "mobile_desc": "我们使用 React Native 构建跨平台移动应用（适用于 iOS 和 Android），只需一套代码库即可实现原生性能和无缝的用户体验。",
+    "mobile_detail": "移动设备是您的用户所在之处。我们构建高质量的跨平台应用程序，在iOS和Android上都具有原生体验。",
+    "web_hosting": "网页托管",
+    "hosting_desc": "我们提供托管主机，支持每日备份、SSL证书、CDN集成和持续监控。",
+    "hosting_detail": "您的网站值得拥有可靠的基础设施。我们提供托管式主机服务，配备 SSD 存储、自动备份、SSL 保护和主动监控。",
+    "performance": "性能优化",
+    "perf_desc": "我们审计您的网站，修复瓶颈，并优化图片、代码和服务器响应。",
+    "perf_detail": "我们执行速度审核，解决核心网页指标问题，并优化您的网站以获得更快的用户体验。",
+    "view_case_studies": "查看案例研究"
+  },
+  "pricing": {
+    "title": "包裹",
+    "subtitle": "根据您的确切需求自定义您的计划。",
+    "market_note": "价格已根据您的本地市场调整",
+    "best_value": "以获得最佳价值。",
+    "number_of_pages": "页数：",
+    "page": "页面",
+    "pages": "页",
+    "recommended_plan": "推荐计划：",
+    "slider_hint": "调整滑块以查看不同页数的定价。",
+    "standard_badge": "标准",
+    "most_popular": "最受欢迎",
+    "suggested": "建议",
+    "additional_page": "附加页面",
+    "need_custom": "需要定制什么吗？",
+    "lets_talk": "让我们谈谈",
+    "custom_suffix": "我们将帮助您集思广益，使您的产品取得成功。",
+    "plans": {
+      "basic": {
+        "name": "基本",
+        "description": "非常适合小型项目和简单网站。",
+        "button": "选择基本",
+        "features": [
+          "响应式设计",
+          "基本搜索引擎优化设置",
+          "快速送达 (3天)",
+          "电子邮件支持",
+          "联系表单集成"
+        ]
+      },
+      "standard": {
+        "name": "标准",
+        "description": "最适合有更多需求的成长型企业。",
+        "button": "选择标准",
+        "features": [
+          "高级SEO与分析",
+          "CMS 集成",
+          "移动优先设计",
+          "1个月免费支持",
+          "优先邮件支持"
+        ]
+      },
+      "pro": {
+        "name": "专业",
+        "description": "非常适合需要可扩展性的企业。",
+        "button": "选择专业版",
+        "features": [
+          "电子商务集成",
+          "自定义API集成",
+          "优先支持",
+          "性能优化",
+          "高级分析"
+        ]
+      }
+    },
+    "modal": {
+      "close": "关闭查询表单",
+      "title": "让我们谈谈科技",
+      "subtitle": "准备好构建一些令人惊叹的东西了吗？填写下面的表格。",
+      "name_placeholder": "输入您的姓名",
+      "contact_placeholder": "输入您的电子邮件或电话",
+      "plan_details": "计划详情：",
+      "plan": "计划",
+      "price": "价格",
+      "included_features": "包含的功能",
+      "for_pages": "为 {{count}} 页",
+      "for_pages_plural": "为 {{count}} 页",
+      "whatsapp_prefix": "您也可以通过以下方式联系我们",
+      "whatsapp_message": "你好 Teravolt！我对 {{count}} 页的 {{plan}} 计划感兴趣。",
+      "sending": "发送中...",
+      "submit": "提交咨询",
+      "confirm": "确定？",
+      "done": "完成！",
+      "success": "查询已成功发送！",
+      "failure": "发送查询失败。",
+      "network_error": "网络错误。"
+    }
+  },
+  "portfolio": {
+    "label": "我们的投资组合",
+    "title": "精选作品",
+    "intro_start": "欢迎来到一个作品集",
+    "web_development": "网页开发",
+    "ui_ux_design": "以用户为中心的UI/UX设计",
+    "graphic_design": "平面设计",
+    "mobile_development": "移动应用开发",
+    "projects_suffix": "项目。",
+    "case_study": "案例研究",
+    "view_project": "查看项目 ↗",
+    "view_all": "查看所有作品 ↗",
+    "projects": {
+      "ecommerce": "电子商务平台",
+      "branding": "品牌",
+      "logos": "标志",
+      "mobile": "移动应用设计",
+      "saas": "SaaS仪表板",
+      "identity": "品牌标识"
+    }
+  },
+  "about": {
+    "label": "我们是谁",
+    "title": "关于",
+    "greeting": "你好，",
+    "we_are": "我们是",
+    "company": "太瓦数字",
+    "main_text": "构建网页设计和托管解决方案，专注于创建和交付数字产品、品牌和体验。",
+    "description": "一家提供网页设计和托管服务的机构，服务于本地和全球客户，在每一个像素和每一毫秒的正常运行时间内都力求卓越。",
+    "tools": "工具方面的专业知识",
+    "show_more": "显示更多",
+    "show_less": "显示较少"
+  },
+  "contact": {
+    "label": "联系我们",
+    "title_start": "让我们",
+    "title_highlight": "工作",
+    "title_end": "一起",
+    "email": "电子邮件",
+    "phone": "电话",
+    "location": "地点",
+    "location_value": "远程 — 全球",
+    "name_placeholder": "您的姓名",
+    "email_placeholder": "您的电子邮件",
+    "project_placeholder": "项目类型（例如，网站+托管）",
+    "message_placeholder": "告诉我们您的项目……",
+    "sending": "发送中...",
+    "send": "发送消息 ↗",
+    "success": "消息发送成功！",
+    "general_error": "出了些问题。",
+    "network_error": "网络错误。"
+  },
+  "footer": {
+    "copyright_company": "太瓦数字解决方案",
+    "rights": "保留所有权利。",
+    "services": "服务",
+    "pricing": "定价",
+    "contact": "联系"
+  }
+}

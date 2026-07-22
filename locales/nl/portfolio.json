@@ -1,0 +1,117 @@
+{
+  "listing": {
+    "open_navigation": "Open projectnavigatie",
+    "projects": "Projecten",
+    "section_label": "Ons werk",
+    "title": "Uitgelicht",
+    "title_highlight": "Werken",
+    "subtitle": "Een samengestelde selectie van onze beste projecten — laat het werk voor zich spreken.",
+    "all": "Alle",
+    "project_count_one": "{{count}} project",
+    "project_count_other": "{{count}} projecten",
+    "empty": "Nog geen projecten in deze categorie."
+  },
+  "card": {
+    "featured_project": "Uitgelicht project",
+    "visit_site": "Bezoek site ↗",
+    "view_project": "Project bekijken →",
+    "details": "Details"
+  },
+  "detail": {
+    "back_to_portfolio": "Terug naar Portfolio",
+    "view_live_site": "Bekijk live site ↗",
+    "github": "GitHub",
+    "overview": "Projectoverzicht",
+    "challenge": "De uitdaging",
+    "solution": "Onze Oplossing",
+    "screenshots": "Schermafbeeldingen",
+    "screenshot_alt": "{{title}} schermopname {{number}}",
+    "tech_stack": "Technologie-stack",
+    "related_projects": "Gerelateerde projecten"
+  },
+  "sidebar": {
+    "close": "Sluit projectnavigatie",
+    "projects": "Projecten",
+    "categories": "Categorieën",
+    "back_to_home": "Terug naar home"
+  },
+  "projects": {
+    "e-commerce-platform": {
+      "title": "E-commerceplatform",
+      "category": "Webontwikkeling",
+      "excerpt": "Een volledig op maat gemaakt e-commerceplatform gebouwd met Next.js, met productfiltering, winkelwagenbeheer en Stripe-betalingen.",
+      "description": "Dit project was een grootschalige e-commerceoplossing, gebouwd voor een retailklant.\n    We hebben de UI vanaf nul ontworpen in Figma, en vervolgens de volledige frontend ontwikkeld in Next.js\n    met een headless CMS backend. Het platform beschikt over realtime voorraad, geavanceerde filtering,\n    een aangepast winkelwagensysteem en Stripe-betalingsintegratie.",
+      "challenge": "De klant had behoefte aan een snelle, mobiel-first winkel die hoge verkeersvolumes kon verwerken tijdens verkoop evenementen zonder concessies te doen aan ontwerpkwaliteit of gebruikerservaring.",
+      "solution": "We hebben een statisch gegenereerde productcatalogus gebouwd met incrementele regeneratie, waardoor de laadtijden met 80% zijn verminderd. Aangepaste animaties en micro-interacties zijn toegevoegd om de betrokkenheid te verbeteren zonder de prestaties te beïnvloeden.",
+      "readTime": "5 min leestijd",
+      "tags": [
+        "WEB DEV",
+        "UI/UX"
+      ]
+    },
+    "branding-identity": {
+      "title": "Branding Identiteit",
+      "category": "Branding",
+      "excerpt": "Een compleet merkidentiteitssysteem inclusief logo, typografie, kleurenpalet en merkrichtlijnen voor een moderne startup.",
+      "description": "Een complete merkidentiteit gebouwd voor een snelgroeiende tech startup. Het project omvatte logo-ontwerp, typografiekeuze, kleurensysteem, icoonset, merkstem en een uitgebreid document met merkrichtlijnen.",
+      "challenge": "De startup moest zich onderscheiden in een drukke SaaS-markt met een merk dat zowel betrouwbaar als gedurfd modern aanvoelde.",
+      "solution": "We ontwikkelden een gedurfd geometrisch logosysteem met een warm-koel kleurcontrast dat precisie en benaderbaarheid communiceert. Het merkrichtlijnen document zorgt voor consistentie over alle contactpunten heen.",
+      "readTime": "4 min leestijd",
+      "tags": [
+        "MERKUITING",
+        "ILLUSTRATIE"
+      ]
+    },
+    "logo-design-collection": {
+      "title": "Logo Ontwerp Collectie",
+      "category": "Branding",
+      "excerpt": "Een samengestelde collectie van logo's en woordmerken, gemaakt voor bedrijven in diverse sectoren.",
+      "description": "Een samengestelde collectie logo-ontwerpen gemaakt voor klanten in meerdere sectoren — van horeca tot fintech. Elk merkteken is ontworpen om tijdloos, schaalbaar en direct herkenbaar te zijn.",
+      "challenge": "Elke klant kwam met een unieke visie en doelgroep, wat een diepgaande, op maat gemaakte aanpak voor elke opdracht vereiste in plaats van een gestandaardiseerd proces.",
+      "solution": "Er werd een grondig ontdekkingsproces uitgevoerd voor elke klant, inclusief concurrentieanalyse en moodboarding, voordat er met het ontwerpproces werd begonnen. Elk logo werd geleverd in alle benodigde formaten en varianten.",
+      "readTime": "3 min leestijd",
+      "tags": [
+        "MERKUITING",
+        "ILLUSTRATIE"
+      ]
+    },
+    "mobile-app-design": {
+      "title": "Mobiel App-ontwerp",
+      "category": "UI/UX",
+      "excerpt": "End-to-end UI/UX-ontwerp voor een mobiele app voor het bijhouden van fitness, van wireframes tot high-fidelity prototypes.",
+      "description": "Een volledig mobiele app UI/UX-ontwerpproject voor een fitness-trackingapplicatie gericht op jonge professionals. Het project omvatte gebruikersonderzoek, informatiearchitectuur, wireframing en high-fidelity prototyping.",
+      "challenge": "Gebruikers van bestaande fitnessapps gaven aan overweldigd te zijn door gegevens en functies. We moesten een gerichte, rustige ervaring ontwerpen die motiveerde in plaats van stress bezorgde.",
+      "solution": "Een kaartgebaseerde informatiearchitectuur met progressieve openbaarmaking werd gebruikt om de interface schoon te houden. Warme tinten en feestelijke micro-animaties werden toegevoegd om de ervaring lonend te maken.",
+      "readTime": "6 min lezen",
+      "tags": [
+        "UI/UX",
+        "MOBIELE"
+      ]
+    },
+    "saas-dashboard": {
+      "title": "SaaS-dashboard",
+      "category": "Webontwikkeling",
+      "excerpt": "Een hoogwaardig analyse-dashboard voor een SaaS-product, gebouwd met realtime gegevensvisualisatie en op rollen gebaseerde toegang.",
+      "description": "Een datarijk analyse-dashboard gebouwd voor een B2B SaaS-bedrijf. Het dashboard beheert realtime datavisualisatie, teambeheer, factureringsoverzicht en op rollen gebaseerde toegangscontrole over meerdere gebruikersniveaus.",
+      "challenge": "Het bestaande dashboard was gebouwd met verouderde bibliotheken en had te kampen met trage laadtijden en een slechte mobiele ervaring, wat leidde tot aanzienlijk klantverloop onder mobiele gebruikers.",
+      "solution": "We hebben de volledige frontend opnieuw opgebouwd in Next.js met servercomponenten, lazy-loaded grafiekmodules en een responsief lay-outsysteem. De laadtijd daalde van 6,2s naar minder dan 1,1s.",
+      "readTime": "7 min leestijd",
+      "tags": [
+        "WEB DEV",
+        "UI/UX"
+      ]
+    },
+    "brand-identity-system": {
+      "title": "Merkidentiteitssysteem",
+      "category": "Branding",
+      "excerpt": "Volledig merkidentiteitssysteem inclusief visuele taal, marketingmateriaal en digitale activa voor een lifestylemerk.",
+      "description": "Een uitgebreid merkidentiteitssysteem ontwikkeld voor een opkomend lifestylemerk gericht op stedelijke millennials. De deliverables omvatten een logosysteem, verpakkingsontwerp, socialemediaprofielen en een volledig merkboek.",
+      "challenge": "Het merk had geen visuele consistentie over zijn contactpunten, wat verwarring veroorzaakte bij klanten en de merkherkenning verzwakte.",
+      "solution": "Een uniforme visuele taal werd ontwikkeld met een onderscheidend kleurenpalet en typografisch systeem dat werkt voor zowel print als digitaal. Alle assets werden geleverd als bewerkbare sjablonen voor intern gebruik.",
+      "readTime": "4 min leestijd",
+      "tags": [
+        "MERKUITING"
+      ]
+    }
+  }
+}

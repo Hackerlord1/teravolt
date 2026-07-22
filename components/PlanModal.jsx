@@ -1,150 +1,240 @@
 'use client'
-import { useEffect, useState } from 'react'
 
-export default function PlanModal({ plan, pages, onClose }) {
-  const [loading, setLoading] = useState(false)
+import {
+  useEffect,
+  useState,
+} from 'react'
+import { useTranslation } from 'react-i18next'
 
-  // ✅ Close on Escape key + disable scroll
+export default function PlanModal({
+  plan,
+  pages,
+  onClose,
+}) {
+  const { t } =
+    useTranslation('home')
+
+  const [loading, setLoading] =
+    useState(false)
+
   useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === 'Escape') onClose()
+    const handleKey = (event) => {
+      if (event.key === 'Escape') {
+        onClose()
+      }
     }
 
-    document.addEventListener('keydown', handleKey)
-    document.body.style.overflow = 'hidden'
+    document.addEventListener(
+      'keydown',
+      handleKey
+    )
+
+    document.body.style.overflow =
+      'hidden'
 
     return () => {
-      document.removeEventListener('keydown', handleKey)
-      document.body.style.overflow = ''
+      document.removeEventListener(
+        'keydown',
+        handleKey
+      )
+
+      document.body.style.overflow =
+        ''
     }
   }, [onClose])
 
-  if (!plan) return null
+  if (!plan) {
+    return null
+  }
 
   const price =
-    plan.basePrice + plan.extraPerPage * (pages - 1)
+    plan.basePrice +
+    plan.extraPerPage *
+      (pages - 1)
 
-  const whatsappMessage = encodeURIComponent(
-    `Hi Teravolt! I'm interested in the *${plan.name}* plan for ${pages} pages.`
+  const pageText = t(
+    pages === 1
+      ? 'pricing.modal.for_pages'
+      : 'pricing.modal.for_pages_plural',
+    {
+      count: pages,
+    }
   )
 
-  const whatsappLink = `https://wa.me/254791220335?text=${whatsappMessage}`
+  const whatsappMessage =
+    encodeURIComponent(
+      t(
+        'pricing.modal.whatsapp_message',
+        {
+          plan: plan.name,
+          count: pages,
+        }
+      )
+    )
+
+  const whatsappLink =
+    `https://wa.me/254791220335?text=${whatsappMessage}`
+
+  const planSummary = [
+    t(
+      'pricing.modal.plan_details'
+    ),
+    `- ${t(
+      'pricing.modal.plan'
+    )}: ${plan.name}`,
+    `- ${t(
+      'pricing.modal.price'
+    )}: Ksh ${price.toLocaleString()} ${pageText}`,
+    `- ${plan.desc}`,
+    `- ${t(
+      'pricing.modal.included_features'
+    )}: ${plan.features.join(', ')}`,
+  ].join('\n')
+
+  const handleSubmit = async (
+    event
+  ) => {
+    event.preventDefault()
+
+    const form =
+      event.currentTarget
+
+    const formData =
+      new FormData(form)
+
+    setLoading(true)
+
+    const data = {
+      name: formData.get('name'),
+      contact:
+        formData.get('contact'),
+      plan: plan.name,
+      pages,
+      details: planSummary,
+    }
+
+    try {
+      const response = await fetch(
+        '/api/send-email',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
+          body: JSON.stringify(data),
+        }
+      )
+
+      if (response.ok) {
+        alert(
+          `✅ ${t(
+            'pricing.modal.success'
+          )}`
+        )
+
+        form.reset()
+        onClose()
+      } else {
+        alert(
+          `❌ ${t(
+            'pricing.modal.failure'
+          )}`
+        )
+      }
+    } catch {
+      alert(
+        `❌ ${t(
+          'pricing.modal.network_error'
+        )}`
+      )
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <>
-      {/* ✅ Backdrop */}
       <div
         className="modal-backdrop"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* ✅ Modal */}
       <div
         className="modal-wrap"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
-        {/* Close */}
         <button
+          type="button"
           className="modal-close"
           onClick={onClose}
+          aria-label={t(
+            'pricing.modal.close'
+          )}
         >
           ✕
         </button>
 
-        {/* Header */}
         <div className="modal-header">
-          <h2 className="modal-title" id="modal-title">
-            Let's Talk Tech
+          <h2
+            className="modal-title"
+            id="modal-title"
+          >
+            {t(
+              'pricing.modal.title'
+            )}
           </h2>
+
           <p className="modal-subtitle">
-            Ready to build something amazing? Fill out the form below.
+            {t(
+              'pricing.modal.subtitle'
+            )}
           </p>
         </div>
 
-        {/* ✅ FORM (UPDATED WITH RESEND) */}
         <form
           className="modal-form"
-          onSubmit={async (e) => {
-            e.preventDefault()
-            setLoading(true)
-
-            const formData = new FormData(e.target)
-
-            const data = {
-              name: formData.get('name'),
-              contact: formData.get('contact'),
-              plan: plan.name,
-              pages: pages,
-              details: `
-Plan: ${plan.name}
-Pages: ${pages}
-Price: Ksh ${price.toLocaleString()}
-Features: ${plan.features.join(', ')}
-              `
-            }
-
-            try {
-              const res = await fetch('/api/send-email', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-              })
-
-              if (res.ok) {
-                alert('✅ Inquiry sent successfully!')
-                e.target.reset()
-                onClose()
-              } else {
-                alert('❌ Failed to send inquiry')
-              }
-            } catch (err) {
-              alert('❌ Network error')
-            }
-
-            setLoading(false)
-          }}
+          onSubmit={handleSubmit}
         >
-
-          {/* Name + Contact */}
           <div className="modal-row">
             <input
               name="name"
               type="text"
-              placeholder="Enter your name"
+              placeholder={t(
+                'pricing.modal.name_placeholder'
+              )}
               className="modal-input"
+              autoComplete="name"
               required
             />
 
             <input
               name="contact"
               type="text"
-              placeholder="Enter your email or phone"
+              placeholder={t(
+                'pricing.modal.contact_placeholder'
+              )}
               className="modal-input"
+              autoComplete="email"
               required
             />
           </div>
 
-          {/* ✅ Plan summary (readonly) */}
           <textarea
             className="modal-textarea"
             readOnly
             rows={5}
-            value={
-              `Plan Details:\n` +
-              `- ${plan.name} Plan — Ksh ${price.toLocaleString()} for ${pages} page${pages > 1 ? 's' : ''}\n` +
-              `- ${plan.desc}\n` +
-              `- Included Features: ${plan.features.join(', ')}`
-            }
+            value={planSummary}
           />
 
-          {/* WhatsApp */}
           <p className="modal-whatsapp-note">
-            You can also contact me via{' '}
+            {t(
+              'pricing.modal.whatsapp_prefix'
+            )}{' '}
+
             <a
               href={whatsappLink}
               target="_blank"
@@ -155,19 +245,26 @@ Features: ${plan.features.join(', ')}
             </a>
           </p>
 
-          {/* ✅ Button */}
           <div className="modal-submit-wrap">
             <button
               type="submit"
               className="modal-submit-btn"
               disabled={loading}
             >
-
-              {/* Default */}
               <span>
-                {loading ? 'Sending...' : 'Submit Inquiry'}
+                {loading
+                  ? t(
+                    'pricing.modal.sending'
+                  )
+                  : t(
+                    'pricing.modal.submit'
+                  )}
+
                 {!loading && (
-                  <svg viewBox="0 0 24 24">
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
                     <path
                       fill="#ffffff"
                       d="M20.33 3.66996L4.23 8.19996L10.07 13.85L13.07 19.94L20.67 5.13996Z"
@@ -176,24 +273,31 @@ Features: ${plan.features.join(', ')}
                 )}
               </span>
 
-              {/* Hover */}
-              <span>Sure ?</span>
-
-              {/* Done */}
               <span>
-                Done !
-                <svg viewBox="0 0 24 24">
+                {t(
+                  'pricing.modal.confirm'
+                )}
+              </span>
+
+              <span>
+                {t(
+                  'pricing.modal.done'
+                )}
+
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
                   <path
                     stroke="#fff"
                     strokeWidth="2"
+                    fill="none"
                     d="M8 13L12 16L22 6"
                   />
                 </svg>
               </span>
-
             </button>
           </div>
-
         </form>
       </div>
     </>

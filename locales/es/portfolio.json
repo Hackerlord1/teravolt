@@ -1,0 +1,117 @@
+{
+  "listing": {
+    "open_navigation": "Abrir navegación del proyecto",
+    "projects": "Proyectos",
+    "section_label": "Nuestro Trabajo",
+    "title": "Destacado",
+    "title_highlight": "Obras",
+    "subtitle": "Una selección curada de nuestros mejores proyectos — deja que el trabajo hable por sí mismo.",
+    "all": "Todo",
+    "project_count_one": "{{count}} proyecto",
+    "project_count_other": "{{count}} proyectos",
+    "empty": "Todavía no hay proyectos en esta categoría."
+  },
+  "card": {
+    "featured_project": "Proyecto Destacado",
+    "visit_site": "Visitar sitio ↗",
+    "view_project": "Ver Proyecto →",
+    "details": "Detalles"
+  },
+  "detail": {
+    "back_to_portfolio": "Volver al portafolio",
+    "view_live_site": "Ver sitio en vivo ↗",
+    "github": "GitHub",
+    "overview": "Descripción general del proyecto",
+    "challenge": "El Reto",
+    "solution": "Nuestra Solución",
+    "screenshots": "Capturas de pantalla",
+    "screenshot_alt": "{{title}} captura de pantalla {{number}}",
+    "tech_stack": "Pila tecnológica",
+    "related_projects": "Proyectos relacionados"
+  },
+  "sidebar": {
+    "close": "Cerrar navegación del proyecto",
+    "projects": "Proyectos",
+    "categories": "Categorías",
+    "back_to_home": "Volver a Inicio"
+  },
+  "projects": {
+    "e-commerce-platform": {
+      "title": "Plataforma de comercio electrónico",
+      "category": "Desarrollo web",
+      "excerpt": "Una plataforma de comercio electrónico totalmente personalizada construida con Next.js, que incluye filtrado de productos, gestión de carrito y pagos con Stripe.",
+      "description": "Este proyecto fue una solución de comercio electrónico a gran escala construida para un cliente minorista. Diseñamos la interfaz de usuario desde cero en Figma, luego desarrollamos todo el frontend en Next.js con un backend de CMS headless. La plataforma cuenta con inventario en tiempo real, filtrado avanzado, un sistema de carrito personalizado e integración de pagos con Stripe.",
+      "challenge": "El cliente necesitaba una tienda rápida y mobile-first que pudiera manejar un alto tráfico durante los eventos de rebajas sin comprometer la calidad del diseño o la experiencia del usuario.",
+      "solution": "Creamos un catálogo de productos generado estáticamente con regeneración incremental, reduciendo los tiempos de carga en un 80%. Se agregaron animaciones personalizadas e microinteracciones para mejorar la participación sin afectar el rendimiento.",
+      "readTime": "5 min de lectura",
+      "tags": [
+        "DESARROLLO WEB",
+        "UI/UX"
+      ]
+    },
+    "branding-identity": {
+      "title": "Identidad de marca",
+      "category": "Marca",
+      "excerpt": "Un sistema completo de identidad de marca que incluye logotipo, tipografía, paleta de colores y directrices de marca para una startup moderna.",
+      "description": "Una identidad de marca completa creada para una startup tecnológica de rápido crecimiento.\n    El proyecto abarcó el diseño del logotipo, la selección de tipografía, el sistema de color, el conjunto de iconos,\n    la voz de la marca y un documento completo de directrices de marca.",
+      "challenge": "La startup necesitaba diferenciarse en un mercado SaaS saturado con una marca que se sintiera confiable y audazmente moderna.",
+      "solution": "Desarrollamos un sistema de logotipos geométricos audaces con un contraste de colores cálido-frío que comunica precisión y accesibilidad. El documento de directrices de marca garantiza la coherencia en todos los puntos de contacto.",
+      "readTime": "4 min de lectura",
+      "tags": [
+        "MARCA",
+        "ILUSTRACIÓN"
+      ]
+    },
+    "logo-design-collection": {
+      "title": "Colección de Diseño de Logotipos",
+      "category": "Marca",
+      "excerpt": "Una colección curada de logotipos y marcas denominativas creadas para empresas de diversas industrias.",
+      "description": "Una colección curada de diseños de logotipos creados para clientes de múltiples industrias, desde la hostelería hasta la tecnología financiera. Cada marca fue diseñada para ser atemporal, escalable y reconocible al instante.",
+      "challenge": "Cada cliente llegó con una visión única y un público objetivo, lo que requirió un enfoque profundamente adaptado a cada marca en lugar de un proceso de plantilla.",
+      "solution": "Se llevó a cabo un proceso de descubrimiento exhaustivo para cada cliente, \n    incluyendo análisis de la competencia y mood boarding, antes de que comenzara cualquier trabajo de diseño. \n    Cada logotipo se entregó en todos los formatos y variantes necesarios.",
+      "readTime": "3 min de lectura",
+      "tags": [
+        "MARCA",
+        "ILUSTRACIÓN"
+      ]
+    },
+    "mobile-app-design": {
+      "title": "Diseño de aplicación móvil",
+      "category": "UI/UX",
+      "excerpt": "Diseño UI/UX de extremo a extremo para una aplicación móvil de seguimiento de actividad física, desde wireframes hasta prototipos de alta fidelidad.",
+      "description": "Un proyecto completo de diseño UI/UX de aplicación móvil para una aplicación de seguimiento de actividad física dirigida a jóvenes profesionales. El proyecto abarcó investigación de usuarios, arquitectura de la información, wireframing y prototipado de alta fidelidad.",
+      "challenge": "Los usuarios de aplicaciones de fitness existentes informaron sentirse abrumados por los datos y las funciones. Necesitábamos diseñar una experiencia enfocada y tranquila que motivara en lugar de estresar.",
+      "solution": "Se utilizó una arquitectura de información basada en tarjetas con divulgación progresiva para mantener la interfaz limpia. Se añadieron tonos cálidos y microanimaciones de celebración para que la experiencia resultara gratificante.",
+      "readTime": "6 min de lectura",
+      "tags": [
+        "UI/UX",
+        "MÓVIL"
+      ]
+    },
+    "saas-dashboard": {
+      "title": "Panel de SaaS",
+      "category": "Desarrollo web",
+      "excerpt": "Un panel de análisis de alto rendimiento para un producto SaaS, construido con visualización de datos en tiempo real y acceso basado en roles.",
+      "description": "Un panel de análisis con gran cantidad de datos creado para una empresa SaaS B2B.\n    El panel maneja la visualización de datos en tiempo real, la gestión de equipos,\n    la descripción general de la facturación y el control de acceso basado en roles en varios niveles de usuario.",
+      "challenge": "El panel existente se construyó con bibliotecas obsoletas y sufría de lentos tiempos de carga y una mala experiencia móvil, lo que provocaba una pérdida significativa de usuarios móviles.",
+      "solution": "Reconstruimos todo el frontend en Next.js con componentes de servidor, \n    módulos de gráficos de carga diferida y un sistema de diseño adaptable. \n    El tiempo de carga se redujo de 6,2 s a menos de 1,1 s.",
+      "readTime": "7 min de lectura",
+      "tags": [
+        "DESARROLLO WEB",
+        "UI/UX"
+      ]
+    },
+    "brand-identity-system": {
+      "title": "Sistema de Identidad de Marca",
+      "category": "Marca",
+      "excerpt": "Sistema de identidad de marca completo que incluye lenguaje visual, material de marketing y activos digitales para una marca de estilo de vida.",
+      "description": "Un sistema integral de identidad de marca desarrollado para una marca de estilo de vida emergente dirigida a los millennials urbanos. Los entregables incluyeron un sistema de logotipos, diseño de empaques, plantillas para redes sociales y un manual de marca completo.",
+      "challenge": "La marca no tenía una coherencia visual en sus puntos de contacto, lo que provocaba confusión entre los clientes y debilitaba el recuerdo de la marca.",
+      "solution": "Se desarrolló un lenguaje visual unificado utilizando una paleta de colores distintiva y un sistema tipográfico que funciona tanto en impresión como en digital. Todos los activos se entregaron como plantillas editables para uso interno.",
+      "readTime": "4 min de lectura",
+      "tags": [
+        "MARCA"
+      ]
+    }
+  }
+}

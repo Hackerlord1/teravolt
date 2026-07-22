@@ -1,80 +1,142 @@
 'use client'
-import { useEffect } from 'react'
+
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { servicesData, serviceCategoryCounts } from '@/lib/servicesData'
+import { useTranslation } from 'react-i18next'
+import {
+  servicesData,
+  serviceCategoryCounts,
+} from '@/lib/servicesData'
 
-const socials = [];
-
+const socials = []
 
 export default function ServiceSidebar({ isOpen, onClose }) {
   const pathname = usePathname()
+  const { t } = useTranslation(['services', 'common'])
+  const onCloseRef = useRef(onClose)
 
-  // Lock body scroll when drawer is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => { document.body.style.overflow = '' }
-  }, [isOpen])
-
-  // Close on ESC
-  useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === 'Escape') onClose?.()
-    }
-    window.addEventListener('keydown', handleEsc)
-    return () => window.removeEventListener('keydown', handleEsc)
+    onCloseRef.current = onClose
   }, [onClose])
 
-  // Close on navigation
+  // Lock body scrolling while the mobile sidebar is open.
   useEffect(() => {
-    onClose?.()
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
+
+  // Close the sidebar when the Escape key is pressed.
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        onClose?.()
+      }
+    }
+
+    window.addEventListener('keydown', handleEscape)
+
+    return () => {
+      window.removeEventListener('keydown', handleEscape)
+    }
+  }, [onClose])
+
+  // Close the sidebar after navigation.
+  useEffect(() => {
+    onCloseRef.current?.()
   }, [pathname])
+
+  const totalCaseStudies = servicesData.reduce(
+    (total, service) => total + (service.caseStudies?.length ?? 0),
+    0
+  )
 
   return (
     <>
-      {/* Backdrop — mobile only */}
+      {/* Mobile backdrop */}
       <div
-        className={`sidebar-backdrop ${isOpen ? 'sidebar-backdrop--visible' : ''}`}
+        className={`sidebar-backdrop ${
+          isOpen ? 'sidebar-backdrop--visible' : ''
+        }`}
         onClick={onClose}
         aria-hidden="true"
       />
 
       {/* Sidebar */}
-      <aside className={`blog-sidebar blog-sidebar--compact ${isOpen ? 'blog-sidebar--open' : ''}`}>
+      <aside
+        className={`blog-sidebar blog-sidebar--compact ${
+          isOpen ? 'blog-sidebar--open' : ''
+        }`}
+      >
         <div className="blog-sidebar-inner">
-
-          {/* Close — mobile only */}
-          <button className="sidebar-close" onClick={onClose} aria-label="Close sidebar">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+          {/* Mobile close button */}
+          <button
+            type="button"
+            className="sidebar-close"
+            onClick={onClose}
+            aria-label="Close sidebar"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
 
-          {/* Services Nav */}
-          <p className="blog-sidebar-label">Our Services</p>
-          <nav className="blog-sidebar-nav blog-sidebar-nav--compact">
+          {/* Services navigation */}
+          <p className="blog-sidebar-label">
+            {`${t('services_title', { ns: 'services' })} ${t('services_title_span', { ns: 'services' })}`}
+          </p>
+
+          <nav
+            className="blog-sidebar-nav blog-sidebar-nav--compact"
+            aria-label={t('services_title_span', { ns: 'services' })}
+          >
             {servicesData.map((service) => {
-              const isActive = pathname === `/services/${service.slug}`
+              const serviceHref = `/services/${service.slug}`
+              const isActive = pathname === serviceHref
+
               return (
                 <Link
                   key={service.slug}
-                  href={`/services/${service.slug}`}
+                  href={serviceHref}
                   className={`blog-sidebar-item blog-sidebar-item--compact ${
                     isActive ? 'blog-sidebar-item--active' : ''
                   }`}
                 >
-                  <span style={{ fontSize: '0.9rem', flexShrink: 0, marginTop: '0.1rem' }}>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      fontSize: '0.9rem',
+                      flexShrink: 0,
+                      marginTop: '0.1rem',
+                    }}
+                  >
                     {service.icon}
                   </span>
+
                   <span className="blog-sidebar-item-text">
-                    {service.title}
+                    {t(service.titleKey, { ns: 'services' })}
                   </span>
-                  {isActive && <span className="blog-sidebar-active-dot" />}
+
+                  {isActive && (
+                    <span
+                      className="blog-sidebar-active-dot"
+                      aria-hidden="true"
+                    />
+                  )}
                 </Link>
               )
             })}
@@ -82,63 +144,74 @@ export default function ServiceSidebar({ isOpen, onClose }) {
 
           <div className="blog-sidebar-divider" />
 
-          {/* Categories */}
-          <p className="blog-sidebar-label">Categories</p>
+          {/* Service categories */}
+          <p className="blog-sidebar-label">
+            {t('categories_count', { ns: 'common' })}
+          </p>
+
           <div className="blog-sidebar-categories blog-sidebar-categories--compact">
-            {serviceCategoryCounts.map((cat) => (
-              <div key={cat.name} className="blog-sidebar-cat blog-sidebar-cat--compact">
-                <span>{cat.name}</span>
+            {serviceCategoryCounts.map((category) => (
+              <div
+                key={category.nameKey}
+                className="blog-sidebar-cat blog-sidebar-cat--compact"
+              >
+                <span>{t(category.nameKey, { ns: 'services' })}</span>
+
                 <span className="blog-sidebar-cat-count blog-sidebar-cat-count--compact">
-                  {cat.count}
+                  {category.count}
                 </span>
               </div>
             ))}
           </div>
 
           <div className="blog-sidebar-divider" />
+          <p className="blog-sidebar-label">
+            {t('sidebar_overview', { ns: 'common' })}
+          </p>
 
-          {/* Quick Stats */}
-          <p className="blog-sidebar-label">Overview</p>
           <div className="blog-sidebar-categories blog-sidebar-categories--compact">
             <div className="blog-sidebar-cat blog-sidebar-cat--compact">
-              <span>Total Services</span>
+              <span>{t('sidebar_total_services', { ns: 'common' })}</span>
+
               <span className="blog-sidebar-cat-count blog-sidebar-cat-count--compact">
                 {servicesData.length}
               </span>
             </div>
+
             <div className="blog-sidebar-cat blog-sidebar-cat--compact">
-              <span>Case Studies</span>
+              <span>{t('sidebar_case_studies', { ns: 'common' })}</span>
+
               <span className="blog-sidebar-cat-count blog-sidebar-cat-count--compact">
-                {servicesData.reduce((sum, s) => sum + s.caseStudies.length, 0)}
+                {totalCaseStudies}
               </span>
             </div>
           </div>
 
           <div className="blog-sidebar-divider" />
 
-          {/* Back Home */}
+          {/* Back to home */}
           <Link href="/#services" className="blog-sidebar-home-link">
-            ← Back to Home
+            ← {t('sidebar_back_to_home', { ns: 'common' })}
           </Link>
 
-          {/* Socials */}
-          <div className="sidebar-socials">
-            {socials.map((social) => (
-              <a
-                key={social.id}
-                id={`sidebar-service-${social.id}`}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sidebar-social-btn"
-                aria-label={`Follow us on ${social.id}`}
-              >
-                {social.icon}
-                <span>{social.label}</span>
-              </a>
-            ))}
-          </div>
-
+          {/* Social links */}
+          {socials.length > 0 && (
+            <div className="sidebar-socials">
+              {socials.map((social) => (
+                <a
+                  key={social.id}
+                  id={`sidebar-${social.id}`}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sidebar-social-btn"
+                >
+                  {social.icon}
+                  <span>{social.label}</span>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </aside>
     </>

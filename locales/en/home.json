@@ -1,0 +1,190 @@
+{
+  "navbar": {
+    "home": "Home",
+    "services": "Services",
+    "pricing": "Packages",
+    "about": "About",
+    "contact": "Contact",
+    "work": "Work",
+    "blog": "Blog",
+    "talk": "Talk to Us ↗"
+  },
+  "hero": {
+    "graphics": "GRAPHICS",
+    "web_design": "WEB / DESIGN",
+    "and_hosting": "HOSTING",
+    "websites": "WEBSITES",
+    "experiences": "EXPERIENCES",
+    "solutions": "SOLUTIONS",
+    "platforms": "PLATFORMS",
+    "products": "PRODUCTS",
+    "brands": "BRANDS",
+    "tagline_part1": "Full Stack Web Design",
+    "tagline_part2": "Hosting Agency",
+    "projects_badge": "Projects Completed",
+    "scroll_text": "Scroll",
+    "partners_prefix": "Partnering as a",
+    "partners_highlight": "Web Design & Hosting Agency",
+    "partners_suffix": "with teams at:"
+  },
+  "services": {
+    "what_we_offer": "WHAT WE OFFER",
+    "expertise": "Expertise",
+    "web_development": "Web Development",
+    "web_dev_desc": "From simple landing pages to complex web applications, we build fast, scalable, and SEO-friendly websites tailored to your business needs.",
+    "web_dev_detail": "We specialize in building modern, high-performance web applications using cutting-edge technologies. Our team handles everything from initial architecture to deployment and optimization.",
+    "graphics_design": "Graphics Design",
+    "graphics_desc": "We craft compelling visual identities—logos, brand guidelines, marketing materials, and digital assets that make your brand stand out.",
+    "graphics_detail": "Great design is more than aesthetics—it communicates your brand's values, builds trust, and drives action.",
+    "ui_ux": "UI/UX Design",
+    "ui_ux_desc": "We design user interfaces that are beautiful, functional, and conversion-focused. Every pixel is intentional, and every interaction is smooth.",
+    "ui_ux_detail": "User experience isn't just about attractive screens—it's about understanding behavior, reducing friction, and guiding users toward their goals.",
+    "mobile_app": "Mobile App Development",
+    "mobile_desc": "We build cross-platform mobile apps for iOS and Android using React Native—one codebase, native performance, and a seamless experience.",
+    "mobile_detail": "Mobile is where your users are. We build high-quality cross-platform applications that feel native on both iOS and Android.",
+    "web_hosting": "Web Hosting",
+    "hosting_desc": "We provide managed hosting with daily backups, SSL certificates, CDN integration, and continuous monitoring.",
+    "hosting_detail": "Your website deserves reliable infrastructure. We provide managed hosting with SSD storage, automated backups, SSL protection, and proactive monitoring.",
+    "performance": "Performance Optimization",
+    "perf_desc": "We audit your site, fix bottlenecks, and optimize images, code, and server response.",
+    "perf_detail": "We perform speed audits, resolve Core Web Vitals issues, and optimize your website for a faster user experience.",
+    "view_case_studies": "View Case Studies"
+  },
+  "pricing": {
+    "title": "Packages",
+    "subtitle": "Customize your plan to fit your exact needs.",
+    "market_note": "Prices adapted to your local market",
+    "best_value": "for the best value.",
+    "number_of_pages": "Number of Pages:",
+    "page": "page",
+    "pages": "pages",
+    "recommended_plan": "Recommended plan:",
+    "slider_hint": "Adjust the slider to see pricing for different page counts.",
+    "standard_badge": "Standard",
+    "most_popular": "Most popular",
+    "suggested": "Suggested",
+    "additional_page": "additional page",
+    "need_custom": "Need something custom?",
+    "lets_talk": "Let's talk",
+    "custom_suffix": "and we'll help brainstorm your product to success.",
+    "plans": {
+      "basic": {
+        "name": "Basic",
+        "description": "Perfect for small projects and simple websites.",
+        "button": "Choose Basic",
+        "features": [
+          "Responsive Design",
+          "Basic SEO Setup",
+          "Fast Delivery (3 Days)",
+          "Email Support",
+          "Contact Form Integration"
+        ]
+      },
+      "standard": {
+        "name": "Standard",
+        "description": "Best for growing businesses with more needs.",
+        "button": "Choose Standard",
+        "features": [
+          "Advanced SEO & Analytics",
+          "CMS Integration",
+          "Mobile-First Design",
+          "1-Month Free Support",
+          "Priority Email Support"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Ideal for larger businesses that need scalability.",
+        "button": "Choose Pro",
+        "features": [
+          "E-commerce Integration",
+          "Custom API Integration",
+          "Priority Support",
+          "Performance Optimization",
+          "Advanced Analytics"
+        ]
+      }
+    },
+    "modal": {
+      "close": "Close inquiry form",
+      "title": "Let's Talk Tech",
+      "subtitle": "Ready to build something amazing? Fill out the form below.",
+      "name_placeholder": "Enter your name",
+      "contact_placeholder": "Enter your email or phone",
+      "plan_details": "Plan Details:",
+      "plan": "Plan",
+      "price": "Price",
+      "included_features": "Included Features",
+      "for_pages": "for {{count}} page",
+      "for_pages_plural": "for {{count}} pages",
+      "whatsapp_prefix": "You can also contact us via",
+      "whatsapp_message": "Hi Teravolt! I'm interested in the {{plan}} plan for {{count}} pages.",
+      "sending": "Sending...",
+      "submit": "Submit Inquiry",
+      "confirm": "Sure?",
+      "done": "Done!",
+      "success": "Inquiry sent successfully!",
+      "failure": "Failed to send inquiry.",
+      "network_error": "Network error."
+    }
+  },
+  "portfolio": {
+    "label": "Our portfolio",
+    "title": "Featured Works",
+    "intro_start": "Welcome to a portfolio of",
+    "web_development": "Web Development",
+    "ui_ux_design": "User-Centered UI/UX Design",
+    "graphic_design": "Graphic Design",
+    "mobile_development": "Mobile App Development",
+    "projects_suffix": "projects.",
+    "case_study": "CASE STUDY",
+    "view_project": "View Project ↗",
+    "view_all": "View All Work ↗",
+    "projects": {
+      "ecommerce": "E-Commerce Platform",
+      "branding": "BRANDING",
+      "logos": "LOGOS",
+      "mobile": "Mobile App Design",
+      "saas": "SaaS Dashboard",
+      "identity": "Brand Identity"
+    }
+  },
+  "about": {
+    "label": "WHO WE ARE",
+    "title": "About",
+    "greeting": "Hi,",
+    "we_are": "we are",
+    "company": "Teravolt Digitals",
+    "main_text": "building Web Design and Hosting solutions, focused on crafting and delivering digital products, brands and experiences.",
+    "description": "A web design and hosting agency serving clients locally and globally, delivering excellence in every pixel and every millisecond of uptime.",
+    "tools": "Expertise in Tools",
+    "show_more": "Show More",
+    "show_less": "Show Less"
+  },
+  "contact": {
+    "label": "// Get In Touch",
+    "title_start": "Let's",
+    "title_highlight": "Work",
+    "title_end": "Together",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "location_value": "Remote — Worldwide",
+    "name_placeholder": "Your Name",
+    "email_placeholder": "Your Email",
+    "project_placeholder": "Project Type (e.g. Website + Hosting)",
+    "message_placeholder": "Tell us about your project...",
+    "sending": "Sending...",
+    "send": "Send Message ↗",
+    "success": "Message sent successfully!",
+    "general_error": "Something went wrong.",
+    "network_error": "Network error."
+  },
+  "footer": {
+    "copyright_company": "Teravolt Digital Solutions",
+    "rights": "All rights reserved.",
+    "services": "Services",
+    "pricing": "Pricing",
+    "contact": "Contact"
+  }
+}

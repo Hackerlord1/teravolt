@@ -1,0 +1,30 @@
+{
+  "listing": {
+    "section_label": "Mawazo Yetu",
+    "title": "Blogi",
+    "title_highlight": "Makala",
+    "subtitle": "Maarifa kuhusu utengenezaji wa wavuti, muundo, na teknolojia — moja kwa moja kutoka studio ya Teravolt.",
+    "all_articles": "Makala Zote",
+    "post_count_one": "{{count}} chapisho",
+    "post_count_other": "{{count}} machapisho"
+  },
+  "post": {
+    "not_found_title": "Chapisho halipatikani",
+    "not_found_description": "Makala unayotafuta hayapo.",
+    "back_to_blog": "Rudi kwenye Blogi",
+    "related_articles": "Makala Yanayohusiana"
+  },
+  "sidebar": {
+    "title": "Blogi",
+    "open_navigation": "Fungua urambazaji wa blogi",
+    "close_navigation": "Funga urambazaji wa blogi",
+    "all_articles": "Makala Zote",
+    "categories": "Kategoria",
+    "back_to_site": "Rudi kwenye Tovuti"
+  },
+  "card": {
+    "read_article": "Soma Makala",
+    "read_more": "Soma Zaidi",
+    "featured": "Iliyoangaziwa"
+  }
+}

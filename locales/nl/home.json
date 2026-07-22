@@ -1,0 +1,190 @@
+{
+  "navbar": {
+    "home": "Home",
+    "services": "Diensten",
+    "pricing": "Pakketten",
+    "about": "Over",
+    "contact": "Contact",
+    "work": "Werk",
+    "blog": "Blog",
+    "talk": "Praat met ons ↗"
+  },
+  "hero": {
+    "graphics": "GRAFIEK",
+    "web_design": "WEB / DESIGN",
+    "and_hosting": "HOSTING",
+    "websites": "WEBSITES",
+    "experiences": "ERVARINGEN",
+    "solutions": "OPLOSSINGEN",
+    "platforms": "PLATFORMEN",
+    "products": "PRODUCTEN",
+    "brands": "MERKEN",
+    "tagline_part1": "Full Stack Webdesign",
+    "tagline_part2": "Hostingbureau",
+    "projects_badge": "Projecten voltooid",
+    "scroll_text": "Scroll",
+    "partners_prefix": "Samenwerken als een",
+    "partners_highlight": "Webdesign & Hosting Bureau",
+    "partners_suffix": "met teams op:"
+  },
+  "services": {
+    "what_we_offer": "WAT WIJ BIEDEN",
+    "expertise": "Expertise",
+    "web_development": "Webontwikkeling",
+    "web_dev_desc": "Van eenvoudige landingspagina's tot complexe webapplicaties, wij bouwen snelle, schaalbare en SEO-vriendelijke websites, afgestemd op uw bedrijfsbehoeften.",
+    "web_dev_detail": "Wij zijn gespecialiseerd in het bouwen van moderne, hoogwaardige webapplicaties met behulp van cutting-edge technologieën. Ons team verzorgt alles, van de initiële architectuur tot implementatie en optimalisatie.",
+    "graphics_design": "Grafisch ontwerp",
+    "graphics_desc": "Wij creëren aansprekende visuele identiteiten—logo's, merkrichtlijnen, marketingmateriaal en digitale assets die uw merk laten opvallen.",
+    "graphics_detail": "Geweldig ontwerp is meer dan esthetiek—het communiceert de waarden van uw merk, bouwt vertrouwen op en stimuleert actie.",
+    "ui_ux": "UI/UX Ontwerp",
+    "ui_ux_desc": "We ontwerpen gebruikersinterfaces die mooi, functioneel en conversiegericht zijn. Elke pixel is intentioneel en elke interactie is soepel.",
+    "ui_ux_detail": "Gebruikerservaring gaat niet alleen over aantrekkelijke schermen—het gaat over het begrijpen van gedrag, het verminderen van frictie en het begeleiden van gebruikers naar hun doelen.",
+    "mobile_app": "Mobiele app-ontwikkeling",
+    "mobile_desc": "We bouwen cross-platform mobiele apps voor iOS en Android met React Native—één codebase, native prestaties en een naadloze ervaring.",
+    "mobile_detail": "Mobiel is waar uw gebruikers zijn. We bouwen hoogwaardige cross-platform applicaties die native aanvoelen op zowel iOS als Android.",
+    "web_hosting": "Webhosting",
+    "hosting_desc": "Wij bieden beheerd hosten met dagelijkse back-ups, SSL-certificaten, CDN-integratie en continue monitoring.",
+    "hosting_detail": "Uw website verdient betrouwbare infrastructuur. Wij bieden managed hosting met SSD-opslag, geautomatiseerde back-ups, SSL-bescherming en proactieve monitoring.",
+    "performance": "Prestatieoptimalisatie",
+    "perf_desc": "We auditen uw site, lossen knelpunten op en optimaliseren afbeeldingen, code en serverreactie.",
+    "perf_detail": "We voeren snelheidsaudits uit, lossen Core Web Vitals-problemen op en optimaliseren uw website voor een snellere gebruikerservaring.",
+    "view_case_studies": "Bekijk casestudy's"
+  },
+  "pricing": {
+    "title": "Pakketten",
+    "subtitle": "Pas uw abonnement aan om aan uw exacte behoeften te voldoen.",
+    "market_note": "Prijzen aangepast aan uw lokale markt",
+    "best_value": "voor de beste prijs.",
+    "number_of_pages": "Aantal pagina's:",
+    "page": "pagina",
+    "pages": "pagina's",
+    "recommended_plan": "Aanbevolen plan:",
+    "slider_hint": "Pas de schuifregelaar aan om de prijzen voor verschillende paginatellingen te zien.",
+    "standard_badge": "Standaard",
+    "most_popular": "Meest populair",
+    "suggested": "Voorgesteld",
+    "additional_page": "extra pagina",
+    "need_custom": "Heb je iets op maat nodig?",
+    "lets_talk": "Laten we praten",
+    "custom_suffix": "en we helpen u om uw product tot een succes te maken.",
+    "plans": {
+      "basic": {
+        "name": "Basis",
+        "description": "Perfect voor kleine projecten en eenvoudige websites.",
+        "button": "Kies Basis",
+        "features": [
+          "Responsief ontwerp",
+          "Basis SEO-instelling",
+          "Snelle levering (3 dagen)",
+          "E-mailondersteuning",
+          "Contactformulierintegratie"
+        ]
+      },
+      "standard": {
+        "name": "Standaard",
+        "description": "Het beste voor groeiende bedrijven met meer behoeften.",
+        "button": "Standaard kiezen",
+        "features": [
+          "Geavanceerde SEO & Analyse",
+          "CMS-integratie",
+          "Mobile-First Design",
+          "1 maand gratis ondersteuning",
+          "Prioriteit E-mailondersteuning"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Ideaal voor grotere bedrijven die schaalbaarheid nodig hebben.",
+        "button": "Kies Pro",
+        "features": [
+          "E-commerce-integratie",
+          "Aangepaste API-integratie",
+          "Prioriteitsondersteuning",
+          "Prestatieoptimalisatie",
+          "Geavanceerde analyses"
+        ]
+      }
+    },
+    "modal": {
+      "close": "Sluit aanvraagformulier",
+      "title": "Laten we praten over technologie",
+      "subtitle": "Klaar om iets geweldigs te bouwen? Vul het onderstaande formulier in.",
+      "name_placeholder": "Voer uw naam in",
+      "contact_placeholder": "Voer uw e-mailadres of telefoonnummer in",
+      "plan_details": "Plangegevens:",
+      "plan": "Plan",
+      "price": "Prijs",
+      "included_features": "Inbegrepen functies",
+      "for_pages": "voor {{count}} pagina",
+      "for_pages_plural": "voor {{count}} pagina's",
+      "whatsapp_prefix": "U kunt ook contact met ons opnemen via",
+      "whatsapp_message": "Hallo Teravolt! Ik ben geïnteresseerd in het {{plan}} plan voor {{count}} pagina's.",
+      "sending": "Verzenden...",
+      "submit": "Dien aanvraag in",
+      "confirm": "Zeker?",
+      "done": "Klaar!",
+      "success": "Vraag succesvol verzonden!",
+      "failure": "Kon geen aanvraag verzenden.",
+      "network_error": "Netwerkfout."
+    }
+  },
+  "portfolio": {
+    "label": "Onze portfolio",
+    "title": "Uitgelichte werken",
+    "intro_start": "Welkom bij een portfolio van",
+    "web_development": "Webontwikkeling",
+    "ui_ux_design": "Gebruikersgericht UI/UX-ontwerp",
+    "graphic_design": "Grafisch ontwerp",
+    "mobile_development": "Mobiele app-ontwikkeling",
+    "projects_suffix": "projecten.",
+    "case_study": "CASE STUDY",
+    "view_project": "Project bekijken ↗",
+    "view_all": "Bekijk al het werk ↗",
+    "projects": {
+      "ecommerce": "E-commerceplatform",
+      "branding": "MERKUITING",
+      "logos": "LOGO'S",
+      "mobile": "Mobiel App-ontwerp",
+      "saas": "SaaS-dashboard",
+      "identity": "Merkidentiteit"
+    }
+  },
+  "about": {
+    "label": "WIE WE ZIJN",
+    "title": "Over",
+    "greeting": "Hallo,",
+    "we_are": "wij zijn",
+    "company": "Teravolt Digitals",
+    "main_text": "het bouwen van webdesign- en hostingoplossingen, gericht op het creëren en leveren van digitale producten, merken en ervaringen.",
+    "description": "Een webdesign- en hostingbureau dat klanten lokaal en wereldwijd bedient, met uitmuntendheid in elke pixel en elke milliseconde aan uptime.",
+    "tools": "Expertise in tools",
+    "show_more": "Meer weergeven",
+    "show_less": "Minder weergeven"
+  },
+  "contact": {
+    "label": "Neem contact op",
+    "title_start": "Laten we",
+    "title_highlight": "Werk",
+    "title_end": "Samen",
+    "email": "E-mail",
+    "phone": "Telefoon",
+    "location": "Locatie",
+    "location_value": "Extern — Wereldwijd",
+    "name_placeholder": "Uw naam",
+    "email_placeholder": "Uw e-mailadres",
+    "project_placeholder": "Projecttype (bijv. Website + Hosting)",
+    "message_placeholder": "Vertel ons over uw project...",
+    "sending": "Verzenden...",
+    "send": "Bericht verzenden ↗",
+    "success": "Bericht succesvol verzonden!",
+    "general_error": "Er ging iets mis.",
+    "network_error": "Netwerkfout."
+  },
+  "footer": {
+    "copyright_company": "Teravolt Digital Solutions",
+    "rights": "Alle rechten voorbehouden.",
+    "services": "Diensten",
+    "pricing": "Prijzen",
+    "contact": "Contact"
+  }
+}

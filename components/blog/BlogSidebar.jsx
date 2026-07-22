@@ -1,14 +1,15 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
 
 export default function BlogSidebar({ posts }) {
+  const { t } = useTranslation('blog')
   const pathname = usePathname()
 
   const categories = [...new Set(posts.map((p) => p.category))]
 
   const socials = [];
-
 
   return (
     <aside className="blog-sidebar blog-sidebar--compact">
@@ -16,7 +17,7 @@ export default function BlogSidebar({ posts }) {
 
         <div className="blog-sidebar-divider" />
 
-        <p className="blog-sidebar-label">All Articles</p>
+        <p className="blog-sidebar-label">{t('sidebar.all_articles')}</p>
 
         <nav className="blog-sidebar-nav blog-sidebar-nav--compact">
           {posts.map((post) => {
@@ -46,7 +47,7 @@ export default function BlogSidebar({ posts }) {
 
         <div className="blog-sidebar-divider" />
 
-        <p className="blog-sidebar-label">Categories</p>
+        <p className="blog-sidebar-label">{t('sidebar.categories')}</p>
         <div className="blog-sidebar-categories blog-sidebar-categories--compact">
           {categories.map((cat) => (
             <span key={cat} className="blog-sidebar-cat blog-sidebar-cat--compact">
@@ -61,7 +62,7 @@ export default function BlogSidebar({ posts }) {
         <div className="blog-sidebar-divider" />
 
         <Link href="/" className="blog-sidebar-home-link">
-          ← Back to Site
+          ← {t('sidebar.back_to_site')}
         </Link>
 
         <div className="sidebar-socials">

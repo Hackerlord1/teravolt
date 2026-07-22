@@ -1,0 +1,30 @@
+{
+  "listing": {
+    "section_label": "Onze gedachten",
+    "title": "Blog",
+    "title_highlight": "Artikelen",
+    "subtitle": "Inzichten in webontwikkeling, design en technologie — rechtstreeks uit de Teravolt-studio.",
+    "all_articles": "Alle artikelen",
+    "post_count_one": "{{count}} bericht",
+    "post_count_other": "{{count}} berichten"
+  },
+  "post": {
+    "not_found_title": "Post niet gevonden",
+    "not_found_description": "Het artikel dat u zoekt bestaat niet.",
+    "back_to_blog": "Terug naar Blog",
+    "related_articles": "Gerelateerde artikelen"
+  },
+  "sidebar": {
+    "title": "Blog",
+    "open_navigation": "Open blognavigatie",
+    "close_navigation": "Sluit blognavigatie",
+    "all_articles": "Alle artikelen",
+    "categories": "Categorieën",
+    "back_to_site": "Terug naar Site"
+  },
+  "card": {
+    "read_article": "Artikel lezen",
+    "read_more": "Lees meer",
+    "featured": "Uitgelicht"
+  }
+}

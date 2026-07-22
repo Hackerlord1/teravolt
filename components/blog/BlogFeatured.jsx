@@ -1,7 +1,10 @@
 'use client'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 
 export default function BlogFeatured({ post }) {
+  const { t } = useTranslation('blog')
+
   if (!post) return null
 
   return (
@@ -10,7 +13,7 @@ export default function BlogFeatured({ post }) {
       {/* ✅ Top row */}
       <div className="blog-featured-top">
         <span className="blog-featured-badge">
-          ★ Featured
+          ★ {t('card.featured')}
         </span>
         <div className="blog-featured-meta">
           <span className="blog-meta-date">
@@ -67,7 +70,7 @@ export default function BlogFeatured({ post }) {
       {/* ✅ Bottom CTA */}
       <div className="blog-featured-footer">
         <span className="blog-read-link">
-          Read Article
+          {t('card.read_article')}
           <svg width="16" height="16" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" strokeWidth="2.5">
             <line x1="5" y1="12" x2="19" y2="12"/>

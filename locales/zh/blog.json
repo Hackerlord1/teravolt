@@ -1,0 +1,30 @@
+{
+  "listing": {
+    "section_label": "我们的想法",
+    "title": "博客",
+    "title_highlight": "文章",
+    "subtitle": "来自 Teravolt 工作室的关于 Web 开发、设计和技术的见解。",
+    "all_articles": "所有文章",
+    "post_count_one": "{{count}} 帖子",
+    "post_count_other": "{{count}} 篇帖子"
+  },
+  "post": {
+    "not_found_title": "未找到帖子",
+    "not_found_description": "您要查找的文章不存在。",
+    "back_to_blog": "返回博客",
+    "related_articles": "相关文章"
+  },
+  "sidebar": {
+    "title": "博客",
+    "open_navigation": "打开博客导航",
+    "close_navigation": "关闭博客导航",
+    "all_articles": "所有文章",
+    "categories": "类别",
+    "back_to_site": "返回网站"
+  },
+  "card": {
+    "read_article": "阅读文章",
+    "read_more": "阅读更多",
+    "featured": "特色"
+  }
+}

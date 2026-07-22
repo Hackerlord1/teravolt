@@ -1,13 +1,28 @@
 'use client'
 import { useState } from 'react'
-import { projects, featuredProject, projectCategories } from '@/lib/projectsData'
+import { useTranslation } from 'react-i18next'
+import useLocalizedProjects from '@/hooks/useLocalizedProjects'
 import ProjectSidebar from '@/components/portfolio/ProjectSidebar'
 import ProjectFeatured from '@/components/portfolio/ProjectFeatured'
 import ProjectCard from '@/components/portfolio/ProjectCard'
 
 export default function PortfolioPage() {
+  const { t } = useTranslation('portfolio')
+  const projects = useLocalizedProjects()
   const [activeFilter, setActiveFilter] = useState('All')
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const featuredProject = projects.find(
+    (project) => project.featured
+  )
+
+  const projectCategories = [
+    ...new Set(
+      projects.map(
+        (project) => project.category
+      )
+    ),
+  ]
 
   const regularProjects = projects.filter((p) => !p.featured)
   const filteredProjects =
@@ -16,85 +31,87 @@ export default function PortfolioPage() {
       : regularProjects.filter((p) => p.category === activeFilter)
 
   return (
-    <div className="blog-page">
+    <section className="portfolio-section">
+      {/* Header */}
+      <div className="portfolio-header">
+        <p className="section-label">
+          {t('listing.section_label', { defaultValue: '// Our Work' })}
+        </p>
+        <h1 className="portfolio-main-title">
+          {t('listing.title', { defaultValue: 'Featured' })}{' '}
+          <span>{t('listing.title_highlight', { defaultValue: 'Works' })}</span>
+        </h1>
+        <p className="portfolio-subtitle">
+          {t('listing.subtitle', { defaultValue: "A curated selection of our best projects — let the work speak for itself." })}
+        </p>
+      </div>
 
-      {/* Mobile Sidebar Toggle */}
-      <button
-        className="sidebar-toggle"
-        onClick={() => setSidebarOpen(true)}
-        aria-label="Open project navigation"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-          <line x1="3" y1="6" x2="21" y2="6" />
-          <line x1="3" y1="12" x2="15" y2="12" />
-          <line x1="3" y1="18" x2="18" y2="18" />
-        </svg>
-        <span>Projects</span>
-      </button>
+      {/* Filter Tabs */}
+      <div className="pf-filters" style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+        <button
+          className={`pf-filter-tab ${activeFilter === 'All' ? 'pf-filter-tab--active' : ''}`}
+          onClick={() => setActiveFilter('All')}
+          style={{
+            padding: '0.5rem 1.2rem',
+            border: '1.5px solid var(--border)',
+            borderRadius: '50px',
+            background: activeFilter === 'All' ? 'var(--black)' : 'transparent',
+            color: activeFilter === 'All' ? 'var(--bg)' : 'var(--black)',
+            cursor: 'pointer',
+            fontSize: '0.85rem',
+            fontWeight: 600,
+            transition: 'all 0.2s ease',
+          }}
+        >
+          {t('listing.all', { defaultValue: 'All' })}
+        </button>
+        {projectCategories.map((cat) => (
+          <button
+            key={cat}
+            className={`pf-filter-tab ${activeFilter === cat ? 'pf-filter-tab--active' : ''}`}
+            onClick={() => setActiveFilter(cat)}
+            style={{
+              padding: '0.5rem 1.2rem',
+              border: '1.5px solid var(--border)',
+              borderRadius: '50px',
+              background: activeFilter === cat ? 'var(--black)' : 'transparent',
+              color: activeFilter === cat ? 'var(--bg)' : 'var(--black)',
+              cursor: 'pointer',
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              transition: 'all 0.2s ease',
+            }}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
 
-      {/* Sidebar */}
-      <ProjectSidebar
-        projects={projects}
-        isOpen={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-      />
+      {/* Featured project */}
+      <ProjectFeatured project={featuredProject} />
 
-      {/* Main */}
-      <main className="blog-content">
+      {/* Grid */}
+      <div className="portfolio-grid-new">
+        {filteredProjects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </div>
 
-        {/* Header */}
-        <div className="blog-page-header">
-          <p className="section-label">// Our Work</p>
-          <h1 className="blog-page-title">
-            Featured <span>Works</span>
-          </h1>
-          <p className="blog-page-subtitle">
-            A curated selection of our best projects — let the work speak for itself.
-          </p>
+      {/* Empty state */}
+      {filteredProjects.length === 0 && (
+        <div className="pf-empty" style={{ textAlign: 'center', padding: '3rem', color: 'var(--gray)' }}>
+          <p>{t('listing.empty', { defaultValue: 'No projects in this category yet.' })}</p>
         </div>
+      )}
 
-        {/* Featured project */}
-        <ProjectFeatured project={featuredProject} />
-
-        {/* Filter Tabs + Count */}
-        <div className="pf-section-header">
-          <div className="pf-filters">
-            <button
-              className={`pf-filter-tab ${activeFilter === 'All' ? 'pf-filter-tab--active' : ''}`}
-              onClick={() => setActiveFilter('All')}
-            >
-              All
-            </button>
-            {projectCategories.map((cat) => (
-              <button
-                key={cat}
-                className={`pf-filter-tab ${activeFilter === cat ? 'pf-filter-tab--active' : ''}`}
-                onClick={() => setActiveFilter(cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-          <span className="pf-count">
-            {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}
-          </span>
+      {/* Show More */}
+      {filteredProjects.length > 6 && (
+        <div className="portfolio-show-more">
+          <button className="show-more-btn">
+            {t('listing.show_more', { defaultValue: 'Show More' })}
+          </button>
         </div>
-
-        {/* Grid */}
-        <div className="pf-grid">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-
-        {/* Empty state */}
-        {filteredProjects.length === 0 && (
-          <div className="pf-empty">
-            <p>No projects in this category yet.</p>
-          </div>
-        )}
-
-      </main>
-    </div>
+      )}
+    </section>
   )
 }

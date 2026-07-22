@@ -1,0 +1,117 @@
+{
+  "listing": {
+    "open_navigation": "Fungua urambazaji wa mradi",
+    "projects": "Miradi",
+    "section_label": "Kazi Yetu",
+    "title": "Iliyoangaziwa",
+    "title_highlight": "Inafanya kazi",
+    "subtitle": "Uteuzi ulioratibiwa wa miradi yetu bora zaidi — acha kazi izungumze yenyewe.",
+    "all": "Wote",
+    "project_count_one": "{{count}} mradi",
+    "project_count_other": "{{count}} miradi",
+    "empty": "Hakuna miradi katika kategoria hii bado."
+  },
+  "card": {
+    "featured_project": "Mradi Ulioangaziwa",
+    "visit_site": "Tembelea Tovuti ↗",
+    "view_project": "Tazama Mradi →",
+    "details": "Maelezo"
+  },
+  "detail": {
+    "back_to_portfolio": "Rudi kwenye Kwing'amua",
+    "view_live_site": "Tazama Tovuti Moja kwa Moja ↗",
+    "github": "GitHub →",
+    "overview": "Muhtasari wa Mradi",
+    "challenge": "Changamoto",
+    "solution": "Suluhisho Letu",
+    "screenshots": "Skrini za simu",
+    "screenshot_alt": "{{title}} skrini ya {{number}}",
+    "tech_stack": "Tech Stack",
+    "related_projects": "Miradi Inayohusiana"
+  },
+  "sidebar": {
+    "close": "Funga urambazaji wa mradi",
+    "projects": "Miradi",
+    "categories": "Kategoria",
+    "back_to_home": "Rudi Nyumbani"
+  },
+  "projects": {
+    "e-commerce-platform": {
+      "title": "Jukwaa la E-biashara",
+      "category": "Ubunifu wa Wavuti",
+      "excerpt": "Jukwaa kamili la e-commerce lililojengwa kwa Next.js, likiangazia uchujaji wa bidhaa, usimamizi wa rukwama, na malipo ya Stripe.",
+      "description": "Mradi huu ulikuwa suluhisho kamili la biashara ya mtandaoni lililojengwa kwa mteja wa rejareja.  Tuliunda UI kutoka mwanzo katika Figma, kisha tukatengeneza sehemu zote za mbele katika Next.js na mfumo mkuu wa CMS usio na kichwa. Jukwaa lina hesabu ya wakati halisi, uchujaji wa hali ya juu, mfumo maalum wa mikokoteni, na ushirikiano wa malipo wa Stripe.",
+      "challenge": "Mteja alihitaji duka la haraka, linalofaa kwa simu ambalo lingeweza kuhimili trafiki kubwa wakati wa matukio ya mauzo bila kuathiri ubora wa muundo au uzoefu wa mtumiaji.",
+      "solution": "Tuliunda katalogi ya bidhaa iliyotengenezwa kwa njia tuli na urejeshaji wa nyongeza, \n    kupunguza muda wa upakiaji kwa 80%. Uhuishaji maalum na mwingiliano mdogo uliongezwa ili \n    kuboresha ushiriki bila kuathiri utendaji.",
+      "readTime": "5 min soma",
+      "tags": [
+        "WEB DEV",
+        "UI/UX"
+      ]
+    },
+    "branding-identity": {
+      "title": "Utambulisho wa chapa",
+      "category": "Uwekaji chapa",
+      "excerpt": "Mfumo kamili wa utambulisho wa chapa ikiwa ni pamoja na nembo, tipografia, rangi, na miongozo ya chapa kwa kampuni mpya ya kisasa.",
+      "description": "Utambulisho kamili wa chapa uliojengwa kwa ajili ya kampuni ya teknolojia inayokua kwa kasi. Mradi ulijumuisha muundo wa nembo, uteuzi wa uchapaji, mfumo wa rangi, seti ya aikoni, sauti ya chapa, na hati pana ya miongozo ya chapa.",
+      "challenge": "Kampuni hiyo changa ilihitaji kujitofautisha katika soko la SaaS lenye ushindani mkali na chapa ambayo ilionekana kuwa ya kuaminika na ya kisasa kwa ujasiri.",
+      "solution": "Tuliunda mfumo wa nembo ya kijiometri yenye ujasiri na utofautishaji wa rangi ya joto-baridi unaowasilisha usahihi na ukaribu. Hati ya miongozo ya chapa huhakikisha uthabiti katika sehemu zote za kugusa.",
+      "readTime": "4 min read",
+      "tags": [
+        "CHAPA",
+        "MCHORO"
+      ]
+    },
+    "logo-design-collection": {
+      "title": "Ubunifu wa Nembo Mkusanyiko",
+      "category": "Uwekaji chapa",
+      "excerpt": "Mkusanyiko ulioratibiwa wa alama za nembo na alama za maneno zilizotengenezwa kwa ajili ya biashara katika tasnia mbalimbali.",
+      "description": "Mkusanyiko ulioratibiwa wa miundo ya nembo iliyoundwa kwa ajili ya wateja katika tasnia mbalimbali — kutoka kwa ukarimu hadi fintech. Kila alama iliundwa ili kudumu, iweze kuongezwa ukubwa, na kutambulika mara moja.",
+      "challenge": "Kila mteja alikuja na maono ya kipekee na hadhira lengwa, ikihitaji mbinu iliyobinafsishwa sana kwa kila alama badala ya mchakato wa kiolezo.",
+      "solution": "Mchakato wa kina wa ugunduzi ulifanywa kwa kila mteja, ikijumuisha uchambuzi wa washindani na ubao wa hisia, kabla ya kazi yoyote ya kubuni kuanza. Kila nembo ilitolewa katika miundo na aina zote muhimu.",
+      "readTime": "Soma kwa dakika 3",
+      "tags": [
+        "CHAPA",
+        "KIWANGO"
+      ]
+    },
+    "mobile-app-design": {
+      "title": "Muundo wa Programu ya Simu",
+      "category": "UI/UX",
+      "excerpt": "Ubunifu wa UI/UX wa mwisho hadi mwisho kwa programu ya simu ya kufuatilia siha, kutoka kwa waya hadi prototypes za ubora wa juu.",
+      "description": "Mradi kamili wa muundo wa UI/UX wa programu ya simu kwa ajili ya programu ya kufuatilia siha inayolenga wataalamu wachanga. Mradi huo ulijumuisha utafiti wa mtumiaji, usanifu wa habari, uundaji wa waya, na uundaji wa mfano wa juu wa uaminifu.",
+      "challenge": "Watumiaji wa programu za zamani za siha waliripoti kuhisi kuzidiwa na data na vipengele. Tulihitaji kubuni uzoefu uliozingatia, tulivu ambao ulihamasisha badala ya kusisitiza.",
+      "solution": "Muundo wa habari unaotegemea kadi na ufunuo unaoendelea ulitumika ili kuweka kiolesura kikiwa safi. Rangi za joto na uhuishaji mdogo wa sherehe ziliongezwa ili kufanya uzoefu ujisikie wa kuridhisha.",
+      "readTime": "6 min read",
+      "tags": [
+        "UI/UX",
+        "SIMU YA MKONONI"
+      ]
+    },
+    "saas-dashboard": {
+      "title": "SaaS Dashboard",
+      "category": "Ubunifu wa Wavuti",
+      "excerpt": "Dashibodi ya uchanganuzi yenye utendaji wa hali ya juu kwa bidhaa ya SaaS, iliyojengwa kwa taswira ya data ya wakati halisi na ufikiaji unaotegemea jukumu.",
+      "description": "Dashibodi ya uchanganuzi yenye data nyingi iliyojengwa kwa kampuni ya B2B SaaS. \n    Dashibodi inashughulikia taswira ya data ya wakati halisi, usimamizi wa timu, \n    muhtasari wa malipo, na udhibiti wa ufikiaji kulingana na majukumu katika ngazi nyingi za watumiaji.",
+      "challenge": "Dawati la kazi lililopo lilijengwa kwa maktaba zilizopitwa na wakati na lilikuwa na muda mrefu wa upakiaji na uzoefu duni wa simu, na kusababisha upotevu mkubwa miongoni mwa watumiaji wa simu.",
+      "solution": "Tuliujenga upya kabisa sehemu ya mbele katika Next.js kwa kutumia vipengele vya seva, moduli za chati zinazopakia kwa uvivu, na mfumo wa mpangilio unaoitikia. Muda wa upakiaji ulipungua kutoka 6.2s hadi chini ya 1.1s.",
+      "readTime": "Soma dakika 7",
+      "tags": [
+        "WEB DEV",
+        "UI/UX"
+      ]
+    },
+    "brand-identity-system": {
+      "title": "Mfumo wa Utambulisho wa Chapa",
+      "category": "Uwekaji chapa",
+      "excerpt": "Mfumo kamili wa utambulisho wa chapa ikiwa ni pamoja na lugha ya kuona, vifaa vya uuzaji, na mali za kidijitali kwa chapa ya mtindo wa maisha.",
+      "description": "Mfumo kamili wa utambulisho wa chapa uliotengenezwa kwa chapa mpya ya mtindo wa maisha inayolenga vijana wa mijini. Matokeo yaliyopatikana ni pamoja na mfumo wa nembo, muundo wa vifungashio, templeti za mitandao ya kijamii, na kitabu kamili cha chapa.",
+      "challenge": "Chapa haikuwa na uwiano wa kuona katika sehemu zake zote za mawasiliano, na kusababisha machafuko miongoni mwa wateja na kudhoofisha kukumbuka chapa.",
+      "solution": "Lugha moja ya kuona ilitengenezwa kwa kutumia rangi maalum na mfumo wa uchapaji unaofanya kazi katika machapisho na kidijitali. Mali zote zilitolewa kama templeti zinazoweza kuhaririwa kwa matumizi ya ndani.",
+      "readTime": "4 min read",
+      "tags": [
+        "CHAPA"
+      ]
+    }
+  }
+}

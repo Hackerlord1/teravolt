@@ -1,4 +1,8 @@
+'use client'
+import { useTranslation } from 'react-i18next'
+
 export default function Footer() {
+  const { t, ready } = useTranslation('home')
   const socials = [
     {
       id: 'twitter',
@@ -31,7 +35,7 @@ export default function Footer() {
       ),
     },
     {
-      id: 'Instagram',
+      id: 'instagram',
       label: '@teravolt.digital',
       href: 'https://www.instagram.com/teravoltdigitech/',
       icon: (
@@ -53,7 +57,7 @@ export default function Footer() {
       ),
     },
     {
-      id: 'Tiktok',
+      id: 'tiktok',
       label: '@teravolt.digital',
       href: 'https://www.tiktok.com/@teravolt_digitech',
       icon: (
@@ -73,7 +77,7 @@ export default function Footer() {
       ),
     },
     {
-      id: 'WhatsApp',
+      id: 'whatsapp',
       label: '+254 791 220 335',
       href: 'https://wa.me/+254791220335',
       icon: (
@@ -89,12 +93,19 @@ export default function Footer() {
 
   return (
     <footer className="footer">
-      <p>© 2026 <strong>Teravolt Digital Solutions</strong>. All rights reserved.</p>
+      <p>
+        © 2026{' '}
+        <strong>
+          {t('footer.copyright_company')}
+        </strong>
+        {'. '}
+        {t('footer.rights')}
+      </p>
 
-      {/* Social links — center */}
+      {/* Social links — using your existing CSS class names */}
       <div className="footer-socials">
         {socials.map((social) => (
-          <a
+          <a 
             key={social.id}
             id={`footer-${social.id}`}
             href={social.href}
@@ -110,10 +121,24 @@ export default function Footer() {
       </div>
 
       <ul className="footer-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li>
+          <a href="/#services">
+            {t('footer.services')}
+          </a>
+        </li>
+
+        <li>
+          <a href="/#pricing">
+            {t('footer.pricing')}
+          </a>
+        </li>
+
+        <li>
+          <a href="/#contact">
+            {t('footer.contact')}
+          </a>
+        </li>
       </ul>
     </footer>
-  );
+  )
 }

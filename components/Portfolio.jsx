@@ -1,12 +1,14 @@
 'use client'
+
 import { useRouter } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
 
 const projects = [
   {
     id: 1,
     slug: 'e-commerce-platform',
-    title: 'E-Commerce Platform',
-    category: 'CASE STUDY',
+    titleKey: 'portfolio.projects.ecommerce',
     year: '2024',
     tags: ['WEB DEV', 'UI/UX'],
     bg: '#e8e0d5',
@@ -17,8 +19,7 @@ const projects = [
   {
     id: 2,
     slug: 'branding-identity',
-    title: 'BRANDING',
-    category: 'CASE STUDY',
+    titleKey: 'portfolio.projects.branding',
     year: '2024',
     tags: ['BRANDING', 'ILLUSTRATION'],
     bg: '#f06b6b',
@@ -29,8 +30,7 @@ const projects = [
   {
     id: 3,
     slug: 'logo-design-collection',
-    title: 'LOGOS',
-    category: 'CASE STUDY',
+    titleKey: 'portfolio.projects.logos',
     year: '2025',
     tags: ['BRANDING', 'ILLUSTRATION'],
     bg: '#4ec9c9',
@@ -41,8 +41,7 @@ const projects = [
   {
     id: 4,
     slug: 'mobile-app-design',
-    title: 'Mobile App Design',
-    category: 'CASE STUDY',
+    titleKey: 'portfolio.projects.mobile',
     year: '2024',
     tags: ['UI/UX', 'MOBILE'],
     bg: '#c8e6c9',
@@ -53,8 +52,7 @@ const projects = [
   {
     id: 5,
     slug: 'saas-dashboard',
-    title: 'SaaS Dashboard',
-    category: 'CASE STUDY',
+    titleKey: 'portfolio.projects.saas',
     year: '2023',
     tags: ['WEB DEV', 'UI/UX'],
     bg: '#e8d5f0',
@@ -65,8 +63,7 @@ const projects = [
   {
     id: 6,
     slug: 'brand-identity-system',
-    title: 'Brand Identity',
-    category: 'CASE STUDY',
+    titleKey: 'portfolio.projects.identity',
     year: '2023',
     tags: ['BRANDING'],
     bg: '#ffd180',
@@ -78,115 +75,206 @@ const projects = [
 
 const VISIBLE_COUNT = 3
 
+function AnimatedLabel({ text }) {
+  return text.split('').map((char, index) => (
+    <span key={`${char}-${index}`}>
+      {char === ' ' ? '\u00A0' : char}
+    </span>
+  ))
+}
+
 export default function Portfolio() {
   const router = useRouter()
-  const visible = projects.slice(0, VISIBLE_COUNT)
+  const { t } = useTranslation('home')
+
+  const visibleProjects = projects.slice(
+    0,
+    VISIBLE_COUNT
+  )
+
+  const viewAllText = t('portfolio.view_all')
 
   return (
-    <section id="portfolio" className="portfolio-section">
-
-      {/* Header */}
+    <section
+      id="portfolio"
+      className="portfolio-section"
+    >
       <div className="portfolio-header">
-        <p className="section-label" style={{ textAlign: 'center' }}>
-          Our portfolio
+        <p
+          className="section-label"
+          style={{ textAlign: 'center' }}
+        >
+          {t('portfolio.label')}
         </p>
-        <h2 className="portfolio-main-title">Featured Works</h2>
+
+        <h2 className="portfolio-main-title">
+          {t('portfolio.title')}
+        </h2>
+
         <p className="portfolio-subtitle">
-          Welcome to a portfolio of{' '}
-          <strong>Web Development</strong>,{' '}
-          <strong>User-Centered UI/UX Design</strong>,{' '}
-          <strong>Graphic Design</strong>, and{' '}
-          <strong>Mobile App Development</strong> projects.
+          {t('portfolio.intro_start')}{' '}
+
+          <strong>
+            {t('portfolio.web_development')}
+          </strong>
+          {', '}
+
+          <strong>
+            {t('portfolio.ui_ux_design')}
+          </strong>
+          {', '}
+
+          <strong>
+            {t('portfolio.graphic_design')}
+          </strong>
+          {', '}
+
+          <strong>
+            {t('portfolio.mobile_development')}
+          </strong>{' '}
+
+          {t('portfolio.projects_suffix')}
         </p>
       </div>
 
-      {/* Grid */}
       <div className="portfolio-grid-new">
-        {visible.map((project) => (
-          <div
-            key={project.id}
-            className={`portfolio-card ${
-              project.featured ? 'portfolio-card--featured' : ''
-            }`}
-            style={{
-              '--card-bg': project.bg,
-              '--card-accent': project.accent,
-              cursor: 'pointer',
-            }}
-            onClick={() => router.push(`/portfolio/${project.slug}`)}
-          >
-            {/* Top bar */}
-            <div className="portfolio-card-top">
-              <span className="portfolio-dash">—</span>
-              <span className="portfolio-year">{project.year}</span>
-            </div>
+        {visibleProjects.map((project) => {
+          const projectTitle = t(
+            project.titleKey
+          )
 
-            {/* Title */}
-            <h3
-              className="portfolio-card-title"
-              style={{ color: project.accent }}
+          return (
+            <div
+              key={project.id}
+              className={`portfolio-card ${
+                project.featured
+                  ? 'portfolio-card--featured'
+                  : ''
+              }`}
+              style={{
+                '--card-bg': project.bg,
+                '--card-accent': project.accent,
+                cursor: 'pointer',
+              }}
+              onClick={() =>
+                router.push(
+                  `/portfolio/${project.slug}`
+                )
+              }
+              onKeyDown={(event) => {
+                if (
+                  event.key === 'Enter' ||
+                  event.key === ' '
+                ) {
+                  event.preventDefault()
+
+                  router.push(
+                    `/portfolio/${project.slug}`
+                  )
+                }
+              }}
+              role="link"
+              tabIndex={0}
             >
-              {project.title}
-            </h3>
-            <p
-              className="portfolio-card-cat"
-              style={{ color: project.accent, opacity: 0.7 }}
-            >
-              {project.category}
-            </p>
-
-            {/* Image */}
-            <div className="portfolio-card-img-wrap">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="portfolio-card-img"
-              />
-            </div>
-
-            {/* Tags */}
-            <div className="portfolio-card-tags">
-              {project.tags.map((tag, j) => (
-                <span key={j} className="portfolio-tag">
-                  {tag}
+              <div className="portfolio-card-top">
+                <span className="portfolio-dash">
+                  —
                 </span>
-              ))}
-            </div>
 
-            {/* Hover overlay */}
-            <div className="portfolio-card-overlay">
-              <span className="portfolio-overlay-text">View Project ↗</span>
+                <span className="portfolio-year">
+                  {project.year}
+                </span>
+              </div>
+
+              <h3
+                className="portfolio-card-title"
+                style={{
+                  color: project.accent,
+                }}
+              >
+                {projectTitle}
+              </h3>
+
+              <p
+                className="portfolio-card-cat"
+                style={{
+                  color: project.accent,
+                  opacity: 0.7,
+                }}
+              >
+                {t('portfolio.case_study')}
+              </p>
+
+              <div className="portfolio-card-img-wrap">
+                <img 
+                  src={project.image} 
+                  alt={projectTitle}
+                  className="portfolio-card-img"
+                />
+              </div>
+
+              <div className="portfolio-card-tags">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="portfolio-tag"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div className="portfolio-card-overlay">
+                <span className="portfolio-overlay-text">
+                  {t('portfolio.view_project')}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
 
-      {/* Pins — decorative */}
-      <div className="portfolio-pins" aria-hidden="true">
-        <span className="portfolio-pin" style={{ left: '18%' }} />
-        <span className="portfolio-pin" style={{ left: '50%' }} />
-        <span className="portfolio-pin" style={{ left: '82%' }} />
+      <div
+        className="portfolio-pins"
+        aria-hidden="true"
+      >
+        <span
+          className="portfolio-pin"
+          style={{ left: '18%' }}
+        />
+
+        <span
+          className="portfolio-pin"
+          style={{ left: '50%' }}
+        />
+
+        <span
+          className="portfolio-pin"
+          style={{ left: '82%' }}
+        />
       </div>
 
-      {/* ✅ View All Work — same animation as connect button */}
       <div className="portfolio-show-more">
-        <a href="/portfolio" className="connect-btn">
-          <span className="connect-dot" aria-hidden="true" />
+        <Link href="/portfolio" className="connect-btn">
+          <span
+            className="connect-dot"
+            aria-hidden="true"
+          />
+
           <span className="connect-animated">
-            <span className="span-mother" aria-hidden="true">
-              {'View All Work ↗'.split('').map((char, i) => (
-                <span key={i}>{char === ' ' ? '\u00A0' : char}</span>
-              ))}
+            <span
+              className="span-mother"
+              aria-hidden="true"
+            >
+              <AnimatedLabel text={viewAllText} />
             </span>
+
             <span className="span-mother2">
-              {'View All Work ↗'.split('').map((char, i) => (
-                <span key={i}>{char === ' ' ? '\u00A0' : char}</span>
-              ))}
+              <AnimatedLabel text={viewAllText} />
             </span>
           </span>
-        </a>
+        </Link>
       </div>
-
     </section>
   )
 }

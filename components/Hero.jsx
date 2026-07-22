@@ -1,24 +1,13 @@
 'use client'
-import { useEffect, useRef, useState, useReducer } from 'react'
+
+import {
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from 'react'
 import { useTranslation } from 'react-i18next'
 import LogoScroll from './LogoScroll'
-
-function codeReducer(state, action) {
-  switch (action.type) {
-    case 'TYPE':
-      return { ...state, charIndex: state.charIndex + 1 }
-    case 'DELETE':
-      return { ...state, charIndex: state.charIndex - 1 }
-    case 'SWITCH_SNIPPET':
-      return { ...state, snippetIndex: (state.snippetIndex + 1) % CODE_SNIPPETS.length, charIndex: 0, isDeleting: false }
-    case 'START_DELETE':
-      return { ...state, isDeleting: true }
-    case 'START_TYPE':
-      return { ...state, isDeleting: false }
-    default:
-      return state
-  }
-}
 
 const CODE_SNIPPETS = [
   `// Smooth scroll navigation
@@ -123,153 +112,372 @@ const imgObserver = new IntersectionObserver(
 images.forEach(img => imgObserver.observe(img))`,
 ]
 
+function codeReducer(state, action) {
+  switch (action.type) {
+    case 'TYPE':
+      return {
+        ...state,
+        charIndex: state.charIndex + 1,
+      }
+
+    case 'DELETE':
+      return {
+        ...state,
+        charIndex: state.charIndex - 1,
+      }
+
+    case 'SWITCH_SNIPPET':
+      return {
+        ...state,
+        snippetIndex:
+          (state.snippetIndex + 1) %
+          CODE_SNIPPETS.length,
+        charIndex: 0,
+        isDeleting: false,
+      }
+
+    case 'START_DELETE':
+      return {
+        ...state,
+        isDeleting: true,
+      }
+
+    case 'START_TYPE':
+      return {
+        ...state,
+        isDeleting: false,
+      }
+
+    default:
+      return state
+  }
+}
+
 export default function Hero() {
-  const { t } = useTranslation(['hero'])
+  const { t, i18n } =
+    useTranslation('home')
+
   const codeRef = useRef(null)
-  const [wordIndex, setWordIndex] = useState(0)
-  const [animState, setAnimState] = useState('visible')
-  const [codeState, dispatch] = useReducer(codeReducer, {
-    snippetIndex: 0,
-    charIndex: 0,
-    isDeleting: false,
-  })
+
+  const [wordIndex, setWordIndex] =
+    useState(0)
+
+  const [animState, setAnimState] =
+    useState('visible')
+
+  const [codeState, dispatch] =
+    useReducer(codeReducer, {
+      snippetIndex: 0,
+      charIndex: 0,
+      isDeleting: false,
+    })
 
   const cyclingWords = [
-    { text: t('websites'), color: 'black' },
-    { text: t('experiences'), color: 'orange' },
-    { text: t('solutions'), color: 'black' },
-    { text: t('platforms'), color: 'orange' },
-    { text: t('products'), color: 'black' },
-    { text: t('brands'), color: 'orange' },
+    {
+      text: t('hero.websites'),
+      color: 'black',
+    },
+    {
+      text: t('hero.experiences'),
+      color: 'orange',
+    },
+    {
+      text: t('hero.solutions'),
+      color: 'black',
+    },
+    {
+      text: t('hero.platforms'),
+      color: 'orange',
+    },
+    {
+      text: t('hero.products'),
+      color: 'black',
+    },
+    {
+      text: t('hero.brands'),
+      color: 'orange',
+    },
   ]
 
+  /*
+   * Reset the rotating word after changing language.
+   * This makes the new language appear immediately
+   * and avoids retaining an outdated word index.
+   */
   useEffect(() => {
+    setWordIndex(0)
+    setAnimState('visible')
+  }, [i18n.resolvedLanguage])
+
+  useEffect(() => {
+    let exitTimeout
+    let visibleTimeout
+
     const interval = setInterval(() => {
       setAnimState('exit')
-      setTimeout(() => {
-        setWordIndex(prev => (prev + 1) % cyclingWords.length)
+
+      exitTimeout = setTimeout(() => {
+        setWordIndex(
+          (previousIndex) =>
+            (previousIndex + 1) %
+            cyclingWords.length
+        )
+
         setAnimState('enter')
-        setTimeout(() => setAnimState('visible'), 50)
+
+        visibleTimeout = setTimeout(() => {
+          setAnimState('visible')
+        }, 50)
       }, 380)
     }, 2800)
-    return () => clearInterval(interval)
+
+    return () => {
+      clearInterval(interval)
+      clearTimeout(exitTimeout)
+      clearTimeout(visibleTimeout)
+    }
   }, [cyclingWords.length])
 
   useEffect(() => {
-    const el = codeRef.current
-    if (!el) return
+    const element = codeRef.current
 
-    const current = CODE_SNIPPETS[codeState.snippetIndex]
-    el.textContent = current.slice(0, codeState.charIndex)
-
-    let timeout
-    if (!codeState.isDeleting) {
-      if (codeState.charIndex === current.length) {
-        timeout = setTimeout(() => dispatch({ type: 'START_DELETE' }), 2500)
-      } else {
-        timeout = setTimeout(() => dispatch({ type: 'TYPE' }), 18)
-      }
-    } else {
-      if (codeState.charIndex === 0) {
-        dispatch({ type: 'SWITCH_SNIPPET' })
-        timeout = setTimeout(() => dispatch({ type: 'START_TYPE' }), 400)
-      } else {
-        timeout = setTimeout(() => dispatch({ type: 'DELETE' }), 8)
-      }
+    if (!element) {
+      return undefined
     }
 
-    return () => clearTimeout(timeout)
+    const currentSnippet =
+      CODE_SNIPPETS[
+        codeState.snippetIndex
+      ]
+
+    element.textContent =
+      currentSnippet.slice(
+        0,
+        codeState.charIndex
+      )
+
+    let timeout
+
+    if (!codeState.isDeleting) {
+      if (
+        codeState.charIndex ===
+        currentSnippet.length
+      ) {
+        timeout = setTimeout(() => {
+          dispatch({
+            type: 'START_DELETE',
+          })
+        }, 2500)
+      } else {
+        timeout = setTimeout(() => {
+          dispatch({
+            type: 'TYPE',
+          })
+        }, 18)
+      }
+    } else if (
+      codeState.charIndex === 0
+    ) {
+      dispatch({
+        type: 'SWITCH_SNIPPET',
+      })
+
+      timeout = setTimeout(() => {
+        dispatch({
+          type: 'START_TYPE',
+        })
+      }, 400)
+    } else {
+      timeout = setTimeout(() => {
+        dispatch({
+          type: 'DELETE',
+        })
+      }, 8)
+    }
+
+    return () => {
+      clearTimeout(timeout)
+    }
   }, [codeState])
 
-  const currentWord = cyclingWords[wordIndex]
+  const currentWord =
+    cyclingWords[wordIndex] ??
+    cyclingWords[0]
 
   return (
     <>
       <div className="hero-wrapper">
-
-        <section id="home" className="hero">
+        <section
+          id="home"
+          className="hero"
+        >
           <div className="hero-left">
-
             <div className="hero-line-graphics">
-              <span className="hero-graphics-text">{t('graphics')},</span>
+              <span className="hero-graphics-text">
+                {t('hero.graphics')},
+              </span>
             </div>
 
             <div className="hero-line-main">
-              <span className="hero-big-orange">{t('web_design')}</span>
+              <span className="hero-big-orange">
+                {t('hero.web_design')}
+              </span>
             </div>
 
             <div className="hero-line-black">
-              <span className="hero-big-black">&amp; {t('and_hosting')}</span>
+              <span className="hero-big-black">
+                &amp;{' '}
+                {t('hero.and_hosting')}
+              </span>
             </div>
 
             <div className="hero-line-animated">
               <span
                 className={`hero-word-swap ${animState} ${
-                  currentWord.color === 'orange' ? 'word-orange' : 'word-black'
+                  currentWord.color ===
+                  'orange'
+                    ? 'word-orange'
+                    : 'word-black'
                 }`}
               >
                 {currentWord.text}
               </span>
-              <span className="hero-word-dot">.</span>
+
+              <span className="hero-word-dot">
+                .
+              </span>
             </div>
 
             <div className="hero-subtitle-row">
               <p className="hero-subtitle-new">
-                <span>{t('tagline_part1')}</span>
+                <span>
+                  {t(
+                    'hero.tagline_part1'
+                  )}
+                </span>
+
                 {' '}&amp;{' '}
-                <span>{t('tagline_part2')}.</span>
+
+                <span>
+                  {t(
+                    'hero.tagline_part2'
+                  )}
+                  .
+                </span>
               </p>
 
               <div className="hero-badge hero-badge--inline">
-                <span className="badge-number">50+</span>
-                <span className="badge-star">⭐</span>
-                <span className="badge-text">{t('projects_badge')}</span>
+                <span className="badge-number">
+                  50+
+                </span>
+
+                <span
+                  className="badge-star"
+                  aria-hidden="true"
+                >
+                  ⭐
+                </span>
+
+                <span className="badge-text">
+                  {t(
+                    'hero.projects_badge'
+                  )}
+                </span>
               </div>
             </div>
-
           </div>
 
           <div className="scroll-indicator">
             <div className="scroll-line" />
-            <span>{t('scroll_text')}</span>
+
+            <span>
+              {t('hero.scroll_text')}
+            </span>
           </div>
         </section>
 
         <div className="code-editor-float">
           <div className="code-window">
             <div className="code-window-bar">
-              <span className="dot red"    />
-              <span className="dot yellow" />
-              <span className="dot green"  />
-              <span className="window-title">teravolt — app.js</span>
+              <span
+                className="dot red"
+                aria-hidden="true"
+              />
+
+              <span
+                className="dot yellow"
+                aria-hidden="true"
+              />
+
+              <span
+                className="dot green"
+                aria-hidden="true"
+              />
+
+              <span className="window-title">
+                teravolt — app.js
+              </span>
+
               <div className="code-tabs">
-                <span className="code-tab active">app.js</span>
-                <span className="code-tab">utils.js</span>
-                <span className="code-tab">api.js</span>
+                <span className="code-tab active">
+                  app.js
+                </span>
+
+                <span className="code-tab">
+                  utils.js
+                </span>
+
+                <span className="code-tab">
+                  api.js
+                </span>
               </div>
             </div>
 
             <div className="code-body">
-              <div className="line-numbers">
-                {Array.from({ length: 30 }, (_, i) => (
-                  <span key={i}>{i + 1}</span>
-                ))}
+              <div
+                className="line-numbers"
+                aria-hidden="true"
+              >
+                {Array.from(
+                  { length: 30 },
+                  (_, index) => (
+                    <span key={index}>
+                      {index + 1}
+                    </span>
+                  )
+                )}
               </div>
+
               <pre className="code-content">
-                <code ref={codeRef} className="code-text" />
-                <span className="code-cursor">▌</span>
+                <code
+                  ref={codeRef}
+                  className="code-text"
+                />
+
+                <span
+                  className="code-cursor"
+                  aria-hidden="true"
+                >
+                  ▌
+                </span>
               </pre>
             </div>
 
             <div className="code-status-bar">
-              <span>⬡ JavaScript</span>
+              <span>
+                ⬡ JavaScript
+              </span>
+
               <span>UTF-8</span>
+
               <span>Spaces: 2</span>
-              <span className="status-online">⬤ Live Server :3000</span>
+
+              <span className="status-online">
+                ⬤ Live Server :3000
+              </span>
             </div>
           </div>
         </div>
-
       </div>
 
       <LogoScroll />

@@ -1,0 +1,190 @@
+{
+  "navbar": {
+    "home": "Início",
+    "services": "Serviços",
+    "pricing": "Pacotes",
+    "about": "Sobre",
+    "contact": "Contato",
+    "work": "Trabalho",
+    "blog": "Blog",
+    "talk": "Fale Conosco ↗"
+  },
+  "hero": {
+    "graphics": "GRÁFICOS",
+    "web_design": "WEB / DESIGN",
+    "and_hosting": "Hospedagem",
+    "websites": "WEBSITES",
+    "experiences": "EXPERIÊNCIAS",
+    "solutions": "SOLUÇÕES",
+    "platforms": "PLATAFORMAS",
+    "products": "PRODUTOS",
+    "brands": "MARCAS",
+    "tagline_part1": "Design Web Full Stack",
+    "tagline_part2": "Agência de Hospedagem",
+    "projects_badge": "Projetos Concluídos",
+    "scroll_text": "Rolar",
+    "partners_prefix": "Parceria como um",
+    "partners_highlight": "Agência de Web Design e Hospedagem",
+    "partners_suffix": "com equipas em:"
+  },
+  "services": {
+    "what_we_offer": "O QUE OFERECEMOS",
+    "expertise": "Perícia",
+    "web_development": "Desenvolvimento Web",
+    "web_dev_desc": "De páginas de destino simples a aplicações web complexas, construímos websites rápidos, escaláveis e otimizados para SEO, adaptados às necessidades do seu negócio.",
+    "web_dev_detail": "Especializamo-nos na construção de aplicações web modernas e de alto desempenho, utilizando tecnologias de ponta. Nossa equipe cuida de tudo, desde a arquitetura inicial até a implantação e otimização.",
+    "graphics_design": "Design Gráfico",
+    "graphics_desc": "Criamos identidades visuais atraentes — logotipos, diretrizes de marca, materiais de marketing e ativos digitais que fazem sua marca se destacar.",
+    "graphics_detail": "Um ótimo design é mais do que estética — ele comunica os valores da sua marca, constrói confiança e impulsiona a ação.",
+    "ui_ux": "Design de UI/UX",
+    "ui_ux_desc": "Projetamos interfaces de usuário que são bonitas, funcionais e focadas em conversão. Cada pixel é intencional e cada interação é fluida.",
+    "ui_ux_detail": "A experiência do usuário não se trata apenas de telas atraentes — trata-se de entender o comportamento, reduzir o atrito e guiar os usuários em direção aos seus objetivos.",
+    "mobile_app": "Desenvolvimento de Aplicativos Móveis",
+    "mobile_desc": "Criamos aplicativos móveis multiplataforma para iOS e Android usando React Native — um único código-fonte, desempenho nativo e uma experiência perfeita.",
+    "mobile_detail": "O mobile é onde seus usuários estão. Construímos aplicativos multiplataforma de alta qualidade que parecem nativos tanto no iOS quanto no Android.",
+    "web_hosting": "Hospedagem Web",
+    "hosting_desc": "Fornecemos hospedagem gerenciada com backups diários, certificados SSL, integração de CDN e monitoramento contínuo.",
+    "hosting_detail": "O seu site merece uma infraestrutura confiável. Fornecemos hospedagem gerenciada com armazenamento SSD, backups automatizados, proteção SSL e monitoramento proativo.",
+    "performance": "Otimização de Desempenho",
+    "perf_desc": "Auditar o seu site, corrigir gargalos e otimizar imagens, código e resposta do servidor.",
+    "perf_detail": "Realizamos auditorias de velocidade, resolvemos problemas de Core Web Vitals e otimizamos seu site para uma experiência de usuário mais rápida.",
+    "view_case_studies": "Ver Estudos de Caso"
+  },
+  "pricing": {
+    "title": "Pacotes",
+    "subtitle": "Personalize seu plano para atender às suas necessidades exatas.",
+    "market_note": "Preços adaptados ao seu mercado local",
+    "best_value": "pelo melhor valor.",
+    "number_of_pages": "Número de Páginas:",
+    "page": "página",
+    "pages": "páginas",
+    "recommended_plan": "Plano recomendado:",
+    "slider_hint": "Ajuste o controle deslizante para ver os preços para diferentes contagens de páginas.",
+    "standard_badge": "Padrão",
+    "most_popular": "Mais populares",
+    "suggested": "Sugerido",
+    "additional_page": "página adicional",
+    "need_custom": "Precisa de algo personalizado?",
+    "lets_talk": "Vamos conversar",
+    "custom_suffix": "e ajudaremos a impulsionar seu produto para o sucesso.",
+    "plans": {
+      "basic": {
+        "name": "Básico",
+        "description": "Perfeito para projetos pequenos e sites simples.",
+        "button": "Escolher Básico",
+        "features": [
+          "Design Responsivo",
+          "Configuração básica de SEO",
+          "Entrega Rápida (3 Dias)",
+          "Suporte por e-mail",
+          "Integração de Formulário de Contato"
+        ]
+      },
+      "standard": {
+        "name": "Padrão",
+        "description": "Melhor para empresas em crescimento com mais necessidades.",
+        "button": "Escolher Padrão",
+        "features": [
+          "SEO e Análise Avançados",
+          "Integração de CMS",
+          "Design Mobile-First",
+          "Suporte Gratuito de 1 Mês",
+          "Suporte de Email Prioritário"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Ideal para empresas maiores que precisam de escalabilidade.",
+        "button": "Escolha o Pro",
+        "features": [
+          "Integração de E-commerce",
+          "Integração de API Personalizada",
+          "Suporte prioritário",
+          "Otimização de Desempenho",
+          "Análise Avançada"
+        ]
+      }
+    },
+    "modal": {
+      "close": "Fechar formulário de consulta",
+      "title": "Vamos Falar de Tecnologia",
+      "subtitle": "Pronto para construir algo incrível? Preencha o formulário abaixo.",
+      "name_placeholder": "Digite seu nome",
+      "contact_placeholder": "Insira seu e-mail ou telefone",
+      "plan_details": "Detalhes do plano:",
+      "plan": "Plano",
+      "price": "Preço",
+      "included_features": "Recursos Incluídos",
+      "for_pages": "para {{count}} página",
+      "for_pages_plural": "para {{count}} páginas",
+      "whatsapp_prefix": "Você também pode entrar em contato conosco via",
+      "whatsapp_message": "Olá Teravolt! Estou interessado no plano {{plan}} para {{count}} páginas.",
+      "sending": "Enviando...",
+      "submit": "Enviar consulta",
+      "confirm": "Certeza?",
+      "done": "Feito!",
+      "success": "Consulta enviada com sucesso!",
+      "failure": "Falha ao enviar consulta.",
+      "network_error": "Erro de rede."
+    }
+  },
+  "portfolio": {
+    "label": "Nosso portfólio",
+    "title": "Obras em Destaque",
+    "intro_start": "Bem-vindo a um portfólio de",
+    "web_development": "Desenvolvimento Web",
+    "ui_ux_design": "Design de UI/UX Centrado no Utilizador",
+    "graphic_design": "Design Gráfico",
+    "mobile_development": "Desenvolvimento de Aplicativos Móveis",
+    "projects_suffix": "projetos.",
+    "case_study": "ESTUDO DE CASO",
+    "view_project": "Ver Projeto ↗",
+    "view_all": "Ver Todo o Trabalho ↗",
+    "projects": {
+      "ecommerce": "Plataforma de E-commerce",
+      "branding": "MARCA",
+      "logos": "LOGOTIPOS",
+      "mobile": "Design de Aplicativo Móvel",
+      "saas": "Painel SaaS",
+      "identity": "Identidade da Marca"
+    }
+  },
+  "about": {
+    "label": "QUEM SOMOS",
+    "title": "Sobre",
+    "greeting": "Olá,",
+    "we_are": "nós somos",
+    "company": "Teravolt Digitals",
+    "main_text": "construindo soluções de Web Design e Hospedagem, focada na criação e entrega de produtos digitais, marcas e experiências.",
+    "description": "Uma agência de design e hospedagem web que atende clientes local e globalmente, entregando excelência em cada pixel e cada milissegundo de tempo de atividade.",
+    "tools": "Experiência em Ferramentas",
+    "show_more": "Mostrar mais",
+    "show_less": "Mostrar Menos"
+  },
+  "contact": {
+    "label": "Entre em contato",
+    "title_start": "Vamos",
+    "title_highlight": "Trabalho",
+    "title_end": "Juntos",
+    "email": "Correio eletrônico",
+    "phone": "Telefone",
+    "location": "Localização",
+    "location_value": "Remoto — Mundial",
+    "name_placeholder": "Seu Nome",
+    "email_placeholder": "Seu Email",
+    "project_placeholder": "Tipo de projeto (ex. Website + Hospedagem)",
+    "message_placeholder": "Conte-nos sobre o seu projeto...",
+    "sending": "Enviando...",
+    "send": "Enviar Mensagem ↗",
+    "success": "Mensagem enviada com sucesso!",
+    "general_error": "Algo correu mal.",
+    "network_error": "Erro de rede."
+  },
+  "footer": {
+    "copyright_company": "Teravolt Soluções Digitais",
+    "rights": "Todos os direitos reservados.",
+    "services": "Serviços",
+    "pricing": "Preços",
+    "contact": "Contato"
+  }
+}

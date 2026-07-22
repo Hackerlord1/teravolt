@@ -1,0 +1,117 @@
+{
+  "listing": {
+    "open_navigation": "Abrir navegação do projeto",
+    "projects": "Projetos",
+    "section_label": "Nosso Trabalho",
+    "title": "Em destaque",
+    "title_highlight": "Trabalhos",
+    "subtitle": "Uma seleção selecionada dos nossos melhores projetos — deixe o trabalho falar por si.",
+    "all": "Todos",
+    "project_count_one": "{{count}} projeto",
+    "project_count_other": "{{count}} projetos",
+    "empty": "Ainda não há projetos nesta categoria."
+  },
+  "card": {
+    "featured_project": "Projeto em Destaque",
+    "visit_site": "Visitar o site ↗",
+    "view_project": "Ver Projeto →",
+    "details": "Detalhes"
+  },
+  "detail": {
+    "back_to_portfolio": "Voltar ao Portfólio",
+    "view_live_site": "Ver Site ao Vivo ↗",
+    "github": "GitHub",
+    "overview": "Visão Geral do Projeto",
+    "challenge": "O Desafio",
+    "solution": "Nossa Solução",
+    "screenshots": "Capturas de tela",
+    "screenshot_alt": "{{title}} captura de tela {{number}}",
+    "tech_stack": "Pilha de tecnologia",
+    "related_projects": "Projetos Relacionados"
+  },
+  "sidebar": {
+    "close": "Fechar navegação do projeto",
+    "projects": "Projetos",
+    "categories": "Categorias",
+    "back_to_home": "Voltar para Início"
+  },
+  "projects": {
+    "e-commerce-platform": {
+      "title": "Plataforma de E-commerce",
+      "category": "Desenvolvimento Web",
+      "excerpt": "Uma plataforma de e-commerce totalmente personalizada construída com Next.js, com filtragem de produtos, gerenciamento de carrinho e pagamentos Stripe.",
+      "description": "Este projeto foi uma solução completa de e-commerce construída para um cliente de varejo. Projetamos a UI do zero no Figma, depois desenvolvemos todo o frontend em Next.js com um backend CMS headless. A plataforma apresenta inventário em tempo real, filtragem avançada, um sistema de carrinho personalizado e integração de pagamentos Stripe.",
+      "challenge": "O cliente precisava de uma loja rápida e mobile-first que pudesse lidar com alto tráfego durante eventos de vendas sem comprometer a qualidade do design ou a experiência do usuário.",
+      "solution": "Construímos um catálogo de produtos gerado estaticamente com regeneração incremental, reduzindo os tempos de carregamento em 80%. Animações personalizadas e microinterações foram adicionadas para melhorar o engajamento sem prejudicar o desempenho.",
+      "readTime": "5 min de leitura",
+      "tags": [
+        "DESENVOLVIMENTO WEB",
+        "UI/UX"
+      ]
+    },
+    "branding-identity": {
+      "title": "Identidade da Marca",
+      "category": "Branding",
+      "excerpt": "Um sistema completo de identidade de marca, incluindo logotipo, tipografia, paleta de cores e diretrizes de marca para uma startup moderna.",
+      "description": "Uma identidade de marca completa construída para uma startup de tecnologia em rápido crescimento.\n    O projeto abrangeu design de logotipo, seleção de tipografia, sistema de cores, conjunto de ícones,\n    voz da marca e um documento abrangente de diretrizes de marca.",
+      "challenge": "A startup precisava se diferenciar em um mercado saturado de SaaS com uma marca que parecesse confiável e ousadamente moderna.",
+      "solution": "Desenvolvemos um sistema de logotipos geométricos ousados com um contraste de cores quente-frio que comunica precisão e acessibilidade. O documento de diretrizes da marca garante a consistência em todos os pontos de contato.",
+      "readTime": "4 min de leitura",
+      "tags": [
+        "MARCA",
+        "ILUSTRAÇÃO"
+      ]
+    },
+    "logo-design-collection": {
+      "title": "Coleção de Design de Logotipos",
+      "category": "Branding",
+      "excerpt": "Uma coleção selecionada de logotipos e logotipos textuais criados para empresas de vários setores.",
+      "description": "Uma coleção selecionada de designs de logotipos criados para clientes em vários setores — de hospitalidade a fintech. Cada marca foi projetada para ser atemporal, escalável e imediatamente reconhecível.",
+      "challenge": "Cada cliente veio com uma visão única e público-alvo, exigindo uma abordagem profundamente personalizada para cada marca, em vez de um processo padronizado.",
+      "solution": "Um processo de descoberta minucioso foi realizado para cada cliente, \n    incluindo análise de concorrentes e mood boarding, antes que qualquer trabalho de design começasse. \n    Cada logotipo foi entregue em todos os formatos e variantes necessários.",
+      "readTime": "3 min de leitura",
+      "tags": [
+        "MARCA",
+        "ILUSTRAÇÃO"
+      ]
+    },
+    "mobile-app-design": {
+      "title": "Design de Aplicativo Móvel",
+      "category": "UI/UX",
+      "excerpt": "Design de UI/UX ponta a ponta para um aplicativo móvel de rastreamento de fitness, de wireframes a protótipos de alta fidelidade.",
+      "description": "Um projeto completo de design UI/UX de aplicativo móvel para um aplicativo de rastreamento de fitness voltado para jovens profissionais. O projeto abrangeu pesquisa de usuário, arquitetura de informação, wireframing e prototipagem de alta fidelidade.",
+      "challenge": "Os usuários de aplicativos de fitness existentes relataram sentir-se sobrecarregados com dados e recursos. Precisávamos projetar uma experiência focada e calma que motivasse em vez de estressar.",
+      "solution": "Uma arquitetura de informação baseada em cartões com divulgação progressiva foi usada para manter a interface limpa. Tons quentes e microanimações comemorativas foram adicionados para tornar a experiência gratificante.",
+      "readTime": "6 min de leitura",
+      "tags": [
+        "UI/UX",
+        "MÓVEL"
+      ]
+    },
+    "saas-dashboard": {
+      "title": "Painel SaaS",
+      "category": "Desenvolvimento Web",
+      "excerpt": "Um painel de análise de alto desempenho para um produto SaaS, construído com visualização de dados em tempo real e acesso baseado em função.",
+      "description": "Um painel de análise rico em dados, criado para uma empresa SaaS B2B. O painel lida com visualização de dados em tempo real, gerenciamento de equipe, visão geral de faturamento e controle de acesso baseado em função em vários níveis de usuário.",
+      "challenge": "O painel existente foi construído com bibliotecas desatualizadas e sofreu com lentidão no carregamento e má experiência em dispositivos móveis, causando uma rotatividade significativa entre os usuários móveis.",
+      "solution": "Reconstruímos todo o frontend em Next.js com componentes de servidor, módulos de gráficos com carregamento preguiçoso e um sistema de layout responsivo. O tempo de carregamento caiu de 6,2s para menos de 1,1s.",
+      "readTime": "7 min de leitura",
+      "tags": [
+        "DESENVOLVIMENTO WEB",
+        "UI/UX"
+      ]
+    },
+    "brand-identity-system": {
+      "title": "Sistema de Identidade da Marca",
+      "category": "Branding",
+      "excerpt": "Sistema completo de identidade de marca, incluindo linguagem visual, material de marketing e ativos digitais para uma marca de estilo de vida.",
+      "description": "Um sistema abrangente de identidade de marca desenvolvido para uma marca emergente de estilo de vida voltada para millennials urbanos. Os entregáveis incluíram sistema de logotipos, design de embalagens, modelos para redes sociais e um manual de marca completo.",
+      "challenge": "A marca não tinha consistência visual em seus pontos de contato, causando confusão entre os clientes e enfraquecendo o reconhecimento da marca.",
+      "solution": "Foi desenvolvida uma linguagem visual unificada, utilizando uma paleta de cores distinta e um sistema tipográfico que funciona em meios impressos e digitais. Todos os ativos foram entregues como modelos editáveis para uso interno.",
+      "readTime": "4 min de leitura",
+      "tags": [
+        "MARCA"
+      ]
+    }
+  }
+}

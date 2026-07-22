@@ -1,0 +1,30 @@
+{
+  "listing": {
+    "section_label": "Nuestros pensamientos",
+    "title": "Blog",
+    "title_highlight": "Artículos",
+    "subtitle": "Perspectivas sobre desarrollo web, diseño y tecnología — directamente desde el estudio Teravolt.",
+    "all_articles": "Todos los artículos",
+    "post_count_one": "{{count}} publicación",
+    "post_count_other": "{{count}} publicaciones"
+  },
+  "post": {
+    "not_found_title": "Publicación no encontrada",
+    "not_found_description": "El artículo que buscas no existe.",
+    "back_to_blog": "Volver al blog",
+    "related_articles": "Artículos relacionados"
+  },
+  "sidebar": {
+    "title": "Blog",
+    "open_navigation": "Abrir navegación del blog",
+    "close_navigation": "Cerrar navegación del blog",
+    "all_articles": "Todos los artículos",
+    "categories": "Categorías",
+    "back_to_site": "Volver al sitio"
+  },
+  "card": {
+    "read_article": "Leer artículo",
+    "read_more": "Leer más",
+    "featured": "Destacado"
+  }
+}

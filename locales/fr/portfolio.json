@@ -1,0 +1,117 @@
+{
+  "listing": {
+    "open_navigation": "Ouvrir la navigation du projet",
+    "projects": "Projets",
+    "section_label": "Notre travail",
+    "title": "En vedette",
+    "title_highlight": "Œuvres",
+    "subtitle": "Une sélection soignée de nos meilleurs projets — laissez le travail parler de lui-même.",
+    "all": "Tout",
+    "project_count_one": "{{count}} projet",
+    "project_count_other": "{{count}} projets",
+    "empty": "Aucun projet dans cette catégorie pour le moment."
+  },
+  "card": {
+    "featured_project": "Projet en vedette",
+    "visit_site": "Visitez le site ↗",
+    "view_project": "Voir le projet →",
+    "details": "Détails"
+  },
+  "detail": {
+    "back_to_portfolio": "Retour au portfolio",
+    "view_live_site": "Voir le site en direct ↗",
+    "github": "GitHub",
+    "overview": "Aperçu du projet",
+    "challenge": "Le Défi",
+    "solution": "Notre Solution",
+    "screenshots": "Captures d'écran",
+    "screenshot_alt": "{{title}} capture d'écran {{number}}",
+    "tech_stack": "Pile technologique",
+    "related_projects": "Projets connexes"
+  },
+  "sidebar": {
+    "close": "Fermer la navigation du projet",
+    "projects": "Projets",
+    "categories": "Catégories",
+    "back_to_home": "Retour à l'accueil"
+  },
+  "projects": {
+    "e-commerce-platform": {
+      "title": "Plateforme E-commerce",
+      "category": "Développement Web",
+      "excerpt": "Une plateforme e-commerce entièrement personnalisée construite avec Next.js, comprenant le filtrage des produits, la gestion du panier et les paiements Stripe.",
+      "description": "Ce projet était une solution de commerce électronique à grande échelle construite pour un client de vente au détail.\n    Nous avons conçu l'interface utilisateur à partir de zéro dans Figma, puis développé l'ensemble du frontend en Next.js\n    avec un backend CMS headless. La plateforme comprend un inventaire en temps réel, un filtrage avancé,\n    un système de panier personnalisé et une intégration de paiement Stripe.",
+      "challenge": "Le client avait besoin d'une boutique rapide, axée sur le mobile, capable de gérer un trafic élevé lors des événements de vente sans compromettre la qualité de la conception ou l'expérience utilisateur.",
+      "solution": "Nous avons créé un catalogue de produits généré statiquement avec régénération incrémentielle, réduisant les temps de chargement de 80 %. Des animations personnalisées et des micro-interactions ont été ajoutées pour améliorer l'engagement sans nuire aux performances.",
+      "readTime": "5 min de lecture",
+      "tags": [
+        "DÉVELOPPEMENT WEB",
+        "UI/UX"
+      ]
+    },
+    "branding-identity": {
+      "title": "Identité de marque",
+      "category": "Image de marque",
+      "excerpt": "Un système d'identité de marque complet comprenant le logo, la typographie, la palette de couleurs et les directives de marque pour une startup moderne.",
+      "description": "Une identité de marque complète conçue pour une startup technologique en pleine croissance.\n    Le projet comprenait la conception du logo, la sélection de la typographie, le système de couleurs, l'ensemble d'icônes,\n    la voix de la marque et un document complet de directives de marque.",
+      "challenge": "La startup devait se différencier sur un marché SaaS concurrentiel avec une marque à la fois digne de confiance et audacieusement moderne.",
+      "solution": "Nous avons développé un système de logo géométrique audacieux avec un contraste de couleurs chaud-froid qui communique précision et accessibilité. Le document des directives de la marque assure la cohérence sur tous les points de contact.",
+      "readTime": "4 min de lecture",
+      "tags": [
+        "MARQUE",
+        "ILLUSTRATION"
+      ]
+    },
+    "logo-design-collection": {
+      "title": "Collection de conception de logo",
+      "category": "Image de marque",
+      "excerpt": "Une collection organisée de logotypes et de marques textuelles conçus pour les entreprises de divers secteurs.",
+      "description": "Une collection organisée de conceptions de logos créés pour des clients de plusieurs secteurs — de l'hôtellerie à la fintech. Chaque marque a été conçue pour être intemporelle, évolutive et immédiatement reconnaissable.",
+      "challenge": "Chaque client est arrivé avec une vision unique et un public cible, nécessitant une approche profondément personnalisée pour chaque marque plutôt qu'un processus standardisé.",
+      "solution": "Un processus de découverte approfondi a été mené pour chaque client, incluant une analyse concurrentielle et du mood boarding, avant que tout travail de conception ne commence. Chaque logo a été livré dans tous les formats et variantes nécessaires.",
+      "readTime": "3 min de lecture",
+      "tags": [
+        "MARQUE",
+        "ILLUSTRATION"
+      ]
+    },
+    "mobile-app-design": {
+      "title": "Conception d'application mobile",
+      "category": "UI/UX",
+      "excerpt": "Conception UI/UX de bout en bout pour une application mobile de suivi de remise en forme, des wireframes aux prototypes haute fidélité.",
+      "description": "Un projet complet de conception UI/UX d'application mobile pour une application de suivi de remise en forme ciblant les jeunes professionnels. Le projet a couvert la recherche utilisateur, l'architecture de l'information, le wireframing et le prototypage haute fidélité.",
+      "challenge": "Les utilisateurs des applications de fitness existantes se sont sentis submergés par les données et les fonctionnalités. Nous devions concevoir une expérience ciblée et calme qui motive plutôt qu'elle ne stresse.",
+      "solution": "Une architecture d'information basée sur des cartes avec une divulgation progressive a été utilisée pour garder l'interface épurée. Des tons chauds et des micro-animations festives ont été ajoutés pour rendre l'expérience gratifiante.",
+      "readTime": "6 min de lecture",
+      "tags": [
+        "UI/UX",
+        "MOBILE"
+      ]
+    },
+    "saas-dashboard": {
+      "title": "Tableau de bord SaaS",
+      "category": "Développement Web",
+      "excerpt": "Un tableau de bord analytique haute performance pour un produit SaaS, construit avec une visualisation de données en temps réel et un accès basé sur les rôles.",
+      "description": "Un tableau de bord analytique riche en données, conçu pour une entreprise SaaS B2B. Le tableau de bord gère la visualisation des données en temps réel, la gestion d'équipe, un aperçu de la facturation et le contrôle d'accès basé sur les rôles pour plusieurs niveaux d'utilisateurs.",
+      "challenge": "Le tableau de bord existant a été construit avec des bibliothèques obsolètes et souffrait de temps de chargement lents et d'une mauvaise expérience mobile, entraînant un taux de désabonnement important parmi les utilisateurs mobiles.",
+      "solution": "Nous avons reconstruit l'intégralité du frontend en Next.js avec des composants serveur, des modules de graphique à chargement différé et un système de mise en page réactif. Le temps de chargement est passé de 6,2 s à moins de 1,1 s.",
+      "readTime": "7 min de lecture",
+      "tags": [
+        "DÉVELOPPEMENT WEB",
+        "UI/UX"
+      ]
+    },
+    "brand-identity-system": {
+      "title": "Système d'identité de marque",
+      "category": "Image de marque",
+      "excerpt": "Système d'identité de marque complet comprenant le langage visuel, les supports marketing et les actifs numériques pour une marque de style de vie.",
+      "description": "Un système d'identité de marque complet développé pour une marque lifestyle émergente ciblant les millennials urbains. Les livrables comprenaient un système de logo, une conception d'emballage, des modèles de médias sociaux et un livre de marque complet.",
+      "challenge": "La marque n'avait aucune cohérence visuelle sur ses points de contact, \n    provoquant une confusion chez les clients et affaiblissant la mémorisation de la marque.",
+      "solution": "Un langage visuel unifié a été développé en utilisant une palette de couleurs distinctive et un système typographique qui fonctionne sur papier et en numérique. Tous les éléments ont été livrés sous forme de modèles modifiables pour une utilisation interne.",
+      "readTime": "4 min de lecture",
+      "tags": [
+        "MARQUE"
+      ]
+    }
+  }
+}

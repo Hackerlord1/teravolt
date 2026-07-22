@@ -1,0 +1,190 @@
+{
+  "navbar": {
+    "home": "Nyumbani",
+    "services": "Huduma",
+    "pricing": "Vifurushi",
+    "about": "Kuhusu",
+    "contact": "Wasiliana",
+    "work": "Kazi",
+    "blog": "Blogi",
+    "talk": "Ongea Nasi ↗"
+  },
+  "hero": {
+    "graphics": "GRAFİKİ",
+    "web_design": "WEB / UBUNIFU",
+    "and_hosting": "UHUDHURUJI",
+    "websites": "MAJIRA YA TOVUTI",
+    "experiences": "MATUKIO",
+    "solutions": "SULUHISHO",
+    "platforms": "MAJUKWAA",
+    "products": "BIDHAA",
+    "brands": "BIASHARA",
+    "tagline_part1": "Muundo kamili wa Wavuti",
+    "tagline_part2": "Wakala wa Ukaribishaji",
+    "projects_badge": "Miradi Imekamilika",
+    "scroll_text": "Tembeza",
+    "partners_prefix": "Kushirikiana kama",
+    "partners_highlight": "Wasanifu wa Wavuti na Wakala wa Ukaribishaji",
+    "partners_suffix": "na timu katika:"
+  },
+  "services": {
+    "what_we_offer": "TUNACHOKITOA",
+    "expertise": "Utaalam",
+    "web_development": "Ubunifu wa Wavuti",
+    "web_dev_desc": "Kuanzia kurasa za kutua rahisi hadi programu tata za wavuti, tunajenga tovuti za haraka, zinazoweza kuongezeka, na zinazofaa kwa SEO zilizoundwa kulingana na mahitaji ya biashara yako.",
+    "web_dev_detail": "Tunataalam katika kujenga programu za kisasa za wavuti zenye utendaji wa hali ya juu kwa kutumia teknolojia za kisasa. Timu yetu inashughulikia kila kitu kuanzia usanifu wa awali hadi kupeleka na kuongeza utendaji.",
+    "graphics_design": "Usanifu wa Picha",
+    "graphics_desc": "Tunatengeneza utambulisho wa kuvutia wa kuona—logo, miongozo ya chapa, vifaa vya uuzaji, na mali za kidijitali zinazofanya chapa yako ionekane.",
+    "graphics_detail": "Muundo mzuri unazidi urembo—unawasilisha maadili ya chapa yako, unajenga uaminifu, na unachochea hatua.",
+    "ui_ux": "Muundo wa UI/UX",
+    "ui_ux_desc": "Tunabuni miingiliano ya mtumiaji ambayo ni mizuri, ya vitendo, na inayolenga ubadilishaji. Kila pikseli ina makusudi, na kila mwingiliano ni laini.",
+    "ui_ux_detail": "Uzoefu wa mtumiaji si tu kuhusu skrini zinazovutia—ni kuhusu kuelewa tabia, kupunguza msuguano, na kuwaongoza watumiaji kuelekea malengo yao.",
+    "mobile_app": "Uundaji wa Programu ya Simu ya Mkononi",
+    "mobile_desc": "Tunajenga programu za simu za mkononi za majukwaa mbalimbali kwa iOS na Android kwa kutumia React Native—msimbo mmoja, utendaji wa asili, na uzoefu mzuri.",
+    "mobile_detail": "Simu za mkononi ndiko watumiaji wako walipo. Tunajenga programu za ubora wa juu za jukwaa-msalaba ambazo huhisi asili kwenye iOS na Android.",
+    "web_hosting": "Web Hosting",
+    "hosting_desc": "Tunatoa huduma ya uhifadhi unaosimamiwa na nakala rudufu za kila siku, vyeti vya SSL, ujumuishaji wa CDN, na ufuatiliaji unaoendelea.",
+    "hosting_detail": "Tovuti yako inastahili miundombinu ya kuaminika. Tunatoa huduma za uhifadhi zinazosimamiwa na hifadhi ya SSD, nakala rudufu za kiotomatiki, ulinzi wa SSL, na ufuatiliaji wa tahadhari.",
+    "performance": "Uboreshaji wa Utendaji",
+    "perf_desc": "Tunakagua tovuti yako, tunarekebisha vikwazo, na kuongeza picha, msimbo, na mwitikio wa seva.",
+    "perf_detail": "Tunafanya ukaguzi wa kasi, tunatatua masuala ya Core Web Vitals, na tunaboresha tovuti yako kwa uzoefu wa haraka zaidi wa mtumiaji.",
+    "view_case_studies": "Tazama Mifano ya Kesi"
+  },
+  "pricing": {
+    "title": "Vifurushi",
+    "subtitle": "Customize your plan to fit your exact needs.",
+    "market_note": "Bei zilizobadilishwa kulingana na soko lako la ndani",
+    "best_value": "kwa thamani bora.",
+    "number_of_pages": "Idadi ya Kurasa:",
+    "page": "ukurasa",
+    "pages": "kurasa",
+    "recommended_plan": "Mpango uliopendekezwa:",
+    "slider_hint": "Rekebisha kiwango ili kuona bei kwa idadi tofauti za kurasa.",
+    "standard_badge": "Kawaida",
+    "most_popular": "Maarufu zaidi",
+    "suggested": "Iliyopendekezwa",
+    "additional_page": "ukurasa wa ziada",
+    "need_custom": "Unahitaji kitu maalum?",
+    "lets_talk": "Hebu tuzungumze",
+    "custom_suffix": "na tutakusaidia kutafakari bidhaa yako hadi kufaulu.",
+    "plans": {
+      "basic": {
+        "name": "Msingi",
+        "description": "Inafaa kwa miradi midogo na tovuti rahisi.",
+        "button": "Chagua Msingi",
+        "features": [
+          "Muundo unaoitikia",
+          "Uwekaji Msingi wa SEO",
+          "Uwasilishaji wa Haraka (Siku 3)",
+          "Tuma barua pepe kwa Usaidizi",
+          "Ujumuishaji wa Fomu ya Mawasiliano"
+        ]
+      },
+      "standard": {
+        "name": "Kawaida",
+        "description": "Bora kwa biashara zinazokua na mahitaji zaidi.",
+        "button": "Chagua Standard",
+        "features": [
+          "SEO & Analytiki za Juu",
+          "Ujumuishaji wa CMS",
+          "Muundo wa Kwanza-Simu",
+          "Msaada wa Bure wa Mwezi 1",
+          "Usaidizi wa Barua pepe wa Kipaumbele"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Inafaa kwa biashara kubwa zinazohitaji uwezo wa kukua.",
+        "button": "Chagua Pro",
+        "features": [
+          "Ujumuishaji wa E-commerce",
+          "Muunganisho Maalum wa API",
+          "Usaidizi wa Kipaumbele",
+          "Uboreshaji wa Utendaji",
+          "Takwimu za Juu"
+        ]
+      }
+    },
+    "modal": {
+      "close": "Funga fomu ya uchunguzi",
+      "title": "Hebu Tujadili Teknolojia",
+      "subtitle": "Uko tayari kujenga kitu cha kushangaza? Jaza fomu hapa chini.",
+      "name_placeholder": "Weka jina lako",
+      "contact_placeholder": "Weka barua pepe au nambari yako ya simu",
+      "plan_details": "Maelezo ya Mpango:",
+      "plan": "Mpango",
+      "price": "Bei",
+      "included_features": "Vipengele Vilivyojumuishwa",
+      "for_pages": "kwa ukurasa {{count}}",
+      "for_pages_plural": "kwa kurasa {{count}}",
+      "whatsapp_prefix": "Unaweza pia kuwasiliana nasi kupitia",
+      "whatsapp_message": "Habari Teravolt! Nina nia ya mpango wa {{plan}} kwa kurasa {{count}}.",
+      "sending": "Kutuma...",
+      "submit": "Tuma Ombi",
+      "confirm": "Hakika?",
+      "done": "Imemalizika!",
+      "success": "Uchunguzi umetumwa kwa mafanikio!",
+      "failure": "Imeshindikana kutuma ombi.",
+      "network_error": "Hitilafu ya mtandao."
+    }
+  },
+  "portfolio": {
+    "label": "Bodi yetu ya kazi",
+    "title": "Kazi Zilizoangaziwa",
+    "intro_start": "Karibu kwenye kwingineko ya",
+    "web_development": "Ubunifu wa Wavuti",
+    "ui_ux_design": "Muundo wa UI/UX unaozingatia Mtumia",
+    "graphic_design": "Usanifu wa Picha",
+    "mobile_development": "Ubunifu wa Programu za Simu",
+    "projects_suffix": "miradi.",
+    "case_study": "UTAFITI WA KESI",
+    "view_project": "Tazama Mradi ↗",
+    "view_all": "Tazama Kazi Zote ↗",
+    "projects": {
+      "ecommerce": "Jukwaa la E-biashara",
+      "branding": "CHAPA",
+      "logos": "LUGHA",
+      "mobile": "Muundo wa Programu ya Simu",
+      "saas": "SaaS Dashboard",
+      "identity": "Utambulisho wa Chapa"
+    }
+  },
+  "about": {
+    "label": "SISI NI NANI",
+    "title": "Kuhusu",
+    "greeting": "Habari,",
+    "we_are": "sisi ni",
+    "company": "Teravolt Digitals",
+    "main_text": "suluhisho za Ubunifu na Usimamizi wa Tovuti, zilizolenga kuunda na kuwasilisha bidhaa za kidijitali, chapa na uzoefu.",
+    "description": "Wakala wa usanifu na uhifadhi wa tovuti unaohudumia wateja ndani na kimataifa, ukitoa ubora katika kila pikseli na kila milisekunde ya muda wa kuwepo.",
+    "tools": "Utaalam katika Zana",
+    "show_more": "Onyesha Zaidi",
+    "show_less": "Onyesha Kidogo"
+  },
+  "contact": {
+    "label": "Wasiliana Nasi",
+    "title_start": "Hebu",
+    "title_highlight": "Kazi",
+    "title_end": "Pamoja",
+    "email": "Barua pepe",
+    "phone": "Simu",
+    "location": "Mahali",
+    "location_value": "Kijijini — Ulimwenguni",
+    "name_placeholder": "Jina Lako",
+    "email_placeholder": "Barua pepe yako",
+    "project_placeholder": "Aina ya Mradi (k.m. Tovuti + Usimamizi wa Tovuti)",
+    "message_placeholder": "Tuambie kuhusu mradi wako...",
+    "sending": "Kutuma...",
+    "send": "Tuma Ujumbe ↗",
+    "success": "Ujumbe umetumwa kwa mafanikio!",
+    "general_error": "Kitu kilienda vibaya.",
+    "network_error": "Hitilafu ya mtandao."
+  },
+  "footer": {
+    "copyright_company": "Suluhisho za Dijiti za Teravolt",
+    "rights": "Haki zote zimehifadhiwa.",
+    "services": "Huduma",
+    "pricing": "Bei",
+    "contact": "Wasiliana"
+  }
+}

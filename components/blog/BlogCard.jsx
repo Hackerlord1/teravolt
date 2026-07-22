@@ -1,7 +1,10 @@
 'use client'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 
 export default function BlogCard({ post }) {
+  const { t } = useTranslation('blog')
+
   return (
     <Link href={`/blog/${post.slug}`} className="blog-card">
 
@@ -32,7 +35,7 @@ export default function BlogCard({ post }) {
       <div className="blog-card-footer">
         <span className="blog-card-readtime">{post.readTime}</span>
         <span className="blog-card-read">
-          Read more
+          {t('card.read_more')}
           <svg width="13" height="13" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" strokeWidth="2.5">
             <line x1="5" y1="12" x2="19" y2="12"/>

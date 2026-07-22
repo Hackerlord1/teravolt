@@ -1,5 +1,7 @@
 'use client'
+
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const tools = [
   {
@@ -174,76 +176,118 @@ const tools = [
 const INITIAL_COUNT = 9
 
 export default function About() {
+  const { t } = useTranslation('home')
   const [showAll, setShowAll] = useState(false)
 
-  const visibleTools = showAll ? tools : tools.slice(0, INITIAL_COUNT)
+  const visibleTools = showAll
+    ? tools
+    : tools.slice(0, INITIAL_COUNT)
+
+  const toggleLabel = showAll
+    ? t('about.show_less')
+    : t('about.show_more')
 
   return (
-    <section id="about" className="section about-section">
-
-      {/* Label — unchanged */}
+    <section
+      id="about"
+      className="section about-section"
+    >
       <div className="about-label-wrap">
-        <p className="section-label" style={{ textAlign: 'center' }}>WHO WE ARE</p>
-        <h2 className="about-main-title">About</h2>
+        <p
+          className="section-label"
+          style={{ textAlign: 'center' }}
+        >
+          {t('about.label')}
+        </p>
+
+        <h2 className="about-main-title">
+          {t('about.title')}
+        </h2>
       </div>
 
-      {/* Big Paragraph — unchanged */}
       <div className="about-big-text">
         <p>
-          Hi,{' '}
-          <span className="about-orange">we are</span>{' '}
-          <span className="about-avatar">🚀</span>{' '}
-          <strong>Teravolt Digitals </strong>{' '}
-          <span className="about-emoji">✌️</span>
-          , building Web Design and Hosting solutions, {' '}
-          
-          focused on crafting{' '}
-          <span className="about-emoji">🎨</span>{' '}
-          and delivering digital products{' '}
-          <span className="about-emoji">🌐</span>
-          , brands{' '}
-          <span className="about-emoji">✦</span>{' '}
-          and experiences{' '}
-          <span className="about-emoji">✨</span>.
+          {t('about.greeting')}{' '}
+
+          <span className="about-orange">
+            {t('about.we_are')}
+          </span>{' '}
+
+          <span
+            className="about-avatar"
+            aria-hidden="true"
+          >
+            🚀
+          </span>{' '}
+
+          <strong>
+            {t('about.company')}{' '}
+          </strong>
+
+          <span
+            className="about-emoji"
+            aria-hidden="true"
+          >
+            ✌️
+          </span>
+          {', '}
+
+          {t('about.main_text')}
         </p>
       </div>
 
-      {/* Sub Description — unchanged */}
       <p className="about-sub-desc">
-        A web design & hosting agency serving clients locally and globally,
-        delivering excellence in every pixel and every millisecond of uptime.
+        {t('about.description')}
       </p>
 
-      {/* Tools — updated icons + expand */}
-      {/* Tools — updated icons + expand */}
-<div className="about-tools-section">
-  <p className="about-tools-label">Expertise in Tools</p>
-  <div className={`about-tools-grid ${showAll ? 'about-tools-grid--expanded' : ''}`}>
+      <div className="about-tools-section">
+        <p className="about-tools-label">
+          {t('about.tools')}
+        </p>
 
-    {visibleTools.map((tool, i) => (
-      <div
-        key={i}
-        className="tool-circle"
-        title={tool.label}
-        style={{ '--tool-color': tool.color }}
-      >
-        {/* ✅ SVG icon only — label removed */}
-        <span className="tool-svg">{tool.icon}</span>
+        <div
+          className={`about-tools-grid ${
+            showAll
+              ? 'about-tools-grid--expanded'
+              : ''
+          }`}
+        >
+          {visibleTools.map((tool) => (
+            <div
+              key={tool.label}
+              className="tool-circle"
+              title={tool.label}
+              style={{
+                '--tool-color': tool.color,
+              }}
+            >
+              <span className="tool-svg">
+                {tool.icon}
+              </span>
+            </div>
+          ))}
+
+          <button
+            type="button"
+            className="tool-more-btn"
+            onClick={() =>
+              setShowAll(
+                (current) => !current
+              )
+            }
+            title={toggleLabel}
+            aria-label={toggleLabel}
+            aria-expanded={showAll}
+          >
+            <span
+              className="tool-more-icon"
+              aria-hidden="true"
+            >
+              {showAll ? '−' : '+'}
+            </span>
+          </button>
+        </div>
       </div>
-    ))}
-
-    {/* ✅ More / Less button — label removed */}
-    <button
-      className="tool-more-btn"
-      onClick={() => setShowAll(!showAll)}
-      title={showAll ? 'Show Less' : 'Show More'}
-    >
-      <span className="tool-more-icon">{showAll ? '−' : '+'}</span>
-    </button>
-
-  </div>
-</div>
-
     </section>
   )
 }

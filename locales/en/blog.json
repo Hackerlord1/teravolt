@@ -1,0 +1,30 @@
+{
+  "listing": {
+    "section_label": "// Our Thoughts",
+    "title": "Blog",
+    "title_highlight": "Articles",
+    "subtitle": "Insights on web development, design, and technology — straight from the Teravolt studio.",
+    "all_articles": "All Articles",
+    "post_count_one": "{{count}} post",
+    "post_count_other": "{{count}} posts"
+  },
+  "post": {
+    "not_found_title": "Post not found",
+    "not_found_description": "The article you are looking for does not exist.",
+    "back_to_blog": "Back to Blog",
+    "related_articles": "Related Articles"
+  },
+  "sidebar": {
+    "title": "Blog",
+    "open_navigation": "Open blog navigation",
+    "close_navigation": "Close blog navigation",
+    "all_articles": "All Articles",
+    "categories": "Categories",
+    "back_to_site": "Back to Site"
+  },
+  "card": {
+    "read_article": "Read Article",
+    "read_more": "Read More",
+    "featured": "Featured"
+  }
+}

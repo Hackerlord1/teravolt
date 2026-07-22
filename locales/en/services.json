@@ -1,0 +1,165 @@
+{
+  "web_dev_title": "Web Development",
+  "web_dev_subtitle": "Fast, scalable and modern websites built around your business goals.",
+  "web_dev_desc": "From simple landing pages to complex web applications, we build fast, scalable and SEO-friendly websites tailored to your business needs.",
+  "web_dev_full_desc": "We design and develop modern, high-performance web applications using reliable technologies. Our work covers discovery, architecture, interface development, backend integration, testing, deployment and continuous optimisation.",
+
+  "graphics_title": "Graphics Design",
+  "graphics_subtitle": "Distinctive visual design that communicates your brand clearly.",
+  "graphics_desc": "We create logos, brand guidelines, marketing materials and digital assets that make your business stand out.",
+  "graphics_full_desc": "Great design goes beyond appearance. We combine creative direction, visual hierarchy, colour, typography and brand consistency to produce designs that build trust and encourage action.",
+
+  "uiux_title": "UI/UX Design",
+  "uiux_subtitle": "User-centred digital experiences designed for clarity and conversion.",
+  "uiux_desc": "We design attractive, functional and conversion-focused user interfaces where every interaction has a clear purpose.",
+  "uiux_full_desc": "Our UI/UX process combines user research, information architecture, wireframing, visual design and interactive prototyping. The result is a consistent experience that reduces friction and helps users achieve their goals.",
+
+  "mobile_title": "Mobile App Development",
+  "mobile_subtitle": "Cross-platform mobile experiences built for real users.",
+  "mobile_desc": "We build cross-platform mobile applications for iOS and Android using modern technologies and a shared codebase.",
+  "mobile_full_desc": "We create dependable mobile applications from product strategy and interface design through development, testing and release. Our applications are designed to feel responsive, intuitive and consistent across supported devices.",
+
+  "hosting_title": "Web Hosting",
+  "hosting_subtitle": "Reliable managed hosting for secure and available websites.",
+  "hosting_desc": "We provide managed hosting with SSL certificates, backups, content delivery integration and continuous monitoring.",
+  "hosting_full_desc": "Your website deserves dependable infrastructure. We configure and manage hosting environments with SSL protection, automated backups, performance monitoring, deployment workflows and proactive support.",
+
+  "performance_title": "Performance Optimisation",
+  "performance_subtitle": "Faster websites that create a better experience for every visitor.",
+  "performance_desc": "We audit websites, identify bottlenecks and optimise images, code, caching and server response.",
+  "performance_full_desc": "We conduct detailed performance audits, resolve Core Web Vitals problems and optimise frontend assets, application code, network delivery and server response to create a faster and more stable experience.",
+
+  "cat_development": "Development",
+  "cat_design": "Design",
+  "cat_infrastructure": "Infrastructure",
+
+  "process_discovery": "Discovery",
+  "process_discovery_desc": "We define your goals, audience, required features, content needs and measures of success.",
+
+  "process_architecture": "Architecture",
+  "process_architecture_desc": "We plan the application structure, data flow, technology stack and integration requirements.",
+
+  "process_development": "Development",
+  "process_development_desc": "We build the interface and functionality using maintainable, tested and scalable code.",
+
+  "process_launch": "Launch",
+  "process_launch_desc": "We test, deploy, monitor and refine the product for a dependable production release.",
+
+  "process_brief": "Creative Brief",
+  "process_brief_desc": "We learn about your business, target audience, brand personality and design requirements.",
+
+  "process_concepts": "Concept Development",
+  "process_concepts_desc": "We explore visual directions and develop the strongest concepts for review.",
+
+  "process_refinement": "Refinement",
+  "process_refinement_desc": "We improve the selected concept through feedback, detailed adjustments and consistency checks.",
+
+  "process_delivery": "Final Delivery",
+  "process_delivery_desc": "We prepare and deliver production-ready files in the required formats and variations.",
+
+  "process_research": "User Research",
+  "process_research_desc": "We study user needs, behaviours, expectations and the problems the experience must solve.",
+
+  "process_wireframe": "Wireframing",
+  "process_wireframe_desc": "We organise content and interactions into clear low-fidelity layouts and user flows.",
+
+  "process_visual": "Visual Design",
+  "process_visual_desc": "We add typography, colour, imagery and interface components to create a polished visual system.",
+
+  "process_prototype": "Prototyping",
+  "process_prototype_desc": "We build and test interactive prototypes before development begins.",
+
+  "process_strategy": "Product Strategy",
+  "process_strategy_desc": "We define the application goals, audience, core features, platforms and release priorities.",
+
+  "process_design": "Application Design",
+  "process_design_desc": "We create user flows, wireframes and polished mobile interfaces for the target devices.",
+
+  "process_dev_mobile": "Mobile Development",
+  "process_dev_mobile_desc": "We implement the application functionality, integrations and device-specific behaviour.",
+
+  "process_launch_app": "Testing and Launch",
+  "process_launch_app_desc": "We test the application, prepare release builds and support deployment to the relevant stores.",
+
+  "process_assessment": "Infrastructure Assessment",
+  "process_assessment_desc": "We review your website, traffic, storage, security, performance and availability requirements.",
+
+  "process_setup": "Environment Setup",
+  "process_setup_desc": "We configure hosting, domains, SSL, backups, deployments and monitoring services.",
+
+  "process_migration": "Migration",
+  "process_migration_desc": "We move the website and supporting services while minimising disruption and checking data integrity.",
+
+  "process_monitoring": "Monitoring and Support",
+  "process_monitoring_desc": "We monitor uptime, security and performance while maintaining backups and supporting improvements.",
+
+  "process_audit": "Performance Audit",
+  "process_audit_desc": "We measure loading speed, responsiveness, layout stability and server performance.",
+
+  "process_diagnosis": "Diagnosis",
+  "process_diagnosis_desc": "We identify the code, media, network and infrastructure problems affecting performance.",
+
+  "process_optimization": "Optimisation",
+  "process_optimization_desc": "We improve assets, application code, caching, delivery and server configuration.",
+
+  "process_verification": "Verification",
+  "process_verification_desc": "We retest the website, compare results and confirm that improvements remain stable.",
+
+  "cs_web_dev_cat": "Web Development",
+  "cs_branding_cat": "Branding",
+  "cs_uiux_cat": "UI/UX Design",
+  "cs_mobile_cat": "Mobile Development",
+  "cs_hosting_cat": "Web Hosting",
+  "cs_performance_cat": "Performance Optimisation",
+
+  "cs_ecommerce_title": "E-Commerce Platform",
+  "cs_ecommerce_excerpt": "A custom online store with product filtering, cart management, content administration and secure payment integration.",
+
+  "cs_saas_title": "SaaS Analytics Dashboard",
+  "cs_saas_excerpt": "A responsive analytics dashboard featuring real-time visualisation, account management and role-based access.",
+
+  "cs_fintech_title": "Fintech Web Application",
+  "cs_fintech_excerpt": "A secure financial web application designed around reliable data handling and accessible user workflows.",
+
+  "cs_branding_title": "Startup Brand Identity",
+  "cs_branding_excerpt": "A complete identity system covering logo design, typography, colour, brand assets and usage guidance.",
+
+  "cs_logo_title": "Logo Design Collection",
+  "cs_logo_excerpt": "A collection of distinctive and scalable logo marks created for businesses across different industries.",
+
+  "cs_brand_system_title": "Lifestyle Brand System",
+  "cs_brand_system_excerpt": "A unified visual system covering identity, marketing collateral, social templates and digital assets.",
+
+  "cs_mobile_design_title": "Fitness Mobile App Design",
+  "cs_mobile_design_excerpt": "An end-to-end mobile experience developed from user research, wireframes and interactive prototypes.",
+
+  "cs_dashboard_redesign_title": "Dashboard Experience Redesign",
+  "cs_dashboard_redesign_excerpt": "A usability-focused dashboard redesign that simplifies navigation, reporting and everyday workflows.",
+
+  "cs_elearning_title": "E-Learning Platform",
+  "cs_elearning_excerpt": "An engaging learning experience combining structured content, progress tracking and interactive activities.",
+
+  "cs_fitness_title": "Fitness Tracker Application",
+  "cs_fitness_excerpt": "A cross-platform fitness application for activity tracking, progress monitoring and personalised goals.",
+
+  "cs_food_delivery_title": "Food Delivery Application",
+  "cs_food_delivery_excerpt": "A mobile ordering experience connecting customers, restaurants, payments and delivery tracking.",
+
+  "cs_travel_title": "Travel Planner Application",
+  "cs_travel_excerpt": "A mobile travel companion for organising destinations, activities, schedules and personalised recommendations.",
+
+  "cs_ecommerce_infra_title": "E-Commerce Hosting Infrastructure",
+  "cs_ecommerce_infra_excerpt": "A scalable managed hosting environment designed to support traffic peaks, secure payments and reliable deployments.",
+
+  "cs_multisite_title": "Multi-Site Hosting Platform",
+  "cs_multisite_excerpt": "A centralised hosting setup supporting multiple websites, automated deployments, backups and monitoring.",
+
+  "cs_saas_speed_title": "SaaS Performance Improvement",
+  "cs_saas_speed_excerpt": "A detailed optimisation project that improved application loading, responsiveness and asset delivery.",
+
+  "cs_ecommerce_speed_title": "E-Commerce Speed Improvement",
+  "cs_ecommerce_speed_excerpt": "A storefront optimisation project focused on Core Web Vitals, image delivery, caching and checkout performance.",
+
+  "cs_news_portal_title": "News Portal Optimisation",
+  "cs_news_portal_excerpt": "A content-heavy website improvement project covering lazy loading, caching, delivery and frontend efficiency."
+}

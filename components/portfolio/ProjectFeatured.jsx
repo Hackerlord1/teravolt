@@ -1,62 +1,40 @@
 'use client'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 
 export default function ProjectFeatured({ project }) {
+  const { t } = useTranslation('portfolio')
+
   if (!project) return null
 
   return (
-    <div className="pf-featured">
-      <div className="pf-featured-img-wrap">
-
-        {/* Image */}
-        <img
-          src={project.image}
-          alt={project.title}
-          className="pf-featured-img"
+    <Link 
+      href={`/portfolio/${project.slug}`} 
+      className="portfolio-card portfolio-card--featured"
+    >
+      <div className="portfolio-card-img-wrap">
+        <img 
+          src={project.image} 
+          alt={project.title} 
+          className="portfolio-card-img" 
         />
-
-        {/* Badge — always visible */}
-        <span className="pf-featured-badge">★ Featured Project</span>
-
-        {/* Bottom overlay with info */}
-        <div className="pf-featured-overlay">
-          <div className="pf-featured-info">
-            <span className="pf-featured-category">
-              {project.category} · {project.year}
-            </span>
-            <h2 className="pf-featured-title">{project.title}</h2>
-
-            <div className="pf-card-actions">
-              {project.liveUrl ? (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pf-card-btn pf-card-btn--primary"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  Visit Site ↗
-                </a>
-              ) : (
-                <Link
-                  href={`/portfolio/${project.slug}`}
-                  className="pf-card-btn pf-card-btn--primary"
-                >
-                  View Project →
-                </Link>
-              )}
-
-              <Link
-                href={`/portfolio/${project.slug}`}
-                className="pf-card-btn pf-card-btn--secondary"
-              >
-                Details
-              </Link>
-            </div>
-          </div>
+        <div className="portfolio-card-overlay">
+          <span className="portfolio-overlay-text">
+            {t('card.view_project', { defaultValue: 'View Project →' })}
+          </span>
         </div>
-
       </div>
-    </div>
+      <div className="portfolio-card-top">
+        <span className="portfolio-dash">★ {t('card.featured_project', { defaultValue: 'Featured' })}</span>
+        <span className="portfolio-year">{project.year}</span>
+      </div>
+      <h2 className="portfolio-card-title">{project.title}</h2>
+      <span className="portfolio-card-cat">{project.category}</span>
+      <div className="portfolio-card-tags">
+        {project.tags.map((tag) => (
+          <span key={tag} className="portfolio-tag">{tag}</span>
+        ))}
+      </div>
+    </Link>
   )
 }

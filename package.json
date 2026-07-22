@@ -10,7 +10,11 @@
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "translate:home": "node scripts/translate-home.mjs",
+    "translate:home:check": "node scripts/translate-home.mjs --dry-run",
+    "translate:home:force": "node scripts/translate-home.mjs --force"
+    
   },
   "dependencies": {
     "framer-motion": "^12.36.0",

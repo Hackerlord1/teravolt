@@ -1,4 +1,5 @@
 'use client'
+import { useTranslation } from 'react-i18next'
 
 const companies = [
   {
@@ -126,56 +127,94 @@ const companies = [
   },
 ]
 
-// ✅ Duplicate for seamless loop
+// Duplicate the companies for a seamless scrolling loop
 const doubled = [...companies, ...companies]
 
 export default function LogoScroll() {
+  const { t } = useTranslation('home')
+
   return (
     <div className="logo-scroll-section">
-
-      {/* ✅ Tagline */}
+      {/* Translated tagline */}
       <p className="logo-scroll-tagline">
-        <span className="dot-orange">●</span>{' '}
-        Partnering as a{' '}
-        <strong>Web Design & Hosting Agency</strong> with teams at:
+        <span
+          className="dot-orange"
+          aria-hidden="true"
+        >
+          ●
+        </span>{' '}
+
+        {t('hero.partners_prefix')}{' '}
+
+        <strong>
+          {t('hero.partners_highlight')}
+        </strong>{' '}
+
+        {t('hero.partners_suffix')}
       </p>
 
-      {/* ✅ Row 1 — scrolls left */}
+      {/* Row 1 — scrolls left */}
       <div className="logo-scroll-track-wrap">
         <div className="logo-fade-left" />
         <div className="logo-fade-right" />
+
         <div className="logo-scroll-track">
-          {doubled.map((company, i) => (
+          {doubled.map((company, index) => (
             <div
-              key={i}
+              key={`${company.name}-forward-${index}`}
               className="logo-item"
-              style={{ '--logo-color': company.color }}
+              style={{
+                '--logo-color': company.color,
+              }}
             >
-              <span className="logo-svg">{company.icon}</span>
-              <span className="logo-name">{company.name}</span>
+              <span
+                className="logo-svg"
+                aria-hidden="true"
+              >
+                {company.icon}
+              </span>
+
+              <span className="logo-name">
+                {company.name}
+              </span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ✅ Row 2 — scrolls right (reversed) */}
-      <div className="logo-scroll-track-wrap" style={{ marginTop: '1rem' }}>
+      {/* Row 2 — scrolls right */}
+      <div
+        className="logo-scroll-track-wrap"
+        style={{ marginTop: '1rem' }}
+      >
         <div className="logo-fade-left" />
         <div className="logo-fade-right" />
+
         <div className="logo-scroll-track logo-scroll-track--reverse">
-          {[...doubled].reverse().map((company, i) => (
-            <div
-              key={i}
-              className="logo-item"
-              style={{ '--logo-color': company.color }}
-            >
-              <span className="logo-svg">{company.icon}</span>
-              <span className="logo-name">{company.name}</span>
-            </div>
-          ))}
+          {[...doubled]
+            .reverse()
+            .map((company, index) => (
+              <div
+                key={`${company.name}-reverse-${index}`}
+                className="logo-item"
+                style={{
+                  '--logo-color': company.color,
+                }}
+              >
+                <span
+                  className="logo-svg"
+                  aria-hidden="true"
+                >
+                  {company.icon}
+                </span>
+
+                <span className="logo-name">
+                  {company.name}
+                </span>
+              </div>
+            ))}
         </div>
       </div>
-
     </div>
   )
 }

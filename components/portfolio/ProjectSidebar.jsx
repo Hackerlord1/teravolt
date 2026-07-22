@@ -2,10 +2,17 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { projectCategories } from '@/lib/projectsData'
+import { useTranslation } from 'react-i18next'
 
 export default function ProjectSidebar({ projects, isOpen, onClose }) {
+  const { t } = useTranslation('portfolio')
   const pathname = usePathname()
+
+  const projectCategories = [
+    ...new Set(
+      projects.map((project) => project.category)
+    ),
+  ]
 
   const categoryCounts = projectCategories.map((cat) => ({
     name: cat,
@@ -40,7 +47,6 @@ export default function ProjectSidebar({ projects, isOpen, onClose }) {
 
   const socials = [];
 
-
   return (
     <>
       {/* Backdrop — mobile only */}
@@ -58,7 +64,7 @@ export default function ProjectSidebar({ projects, isOpen, onClose }) {
           <button
             className="sidebar-close"
             onClick={onClose}
-            aria-label="Close sidebar"
+            aria-label={t('sidebar.close', { defaultValue: 'Close sidebar' })}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <line x1="18" y1="6" x2="6" y2="18" />
@@ -67,7 +73,9 @@ export default function ProjectSidebar({ projects, isOpen, onClose }) {
           </button>
 
           {/* Label */}
-          <p className="blog-sidebar-label">Projects</p>
+          <p className="blog-sidebar-label">
+            {t('sidebar.projects', { defaultValue: 'Projects' })}
+          </p>
 
           {/* Nav — all projects */}
           <nav className="blog-sidebar-nav blog-sidebar-nav--compact">
@@ -98,7 +106,9 @@ export default function ProjectSidebar({ projects, isOpen, onClose }) {
           <div className="blog-sidebar-divider" />
 
           {/* Categories */}
-          <p className="blog-sidebar-label">Categories</p>
+          <p className="blog-sidebar-label">
+            {t('sidebar.categories', { defaultValue: 'Categories' })}
+          </p>
           <div className="blog-sidebar-categories blog-sidebar-categories--compact">
             {categoryCounts.map((cat) => (
               <div key={cat.name} className="blog-sidebar-cat blog-sidebar-cat--compact">
@@ -114,7 +124,7 @@ export default function ProjectSidebar({ projects, isOpen, onClose }) {
 
           {/* Back to site */}
           <Link href="/#portfolio" className="blog-sidebar-home-link">
-            ← Back to Home
+            ← {t('sidebar.back_to_home', { defaultValue: 'Back to Home' })}
           </Link>
 
           {/* Social links */}
