@@ -87,9 +87,9 @@ export default function BlogPostPage({ params }) {
           {t("post.not_found_description")}
         </p>
 
-        <Link href="/blog">
-          ← {t("post.back_to_blog")}
-        </Link>
+        <Link href="/blog" className="blog-back-link">
+        ← {t("post.back_to_blog")}
+      </Link>
       </div>
     );
   }
