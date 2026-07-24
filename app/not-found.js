@@ -1,6 +1,24 @@
+'use client'
+
+import { useEffect } from 'react'
 import Link from 'next/link'
 
 export default function NotFound() {
+  useEffect(() => {
+    // Hide footer on mount
+    const footer = document.querySelector('footer')
+    if (footer) {
+      footer.style.display = 'none'
+    }
+    
+    // Show footer on unmount (when navigating away)
+    return () => {
+      if (footer) {
+        footer.style.display = ''
+      }
+    }
+  }, [])
+
   return (
     <main className="notfound-page">
       <div className="notfound-content">

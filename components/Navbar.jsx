@@ -7,16 +7,98 @@ import { useTranslation } from 'react-i18next'
 import AnimatedText from './AnimatedText'
 import { THEME_KEY, NAV_SECTIONS } from '@/lib/constants'
 
+// Simple SVG flag component
+function FlagIcon({ countryCode }) {
+  const flags = {
+    gb: (
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="18" height="14" rx="2" fill="#012169"/>
+        <path d="M0 0l18 14M18 0L0 14" stroke="#fff" strokeWidth="2.5"/>
+        <path d="M9 0v14M0 7h18" stroke="#fff" strokeWidth="4"/>
+        <path d="M9 0v14M0 7h18" stroke="#C8102E" strokeWidth="2"/>
+        <path d="M0 0l18 14M18 0L0 14" stroke="#C8102E" strokeWidth="1.2"/>
+      </svg>
+    ),
+    fr: (
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="6" height="14" rx="0" fill="#002395"/>
+        <rect x="6" width="6" height="14" fill="#fff"/>
+        <rect x="12" width="6" height="14" fill="#ED2939"/>
+        <rect width="18" height="14" rx="2" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5"/>
+      </svg>
+    ),
+    br: (
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="18" height="14" rx="2" fill="#009B3A"/>
+        <path d="M9 2l6 5-6 5-6-5 6-5z" fill="#FEDF00"/>
+        <circle cx="9" cy="7" r="2.5" fill="#002776"/>
+        <rect width="18" height="14" rx="2" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5"/>
+      </svg>
+    ),
+    es: (
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="18" height="5" rx="0" fill="#C60B1E"/>
+        <rect y="5" width="18" height="4" fill="#FFC400"/>
+        <rect y="9" width="18" height="5" fill="#C60B1E"/>
+        <rect width="18" height="14" rx="2" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5"/>
+      </svg>
+    ),
+    de: (
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="18" height="4.67" fill="#000"/>
+        <rect y="4.67" width="18" height="4.66" fill="#DD0000"/>
+        <rect y="9.33" width="18" height="4.67" fill="#FFCE00"/>
+        <rect width="18" height="14" rx="2" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5"/>
+      </svg>
+    ),
+    it: (
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="6" height="14" rx="0" fill="#009246"/>
+        <rect x="6" width="6" height="14" fill="#fff"/>
+        <rect x="12" width="6" height="14" fill="#CE2B37"/>
+        <rect width="18" height="14" rx="2" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5"/>
+      </svg>
+    ),
+    nl: (
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="18" height="4.67" fill="#AE1C28"/>
+        <rect y="4.67" width="18" height="4.66" fill="#fff"/>
+        <rect y="9.33" width="18" height="4.67" fill="#21468B"/>
+        <rect width="18" height="14" rx="2" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5"/>
+      </svg>
+    ),
+    ke: (
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="18" height="4.67" fill="#000"/>
+        <rect y="4.67" width="18" height="0.5" fill="#fff"/>
+        <rect y="5.17" width="18" height="3.66" fill="#BB0000"/>
+        <rect y="8.83" width="18" height="0.5" fill="#fff"/>
+        <rect y="9.33" width="18" height="4.67" fill="#006600"/>
+        <rect width="18" height="14" rx="2" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5"/>
+      </svg>
+    ),
+    cn: (
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="18" height="14" rx="2" fill="#DE2910"/>
+        <text x="9" y="6" textAnchor="middle" fontSize="4" fill="#FFDE00" fontWeight="900">★</text>
+        <rect width="18" height="14" rx="2" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5"/>
+      </svg>
+    ),
+  }
+
+  return flags[countryCode] || null
+}
+
 const LANGUAGES = [
-  { code: 'en', label: 'EN' },
-  { code: 'fr', label: 'FR' },
-  { code: 'pt', label: 'PT' },
-  { code: 'es', label: 'ES' },
-  { code: 'de', label: 'DE' },
-  { code: 'it', label: 'IT' },
-  { code: 'nl', label: 'NL' },
-  { code: 'sw', label: 'SW' },
-  { code: 'zh', label: 'ZH' },
+  { code: 'en', label: 'EN', flagCode: 'gb' },
+  { code: 'fr', label: 'FR', flagCode: 'fr' },
+  { code: 'pt', label: 'PT', flagCode: 'br' },
+  { code: 'es', label: 'ES', flagCode: 'es' },
+  { code: 'de', label: 'DE', flagCode: 'de' },
+  { code: 'it', label: 'IT', flagCode: 'it' },
+  { code: 'nl', label: 'NL', flagCode: 'nl' },
+  { code: 'sw', label: 'SW', flagCode: 'ke' },
+  { code: 'zh', label: 'ZH', flagCode: 'cn' },
 ]
 
 function AnimatedNavLink({
@@ -239,18 +321,32 @@ export default function Navbar() {
             </span>
           </a>
 
-          <select
-            onChange={(event) => changeLang(event.target.value)}
-            value={lang}
-            className="nav-lang-select"
-            aria-label="Select language"
-          >
-            {LANGUAGES.map((language) => (
-              <option key={language.code} value={language.code}>
-                {language.label}
-              </option>
-            ))}
-          </select>
+          {/* Language Switcher with SVG flags */}
+          <div className="nav-lang-wrapper" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+            <span style={{ 
+              position: 'absolute', 
+              left: '0.5rem', 
+              pointerEvents: 'none',
+              zIndex: 1,
+              display: 'flex',
+              alignItems: 'center'
+            }}>
+              <FlagIcon countryCode={LANGUAGES.find(l => l.code === lang)?.flagCode || 'gb'} />
+            </span>
+            <select
+              onChange={(event) => changeLang(event.target.value)}
+              value={lang}
+              className="nav-lang-select"
+              aria-label="Select language"
+              style={{ paddingLeft: '2.2rem' }}
+            >
+              {LANGUAGES.map((language) => (
+                <option key={language.code} value={language.code}>
+                  {language.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
           {/* Hamburger Button - using nav-hamburger and hamburger-line classes */}
           <button
@@ -325,18 +421,32 @@ export default function Navbar() {
         <div className="nav-overlay-footer">
           <div className="nav-overlay-theme">
             <span className="nav-overlay-theme-label">Teravolt</span>
-            <select
-              onChange={(event) => changeLang(event.target.value)}
-              value={lang}
-              className="nav-lang-select"
-              aria-label="Select language"
-            >
-              {LANGUAGES.map((language) => (
-                <option key={language.code} value={language.code}>
-                  {language.label}
-                </option>
-              ))}
-            </select>
+            {/* Language Switcher with SVG flags (mobile) */}
+            <div className="nav-lang-wrapper" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+              <span style={{ 
+                position: 'absolute', 
+                left: '0.5rem', 
+                pointerEvents: 'none',
+                zIndex: 1,
+                display: 'flex',
+                alignItems: 'center'
+              }}>
+                <FlagIcon countryCode={LANGUAGES.find(l => l.code === lang)?.flagCode || 'gb'} />
+              </span>
+              <select
+                onChange={(event) => changeLang(event.target.value)}
+                value={lang}
+                className="nav-lang-select"
+                aria-label="Select language"
+                style={{ paddingLeft: '2.2rem' }}
+              >
+                {LANGUAGES.map((language) => (
+                  <option key={language.code} value={language.code}>
+                    {language.label}
+                  </option>
+                ))}
+              </select>
+            </div>
             <ThemeToggle dark={dark} onToggle={() => setDark((current) => !current)} mounted={mounted} />
           </div>
 

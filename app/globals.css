@@ -2641,7 +2641,16 @@ input::placeholder, textarea::placeholder { color: var(--gray); }
 /* =============================
    404 PAGE
    ============================= */
-.notfound-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 6rem 4%; position: fixed; overflow: hidden; z-index: 1; }
+.notfound-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 4%;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
 .notfound-content { display: flex; align-items: center; gap: 4rem; max-width: 1000px; width: 100%; position: relative; z-index: 2; }
 .tv-container { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
 .tv-screen { position: relative; width: 320px; height: 220px; background: #0a0a0a; border: 8px solid var(--black); border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 2px rgba(0,0,0,0.1), 0 20px 60px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.1), inset 0 0 80px rgba(255,255,255,0.03); }
