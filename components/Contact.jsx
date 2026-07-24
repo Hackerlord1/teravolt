@@ -3,6 +3,15 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+function AnimatedLabel({ text }) {
+  return text.split('').map((char, index) => {
+    if (char === ' ') {
+      return <span key={`space-${index}`}> </span>
+    }
+    return <span key={`${char}-${index}`}>{char}</span>
+  })
+}
+
 export default function Contact() {
   const { t } = useTranslation('home')
   const [loading, setLoading] = useState(false)
@@ -58,6 +67,10 @@ export default function Contact() {
       setLoading(false)
     }
   }
+
+  const sendText = loading
+    ? t('contact.sending')
+    : t('contact.send')
 
   return (
     <section
@@ -145,16 +158,19 @@ export default function Contact() {
             required
           />
 
+          {/* Animated Submit Button */}
           <button
             type="submit"
             className="submit-btn"
             disabled={loading}
           >
-            <span>
-              {loading
-                ? t('contact.sending')
-                : t('contact.send')}
-            </span>
+            <div className="submit-span-mother">
+              <AnimatedLabel text={sendText} />
+            </div>
+
+            <div className="submit-span-mother2">
+              <AnimatedLabel text={sendText} />
+            </div>
           </button>
         </form>
       </div>

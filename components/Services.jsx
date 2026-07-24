@@ -4,6 +4,14 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 
+function AnimatedLabel({ text }) {
+  return text.split('').map((char, index) => (
+    <span key={`${char}-${index}`}>
+      {char === ' ' ? '\u00A0' : char}
+    </span>
+  ))
+}
+
 export default function Services() {
   const { t } = useTranslation('home')
   const [openIndex, setOpenIndex] = useState(null)
@@ -100,6 +108,8 @@ export default function Services() {
       currentIndex === index ? null : index
     )
   }
+
+  const viewAllText = t('services.view_all_services', { defaultValue: 'View All Services' })
 
   return (
     <section
@@ -217,7 +227,7 @@ export default function Services() {
 
                   <Link 
                     href={service.slug}
-                    className="accordion-case-link"
+                    className="accordion-cta"
                   >
                     {t(
                       'services.view_case_studies'
@@ -242,6 +252,29 @@ export default function Services() {
             </div>
           )
         })}
+      </div>
+
+      {/* View All Services — same animation as portfolio */}
+      <div className="portfolio-show-more">
+        <Link href="/services" className="connect-btn">
+          <span
+            className="connect-dot"
+            aria-hidden="true"
+          />
+
+          <span className="connect-animated">
+            <span
+              className="span-mother"
+              aria-hidden="true"
+            >
+              <AnimatedLabel text={viewAllText} />
+            </span>
+
+            <span className="span-mother2">
+              <AnimatedLabel text={viewAllText} />
+            </span>
+          </span>
+        </Link>
       </div>
     </section>
   )

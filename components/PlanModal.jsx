@@ -56,7 +56,6 @@ export default function PlanModal({
   // Format price with currency
   const formatModalPrice = (value) => {
     if (!currencyInfo) return `KSh ${value.toLocaleString()}`
-    
     const noDecimalCurrencies = ['JPY', 'KRW']
     const formatted = noDecimalCurrencies.includes(currencyInfo.currency)
       ? value.toLocaleString()

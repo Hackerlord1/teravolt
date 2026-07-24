@@ -76,11 +76,13 @@ const projects = [
 const VISIBLE_COUNT = 3
 
 function AnimatedLabel({ text }) {
-  return text.split('').map((char, index) => (
-    <span key={`${char}-${index}`}>
-      {char === ' ' ? '\u00A0' : char}
-    </span>
-  ))
+  return text.split('').map((char, index) => {
+    // Use a regular space wrapped in span, not \u00A0
+    if (char === ' ') {
+      return <span key={`space-${index}`}> </span>
+    }
+    return <span key={`${char}-${index}`}>{char}</span>
+  })
 }
 
 export default function Portfolio() {
