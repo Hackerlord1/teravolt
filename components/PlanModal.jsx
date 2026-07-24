@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next'
 export default function PlanModal({
   plan,
   pages,
+  currencyInfo,
   onClose,
 }) {
   const { t } =
@@ -52,6 +53,24 @@ export default function PlanModal({
     plan.extraPerPage *
       (pages - 1)
 
+  // Format price with currency
+  const formatModalPrice = (value) => {
+    if (!currencyInfo) return `KSh ${value.toLocaleString()}`
+    
+    const noDecimalCurrencies = ['JPY', 'KRW']
+    const formatted = noDecimalCurrencies.includes(currencyInfo.currency)
+      ? value.toLocaleString()
+      : value.toLocaleString()
+    
+    return `${currencyInfo.symbol}${formatted}`
+  }
+
+  // Format extra per page price
+  const formatExtraPrice = (value) => {
+    if (!currencyInfo) return `KSh ${value.toLocaleString()}`
+    return `${currencyInfo.symbol}${value.toLocaleString()}`
+  }
+
   const pageText = t(
     pages === 1
       ? 'pricing.modal.for_pages'
@@ -84,11 +103,15 @@ export default function PlanModal({
     )}: ${plan.name}`,
     `- ${t(
       'pricing.modal.price'
-    )}: Ksh ${price.toLocaleString()} ${pageText}`,
+    )}: ${formatModalPrice(price)} ${pageText}`,
+    `- ${t('pricing.modal.per_page')}: ${formatExtraPrice(plan.extraPerPage)}`,
     `- ${plan.desc}`,
     `- ${t(
       'pricing.modal.included_features'
     )}: ${plan.features.join(', ')}`,
+    `- ${t('pricing.modal.currency_note', { 
+      defaultValue: `Prices in ${currencyInfo?.currency || 'KES'}` 
+    })}`,
   ].join('\n')
 
   const handleSubmit = async (
@@ -110,6 +133,8 @@ export default function PlanModal({
         formData.get('contact'),
       plan: plan.name,
       pages,
+      price: formatModalPrice(price),
+      currency: currencyInfo?.currency || 'KES',
       details: planSummary,
     }
 
@@ -226,7 +251,7 @@ export default function PlanModal({
           <textarea
             className="modal-textarea"
             readOnly
-            rows={5}
+            rows={6}
             value={planSummary}
           />
 

@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import PlanModal from './PlanModal'
+import useCurrency from '@/hooks/useCurrency'
+import CurrencySwitcher from '@/components/CurrencySwitcher'
 
 const PAGE_OPTIONS = [
   1, 2, 3, 4, 5,
@@ -47,6 +49,7 @@ function getTranslationArray(
 
 export default function Pricing() {
   const { t } = useTranslation('home')
+  const { currencyInfo, loading, changeCurrency, formatPrice } = useCurrency()
 
   const [pageIndex, setPageIndex] =
     useState(0)
@@ -68,14 +71,15 @@ export default function Pricing() {
   const activePlanId =
     getActivePlanId(pages)
 
+  // Base prices in USD
   const plans = [
     {
       id: 'basic',
       name: t(
         'pricing.plans.basic.name'
       ),
-      basePrice: 8000,
-      extraPerPage: 2500,
+      basePriceUSD: 60,
+      extraPerPageUSD: 19,
       desc: t(
         'pricing.plans.basic.description'
       ),
@@ -93,8 +97,8 @@ export default function Pricing() {
       name: t(
         'pricing.plans.standard.name'
       ),
-      basePrice: 20000,
-      extraPerPage: 4000,
+      basePriceUSD: 150,
+      extraPerPageUSD: 30,
       desc: t(
         'pricing.plans.standard.description'
       ),
@@ -112,8 +116,8 @@ export default function Pricing() {
       name: t(
         'pricing.plans.pro.name'
       ),
-      basePrice: 35000,
-      extraPerPage: 5500,
+      basePriceUSD: 270,
+      extraPerPageUSD: 42,
       desc: t(
         'pricing.plans.pro.description'
       ),
@@ -128,16 +132,47 @@ export default function Pricing() {
     },
   ]
 
+  // Convert USD prices to current currency
+  const convertedPlans = plans.map(plan => ({
+    ...plan,
+    basePrice: Math.round(plan.basePriceUSD * (currencyInfo?.rate || 1)),
+    extraPerPage: Math.round(plan.extraPerPageUSD * (currencyInfo?.rate || 1)),
+  }))
+
   const activePlan =
-    plans.find(
+    convertedPlans.find(
       (plan) =>
         plan.id === activePlanId
-    ) ?? plans[0]
+    ) ?? convertedPlans[0]
 
   const pageLabel =
     pages === 1
       ? t('pricing.page')
       : t('pricing.pages')
+
+  // Format a price value with the currency symbol
+  const displayPrice = (value) => {
+    if (!currencyInfo) return `KSh ${value.toLocaleString()}`
+    
+    const noDecimalCurrencies = ['JPY', 'KRW']
+    const formatted = noDecimalCurrencies.includes(currencyInfo.currency)
+      ? value.toLocaleString()
+      : value.toLocaleString()
+    
+    return `${currencyInfo.symbol}${formatted}`
+  }
+
+  if (loading) {
+    return (
+      <section id="pricing" className="pricing-section">
+        <div style={{ textAlign: 'center', padding: '3rem' }}>
+          <p style={{ color: 'var(--gray)', fontSize: '1rem' }}>
+            {t('pricing.loading', { defaultValue: 'Loading pricing...' })}
+          </p>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section
@@ -148,6 +183,7 @@ export default function Pricing() {
         <PlanModal
           plan={selectedPlan}
           pages={pages}
+          currencyInfo={currencyInfo}
           onClose={() =>
             setSelectedPlan(null)
           }
@@ -163,11 +199,31 @@ export default function Pricing() {
           {t('pricing.subtitle')}
         </p>
 
-        <p className="pricing-note">
+        {/* Currency Switcher */}
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center',
+          gap: '0.8rem',
+          marginTop: '1rem',
+          flexWrap: 'wrap'
+        }}>
+          <CurrencySwitcher 
+            currentCurrency={currencyInfo?.currency} 
+            onChange={changeCurrency} 
+          />
+          {currencyInfo?.currency !== 'KES' && (
+            <span className="pricing-note" style={{ margin: 0 }}>
+              {t('pricing.approximate', { defaultValue: 'Approximate prices' })}
+            </span>
+          )}
+        </div>
+
+        <p className="pricing-note" style={{ marginTop: '0.8rem' }}>
           {t('pricing.market_note')}{' '}
 
           <span className="pricing-kes">
-            (KES)
+            ({currencyInfo?.currency || 'KES'})
           </span>{' '}
 
           {t('pricing.best_value')}
@@ -286,7 +342,7 @@ export default function Pricing() {
       </div>
 
       <div className="pricing-cards">
-        {plans.map((plan) => {
+        {convertedPlans.map((plan) => {
           const price =
             calculatePrice(
               plan.basePrice,
@@ -346,8 +402,7 @@ export default function Pricing() {
               </p>
 
               <h3 className="plan-price">
-                Ksh{' '}
-                {price.toLocaleString()}
+                {displayPrice(price)}
               </h3>
 
               <p className="plan-desc">
@@ -357,9 +412,7 @@ export default function Pricing() {
               <p className="plan-extra">
                 {pages} {pageLabel}
                 {' • '}
-                Ksh{' '}
-                {plan.extraPerPage
-                  .toLocaleString()}
+                {displayPrice(plan.extraPerPage)}
                 /
                 {t(
                   'pricing.additional_page'
@@ -402,7 +455,7 @@ export default function Pricing() {
       <p className="pricing-footer-note">
         {t('pricing.need_custom')}{' '}
 
-        <a href="/#contact" className="pricing-contact-link">
+        <a href="/#contact" className="pricing-talk-link">
           {t('pricing.lets_talk')}
         </a>
 

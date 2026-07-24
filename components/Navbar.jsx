@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
@@ -100,6 +100,141 @@ const LANGUAGES = [
   { code: 'sw', label: 'SW', flagCode: 'ke' },
   { code: 'zh', label: 'ZH', flagCode: 'cn' },
 ]
+
+// Custom Language Switcher Dropdown
+function LangSwitcher({ currentLang, onChange }) {
+  const [open, setOpen] = useState(false)
+  const dropdownRef = useRef(null)
+
+  const currentLanguage = LANGUAGES.find(l => l.code === currentLang) || LANGUAGES[0]
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') setOpen(false)
+    }
+    if (open) {
+      document.addEventListener('keydown', handleEscape)
+    }
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [open])
+
+  return (
+    <div className="nav-lang-wrapper" ref={dropdownRef} style={{ position: 'relative' }}>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="nav-lang-select"
+        aria-label="Select language"
+        aria-expanded={open}
+        aria-haspopup="listbox"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.4rem',
+          padding: '0.4rem 0.6rem',
+          paddingRight: '1.8rem',
+          cursor: 'pointer',
+        }}
+      >
+        <FlagIcon countryCode={currentLanguage.flagCode} />
+        <span>{currentLanguage.label}</span>
+        <svg 
+          width="10" 
+          height="10" 
+          viewBox="0 0 12 12" 
+          fill="none" 
+          style={{ 
+            position: 'absolute', 
+            right: '0.5rem',
+            transition: 'transform 0.2s ease',
+            transform: open ? 'rotate(180deg)' : 'rotate(0deg)'
+          }}
+        >
+          <path d="M6 8L1 3h10z" fill="currentColor" />
+        </svg>
+      </button>
+
+      {open && (
+        <ul
+          role="listbox"
+          aria-label="Select language"
+          style={{
+            position: 'absolute',
+            top: '100%',
+            right: 0,
+            marginTop: '0.4rem',
+            background: 'var(--card-bg)',
+            border: '1px solid var(--border)',
+            borderRadius: '0.5rem',
+            listStyle: 'none',
+            padding: '0.3rem',
+            minWidth: '100%',
+            zIndex: 1002,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
+          }}
+        >
+          {LANGUAGES.map((language) => (
+            <li key={language.code}>
+              <button
+                type="button"
+                role="option"
+                aria-selected={currentLang === language.code}
+                onClick={() => {
+                  onChange(language.code)
+                  setOpen(false)
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  width: '100%',
+                  padding: '0.45rem 0.6rem',
+                  border: 'none',
+                  borderRadius: '0.35rem',
+                  background: currentLang === language.code ? 'rgba(255,69,0,0.08)' : 'transparent',
+                  color: currentLang === language.code ? 'var(--orange)' : 'var(--black)',
+                  cursor: 'pointer',
+                  fontSize: '0.78rem',
+                  fontWeight: currentLang === language.code ? 700 : 500,
+                  fontFamily: 'var(--font-main)',
+                  transition: 'all 0.15s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (currentLang !== language.code) {
+                    e.currentTarget.style.background = 'rgba(0,0,0,0.04)'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (currentLang !== language.code) {
+                    e.currentTarget.style.background = 'transparent'
+                  }
+                }}
+              >
+                <FlagIcon countryCode={language.flagCode} />
+                <span>{language.label}</span>
+                {currentLang === language.code && (
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: 'auto' }}>
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                )}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
 
 function AnimatedNavLink({
   href,
@@ -203,17 +338,46 @@ export default function Navbar() {
     setLang(language)
   }
 
+  // Initialize theme from localStorage or system preference
   useEffect(() => {
     const savedTheme = localStorage.getItem(THEME_KEY)
-    const darkTheme = savedTheme === 'dark'
-    setDark(darkTheme)
-    document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light')
+
+    if (savedTheme) {
+      // User has manually set a preference — use it
+      const darkTheme = savedTheme === 'dark'
+      setDark(darkTheme)
+      document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light')
+    } else {
+      // No saved preference — use the system/browser theme
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      setDark(prefersDark)
+      document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light')
+    }
 
     const activeLanguage = (i18n.resolvedLanguage || i18n.language || 'en').split('-')[0]
     setLang(activeLanguage)
     document.documentElement.lang = activeLanguage
     setMounted(true)
   }, [i18n])
+
+  // Listen for system theme changes
+  useEffect(() => {
+    if (!mounted) return
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const handleSystemThemeChange = (e) => {
+      // Only auto-switch if the user hasn't manually set a preference
+      const savedTheme = localStorage.getItem(THEME_KEY)
+      if (!savedTheme) {
+        setDark(e.matches)
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light')
+      }
+    }
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange)
+    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange)
+  }, [mounted])
 
   useEffect(() => {
     const handleLanguageChanged = (language) => {
@@ -321,32 +485,8 @@ export default function Navbar() {
             </span>
           </a>
 
-          {/* Language Switcher with SVG flags */}
-          <div className="nav-lang-wrapper" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-            <span style={{ 
-              position: 'absolute', 
-              left: '0.5rem', 
-              pointerEvents: 'none',
-              zIndex: 1,
-              display: 'flex',
-              alignItems: 'center'
-            }}>
-              <FlagIcon countryCode={LANGUAGES.find(l => l.code === lang)?.flagCode || 'gb'} />
-            </span>
-            <select
-              onChange={(event) => changeLang(event.target.value)}
-              value={lang}
-              className="nav-lang-select"
-              aria-label="Select language"
-              style={{ paddingLeft: '2.2rem' }}
-            >
-              {LANGUAGES.map((language) => (
-                <option key={language.code} value={language.code}>
-                  {language.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          {/* Language Switcher - Desktop */}
+          <LangSwitcher currentLang={lang} onChange={changeLang} />
 
           {/* Hamburger Button - using nav-hamburger and hamburger-line classes */}
           <button
@@ -421,32 +561,8 @@ export default function Navbar() {
         <div className="nav-overlay-footer">
           <div className="nav-overlay-theme">
             <span className="nav-overlay-theme-label">Teravolt</span>
-            {/* Language Switcher with SVG flags (mobile) */}
-            <div className="nav-lang-wrapper" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-              <span style={{ 
-                position: 'absolute', 
-                left: '0.5rem', 
-                pointerEvents: 'none',
-                zIndex: 1,
-                display: 'flex',
-                alignItems: 'center'
-              }}>
-                <FlagIcon countryCode={LANGUAGES.find(l => l.code === lang)?.flagCode || 'gb'} />
-              </span>
-              <select
-                onChange={(event) => changeLang(event.target.value)}
-                value={lang}
-                className="nav-lang-select"
-                aria-label="Select language"
-                style={{ paddingLeft: '2.2rem' }}
-              >
-                {LANGUAGES.map((language) => (
-                  <option key={language.code} value={language.code}>
-                    {language.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {/* Language Switcher - Mobile */}
+            <LangSwitcher currentLang={lang} onChange={changeLang} />
             <ThemeToggle dark={dark} onToggle={() => setDark((current) => !current)} mounted={mounted} />
           </div>
 
