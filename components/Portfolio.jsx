@@ -14,7 +14,6 @@ const projects = [
     bg: '#e8e0d5',
     accent: '#111',
     image: '/images/mockup2.png',
-    featured: false,
   },
   {
     id: 2,
@@ -25,7 +24,6 @@ const projects = [
     bg: '#f06b6b',
     accent: '#fff',
     image: '/images/mockup1.png',
-    featured: true,
   },
   {
     id: 3,
@@ -36,7 +34,6 @@ const projects = [
     bg: '#4ec9c9',
     accent: '#fff',
     image: '/images/mockup1.png',
-    featured: false,
   },
   {
     id: 4,
@@ -47,7 +44,6 @@ const projects = [
     bg: '#c8e6c9',
     accent: '#111',
     image: '/images/mockup2.png',
-    featured: false,
   },
   {
     id: 5,
@@ -58,7 +54,6 @@ const projects = [
     bg: '#e8d5f0',
     accent: '#111',
     image: '/images/mockup1.png',
-    featured: false,
   },
   {
     id: 6,
@@ -69,7 +64,6 @@ const projects = [
     bg: '#ffd180',
     accent: '#111',
     image: '/images/mockup2.png',
-    featured: false,
   },
 ]
 
@@ -77,7 +71,6 @@ const VISIBLE_COUNT = 3
 
 function AnimatedLabel({ text }) {
   return text.split('').map((char, index) => {
-    // Use a regular space wrapped in span, not \u00A0
     if (char === ' ') {
       return <span key={`space-${index}`}> </span>
     }
@@ -89,10 +82,7 @@ export default function Portfolio() {
   const router = useRouter()
   const { t } = useTranslation('home')
 
-  const visibleProjects = projects.slice(
-    0,
-    VISIBLE_COUNT
-  )
+  const visibleProjects = projects.slice(0, VISIBLE_COUNT)
 
   const viewAllText = t('portfolio.view_all')
 
@@ -141,38 +131,24 @@ export default function Portfolio() {
 
       <div className="portfolio-grid-new">
         {visibleProjects.map((project) => {
-          const projectTitle = t(
-            project.titleKey
-          )
+          const projectTitle = t(project.titleKey)
 
           return (
             <div
               key={project.id}
-              className={`portfolio-card ${
-                project.featured
-                  ? 'portfolio-card--featured'
-                  : ''
-              }`}
+              className="portfolio-card"
               style={{
                 '--card-bg': project.bg,
                 '--card-accent': project.accent,
                 cursor: 'pointer',
               }}
               onClick={() =>
-                router.push(
-                  `/portfolio/${project.slug}`
-                )
+                router.push(`/portfolio/${project.slug}`)
               }
               onKeyDown={(event) => {
-                if (
-                  event.key === 'Enter' ||
-                  event.key === ' '
-                ) {
+                if (event.key === 'Enter' || event.key === ' ') {
                   event.preventDefault()
-
-                  router.push(
-                    `/portfolio/${project.slug}`
-                  )
+                  router.push(`/portfolio/${project.slug}`)
                 }
               }}
               role="link"

@@ -1,10 +1,9 @@
 'use client'
 
-import {
-  useEffect,
-  useState,
-} from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import Lottie from 'lottie-react'
+import { successTickAnimation } from '@/lib/animations/success-tick'
 
 export default function PlanModal({
   plan,
@@ -12,11 +11,29 @@ export default function PlanModal({
   currencyInfo,
   onClose,
 }) {
-  const { t } =
-    useTranslation('home')
+  const { t } = useTranslation('home')
+  const lottieRef = useRef()
 
-  const [loading, setLoading] =
-    useState(false)
+  const [loading, setLoading] = useState(false)
+  const [feedback, setFeedback] = useState('')
+  const [feedbackType, setFeedbackType] = useState('')
+
+  // Reset animation when showing success
+  useEffect(() => {
+    if (feedbackType === 'success' && lottieRef.current) {
+      lottieRef.current.goToAndPlay(0)
+    }
+  }, [feedbackType])
+
+  const showFeedback = (message, type) => {
+    setFeedback(message)
+    setFeedbackType(type)
+
+    setTimeout(() => {
+      setFeedback('')
+      setFeedbackType('')
+    }, 5000)
+  }
 
   useEffect(() => {
     const handleKey = (event) => {
@@ -25,22 +42,12 @@ export default function PlanModal({
       }
     }
 
-    document.addEventListener(
-      'keydown',
-      handleKey
-    )
-
-    document.body.style.overflow =
-      'hidden'
+    document.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
 
     return () => {
-      document.removeEventListener(
-        'keydown',
-        handleKey
-      )
-
-      document.body.style.overflow =
-        ''
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
     }
   }, [onClose])
 
@@ -48,25 +55,19 @@ export default function PlanModal({
     return null
   }
 
-  const price =
-    plan.basePrice +
-    plan.extraPerPage *
-      (pages - 1)
+  const price = plan.basePrice + plan.extraPerPage * (pages - 1)
 
-  // Format price with currency
   const formatModalPrice = (value) => {
-    if (!currencyInfo) return `KSh ${value.toLocaleString()}`
-    const noDecimalCurrencies = ['JPY', 'KRW']
-    const formatted = noDecimalCurrencies.includes(currencyInfo.currency)
-      ? value.toLocaleString()
-      : value.toLocaleString()
-    
-    return `${currencyInfo.symbol}${formatted}`
+    if (!currencyInfo) {
+      return `KSh ${value.toLocaleString()}`
+    }
+    return `${currencyInfo.symbol}${value.toLocaleString()}`
   }
 
-  // Format extra per page price
   const formatExtraPrice = (value) => {
-    if (!currencyInfo) return `KSh ${value.toLocaleString()}`
+    if (!currencyInfo) {
+      return `KSh ${value.toLocaleString()}`
+    }
     return `${currencyInfo.symbol}${value.toLocaleString()}`
   }
 
@@ -79,57 +80,38 @@ export default function PlanModal({
     }
   )
 
-  const whatsappMessage =
-    encodeURIComponent(
-      t(
-        'pricing.modal.whatsapp_message',
-        {
-          plan: plan.name,
-          count: pages,
-        }
-      )
-    )
+  const whatsappMessage = encodeURIComponent(
+    t('pricing.modal.whatsapp_message', {
+      plan: plan.name,
+      count: pages,
+    })
+  )
 
-  const whatsappLink =
-    `https://wa.me/254791220335?text=${whatsappMessage}`
+  const whatsappLink = `https://wa.me/254791220335?text=${whatsappMessage}`
 
   const planSummary = [
-    t(
-      'pricing.modal.plan_details'
-    ),
-    `- ${t(
-      'pricing.modal.plan'
-    )}: ${plan.name}`,
-    `- ${t(
-      'pricing.modal.price'
-    )}: ${formatModalPrice(price)} ${pageText}`,
+    t('pricing.modal.plan_details'),
+    `- ${t('pricing.modal.plan')}: ${plan.name}`,
+    `- ${t('pricing.modal.price')}: ${formatModalPrice(price)} ${pageText}`,
     `- ${t('pricing.modal.per_page')}: ${formatExtraPrice(plan.extraPerPage)}`,
     `- ${plan.desc}`,
-    `- ${t(
-      'pricing.modal.included_features'
-    )}: ${plan.features.join(', ')}`,
-    `- ${t('pricing.modal.currency_note', { 
-      defaultValue: `Prices in ${currencyInfo?.currency || 'KES'}` 
+    `- ${t('pricing.modal.included_features')}: ${plan.features.join(', ')}`,
+    `- ${t('pricing.modal.currency_note', {
+      defaultValue: `Prices in ${currencyInfo?.currency || 'KES'}`,
     })}`,
   ].join('\n')
 
-  const handleSubmit = async (
-    event
-  ) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const form =
-      event.currentTarget
-
-    const formData =
-      new FormData(form)
+    const form = event.currentTarget
+    const formData = new FormData(form)
 
     setLoading(true)
 
     const data = {
       name: formData.get('name'),
-      contact:
-        formData.get('contact'),
+      contact: formData.get('contact'),
       plan: plan.name,
       pages,
       price: formatModalPrice(price),
@@ -138,40 +120,26 @@ export default function PlanModal({
     }
 
     try {
-      const response = await fetch(
-        '/api/send-email',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type':
-              'application/json',
-          },
-          body: JSON.stringify(data),
-        }
-      )
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
 
       if (response.ok) {
-        alert(
-          `✅ ${t(
-            'pricing.modal.success'
-          )}`
-        )
-
+        showFeedback(t('pricing.modal.success'), 'success')
         form.reset()
-        onClose()
+
+        setTimeout(() => {
+          onClose()
+        }, 10000)
       } else {
-        alert(
-          `❌ ${t(
-            'pricing.modal.failure'
-          )}`
-        )
+        showFeedback(t('pricing.modal.failure'), 'error')
       }
     } catch {
-      alert(
-        `❌ ${t(
-          'pricing.modal.network_error'
-        )}`
-      )
+      showFeedback(t('pricing.modal.network_error'), 'error')
     } finally {
       setLoading(false)
     }
@@ -195,41 +163,27 @@ export default function PlanModal({
           type="button"
           className="modal-close"
           onClick={onClose}
-          aria-label={t(
-            'pricing.modal.close'
-          )}
+          aria-label={t('pricing.modal.close')}
         >
           ✕
         </button>
 
         <div className="modal-header">
-          <h2
-            className="modal-title"
-            id="modal-title"
-          >
-            {t(
-              'pricing.modal.title'
-            )}
+          <h2 className="modal-title" id="modal-title">
+            {t('pricing.modal.title')}
           </h2>
 
           <p className="modal-subtitle">
-            {t(
-              'pricing.modal.subtitle'
-            )}
+            {t('pricing.modal.subtitle')}
           </p>
         </div>
 
-        <form
-          className="modal-form"
-          onSubmit={handleSubmit}
-        >
+        <form className="modal-form" onSubmit={handleSubmit}>
           <div className="modal-row">
             <input
               name="name"
               type="text"
-              placeholder={t(
-                'pricing.modal.name_placeholder'
-              )}
+              placeholder={t('pricing.modal.name_placeholder')}
               className="modal-input"
               autoComplete="name"
               required
@@ -238,9 +192,7 @@ export default function PlanModal({
             <input
               name="contact"
               type="text"
-              placeholder={t(
-                'pricing.modal.contact_placeholder'
-              )}
+              placeholder={t('pricing.modal.contact_placeholder')}
               className="modal-input"
               autoComplete="email"
               required
@@ -255,10 +207,7 @@ export default function PlanModal({
           />
 
           <p className="modal-whatsapp-note">
-            {t(
-              'pricing.modal.whatsapp_prefix'
-            )}{' '}
-
+            {t('pricing.modal.whatsapp_prefix')}{' '}
             <a
               href={whatsappLink}
               target="_blank"
@@ -277,18 +226,11 @@ export default function PlanModal({
             >
               <span>
                 {loading
-                  ? t(
-                    'pricing.modal.sending'
-                  )
-                  : t(
-                    'pricing.modal.submit'
-                  )}
+                  ? t('pricing.modal.sending')
+                  : t('pricing.modal.submit')}
 
                 {!loading && (
-                  <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       fill="#ffffff"
                       d="M20.33 3.66996L4.23 8.19996L10.07 13.85L13.07 19.94L20.67 5.13996Z"
@@ -297,21 +239,12 @@ export default function PlanModal({
                 )}
               </span>
 
-              <span>
-                {t(
-                  'pricing.modal.confirm'
-                )}
-              </span>
+              <span>{t('pricing.modal.confirm')}</span>
 
               <span>
-                {t(
-                  'pricing.modal.done'
-                )}
+                {t('pricing.modal.done')}
 
-                <svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path
                     stroke="#fff"
                     strokeWidth="2"
@@ -321,6 +254,25 @@ export default function PlanModal({
                 </svg>
               </span>
             </button>
+
+            {feedback && (
+              <div className={`modal-feedback ${feedbackType}`}>
+                {feedbackType === 'success' ? (
+                  <div className="feedback-icon-wrapper">
+                    <Lottie
+                      lottieRef={lottieRef}
+                      animationData={successTickAnimation}
+                      loop={false}
+                      autoplay={true}
+                      style={{ width: 24, height: 24 }}
+                    />
+                  </div>
+                ) : (
+                  <span className="feedback-icon">❌</span>
+                )}
+                <span className="feedback-message">{feedback}</span>
+              </div>
+            )}
           </div>
         </form>
       </div>

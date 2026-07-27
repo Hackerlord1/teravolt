@@ -14,11 +14,11 @@
     "translate:home": "node scripts/translate-home.mjs",
     "translate:home:check": "node scripts/translate-home.mjs --dry-run",
     "translate:home:force": "node scripts/translate-home.mjs --force"
-    
   },
   "dependencies": {
     "framer-motion": "^12.36.0",
     "i18next": "^26.2.0",
+    "lottie-react": "^2.4.1",
     "next": "^15.5.18",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
