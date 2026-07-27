@@ -32,7 +32,7 @@ export default function PlanModal({
     setTimeout(() => {
       setFeedback('')
       setFeedbackType('')
-    }, 5000)
+    }, 10000)
   }
 
   useEffect(() => {

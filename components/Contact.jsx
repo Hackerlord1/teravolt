@@ -3,9 +3,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Lottie from 'lottie-react'
-import successAnimation from '@/lib/animations/success-tick'
-// Or if saved in public folder:
-// const successAnimation = '/animations/success-tick.json'
+import { successTickAnimation } from '@/lib/animations/success-tick'
 
 function AnimatedLabel({ text }) {
   return text.split('').map((char, index) => {
@@ -34,7 +32,7 @@ export default function Contact() {
     setTimeout(() => {
       setFeedback('')
       setFeedbackType('')
-    }, 5000)
+    }, 10000)
   }
 
   const handleSubmit = async (event) => {
@@ -164,7 +162,7 @@ export default function Contact() {
               {feedbackType === 'success' ? (
                 <div className="feedback-icon-wrapper">
                   <Lottie
-                    animationData={successAnimation}
+                    animationData={successTickAnimation}
                     loop={false}
                     style={{ width: 24, height: 24 }}
                   />
