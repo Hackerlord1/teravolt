@@ -1,5 +1,18 @@
 import type { NextConfig } from "next";
 
+// Deliberately no `default-src` — that would fall back onto script/style/font/img
+// and break Google Fonts, Unsplash images, and Next.js inline hydration scripts.
+// These directives only restrict framing, plugins, and base-URI/form hijacking,
+// none of which the site relies on. Add a full script/style policy later with a
+// nonce if you want stricter coverage.
+const CSP = [
+  "frame-ancestors 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "upgrade-insecure-requests",
+].join("; ");
+
 const nextConfig: NextConfig = {
   eslint: {
     // Temporary deployment fix:
@@ -12,7 +25,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "images.unsplash.com",
       },
     ],
   },
@@ -22,21 +35,20 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=(), browsing-topics=()",
           },
           {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
           },
           {
-            key: "X-XSS-Protection",
-            value: "1; mode=block",
-          },
-          {
-            key: "Referrer-Policy",
-            value: "strict-origin-when-cross-origin",
+            key: "Content-Security-Policy",
+            value: CSP,
           },
         ],
       },

@@ -2,8 +2,6 @@
 
 import { useState, useEffect, useCallback } from 'react'
 
-const IPINFO_TOKEN = 'fe1ca889193aac'
-
 // Base prices in USD
 const BASE_PRICES_USD = {
   basic: 499,
@@ -64,34 +62,25 @@ function getCurrencyByCode(code) {
   return COUNTRY_CURRENCY_MAP.DEFAULT
 }
 
-// Detect user's currency via IP
+// Detect user's currency from the visitor's country (resolved server-side at the edge)
 async function detectUserCurrency() {
   try {
-    const response = await fetch(`https://ipinfo.io/json?token=${IPINFO_TOKEN}`)
-    if (!response.ok) throw new Error('IP detection failed')
-    
+    const response = await fetch('/api/geo')
+    if (!response.ok) throw new Error('Geo detection failed')
+
     const data = await response.json()
     const countryCode = data.country
-    
+
     return COUNTRY_CURRENCY_MAP[countryCode] || COUNTRY_CURRENCY_MAP.DEFAULT
   } catch (error) {
-    console.log('IP detection failed, using USD:', error.message)
+    console.warn('Geo detection failed, using USD:', error.message)
     return COUNTRY_CURRENCY_MAP.DEFAULT
   }
 }
 
-// Format price based on currency
+// Format price based on currency (all supported currencies render without decimals)
 export function formatPrice(amountUSD, currencyInfo) {
   const converted = Math.round(amountUSD * currencyInfo.rate)
-  
-  // Handle currencies that don't use decimals (JPY, KRW)
-  const noDecimalCurrencies = ['JPY', 'KRW']
-  
-  if (noDecimalCurrencies.includes(currencyInfo.currency)) {
-    return `${currencyInfo.symbol}${converted.toLocaleString()}`
-  }
-  
-  // Format with commas for thousands
   return `${currencyInfo.symbol}${converted.toLocaleString()}`
 }
 
@@ -105,15 +94,21 @@ export default function useCurrency() {
     const initCurrency = async () => {
       // Check localStorage first
       const savedCurrency = localStorage.getItem('preferred_currency')
-      
+
       if (savedCurrency) {
-        const parsed = JSON.parse(savedCurrency)
-        setCurrencyInfo(parsed)
-        setLoading(false)
-        return
+        try {
+          const parsed = JSON.parse(savedCurrency)
+          if (parsed && parsed.currency && parsed.symbol && parsed.rate) {
+            setCurrencyInfo(parsed)
+            setLoading(false)
+            return
+          }
+        } catch {
+          // corrupted value — fall through to re-detect
+        }
       }
 
-      // Detect from IP
+      // Detect from the visitor's country
       const detected = await detectUserCurrency()
       setCurrencyInfo(detected)
       localStorage.setItem('preferred_currency', JSON.stringify(detected))

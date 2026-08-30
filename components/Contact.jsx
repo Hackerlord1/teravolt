@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Lottie from 'lottie-react'
 import { successTickAnimation } from '@/lib/animations/success-tick'
@@ -24,12 +24,20 @@ export default function Contact() {
   const [loading, setLoading] = useState(false)
   const [feedback, setFeedback] = useState('')
   const [feedbackType, setFeedbackType] = useState('')
+  const feedbackTimer = useRef(null)
+
+  useEffect(() => {
+    return () => {
+      if (feedbackTimer.current) clearTimeout(feedbackTimer.current)
+    }
+  }, [])
 
   const showFeedback = (message, type) => {
     setFeedback(message)
     setFeedbackType(type)
 
-    setTimeout(() => {
+    if (feedbackTimer.current) clearTimeout(feedbackTimer.current)
+    feedbackTimer.current = setTimeout(() => {
       setFeedback('')
       setFeedbackType('')
     }, 10000)
@@ -46,6 +54,7 @@ export default function Contact() {
       email: formData.get('email'),
       project: formData.get('project'),
       message: formData.get('message'),
+      company: formData.get('company'), // honeypot
     }
 
     setLoading(true)
@@ -115,6 +124,16 @@ export default function Contact() {
         </div>
 
         <form onSubmit={handleSubmit}>
+          {/* Honeypot — hidden from real users, catches bots */}
+          <input
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+          />
+
           <input
             name="name"
             type="text"

@@ -17,6 +17,19 @@ export default function PlanModal({
   const [loading, setLoading] = useState(false)
   const [feedback, setFeedback] = useState('')
   const [feedbackType, setFeedbackType] = useState('')
+  const timers = useRef([])
+
+  const track = (id) => {
+    timers.current.push(id)
+    return id
+  }
+
+  useEffect(() => {
+    return () => {
+      timers.current.forEach(clearTimeout)
+      timers.current = []
+    }
+  }, [])
 
   // Reset animation when showing success
   useEffect(() => {
@@ -29,10 +42,12 @@ export default function PlanModal({
     setFeedback(message)
     setFeedbackType(type)
 
-    setTimeout(() => {
-      setFeedback('')
-      setFeedbackType('')
-    }, 10000)
+    track(
+      setTimeout(() => {
+        setFeedback('')
+        setFeedbackType('')
+      }, 10000)
+    )
   }
 
   useEffect(() => {
@@ -112,6 +127,7 @@ export default function PlanModal({
     const data = {
       name: formData.get('name'),
       contact: formData.get('contact'),
+      company: formData.get('company'), // honeypot
       plan: plan.name,
       pages,
       price: formatModalPrice(price),
@@ -132,9 +148,11 @@ export default function PlanModal({
         showFeedback(t('pricing.modal.success'), 'success')
         form.reset()
 
-        setTimeout(() => {
-          onClose()
-        }, 10000)
+        track(
+          setTimeout(() => {
+            onClose()
+          }, 10000)
+        )
       } else {
         showFeedback(t('pricing.modal.failure'), 'error')
       }
@@ -179,6 +197,16 @@ export default function PlanModal({
         </div>
 
         <form className="modal-form" onSubmit={handleSubmit}>
+          {/* Honeypot — hidden from real users, catches bots */}
+          <input
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+          />
+
           <div className="modal-row">
             <input
               name="name"
