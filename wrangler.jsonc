@@ -2,6 +2,11 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"main": ".open-next/worker.js",
 	"name": "teravolt",
+	// Don't delete dashboard-defined vars/secrets on deploy. Without this,
+	// `wrangler deploy` uploads a full config and drops anything (like
+	// RESEND_API_KEY) that isn't declared here. Secrets still belong in
+	// `wrangler secret put`, never in this file.
+	"keep_vars": true,
 	"compatibility_date": "2026-07-02",
 	"compatibility_flags": [
 		"nodejs_compat",
