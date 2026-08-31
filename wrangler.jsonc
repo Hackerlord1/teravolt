@@ -7,6 +7,14 @@
 		"nodejs_compat",
 		"global_fetch_strictly_public"
 	],
+	// Custom domain — kept here so `wrangler deploy` doesn't drop it.
+	// (It was previously configured only in the dashboard.)
+	"routes": [
+		{
+			"pattern": "teravoltdigital.website",
+			"custom_domain": true
+		}
+	],
 	"assets": {
 		"directory": ".open-next/assets",
 		"binding": "ASSETS"
@@ -29,7 +37,6 @@
 	"observability": {
 		"enabled": false,
 		"head_sampling_rate": 1,
-		"redact_query_string": false,
 		"logs": {
 			"enabled": true,
 			"head_sampling_rate": 1,
