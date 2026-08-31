@@ -77,12 +77,6 @@ export async function POST(req) {
       )
     }
 
-    // ✅ Honeypot — real users never fill this hidden field
-    if (clean(body.company)) {
-      console.warn('Honeypot triggered — dropping submission (company field was filled)')
-      return Response.json({ success: true, message: 'Email sent successfully!' })
-    }
-
     const name = clean(body.name)
     const email = clean(body.email)
     const contact = clean(body.contact)

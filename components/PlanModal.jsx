@@ -127,7 +127,6 @@ export default function PlanModal({
     const data = {
       name: formData.get('name'),
       contact: formData.get('contact'),
-      company: formData.get('company'), // honeypot
       plan: plan.name,
       pages,
       price: formatModalPrice(price),
@@ -197,16 +196,6 @@ export default function PlanModal({
         </div>
 
         <form className="modal-form" onSubmit={handleSubmit}>
-          {/* Honeypot — hidden from real users, catches bots */}
-          <input
-            type="text"
-            name="company"
-            tabIndex={-1}
-            autoComplete="off"
-            aria-hidden="true"
-            style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
-          />
-
           <div className="modal-row">
             <input
               name="name"
