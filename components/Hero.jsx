@@ -21,7 +21,7 @@ const CONSOLE_CODE = [
   [['', '  --header '], ['str', "'authorization: Bearer TERAVOLT_TOKEN'"], ['', ' \\']],
   [['', '  --header '], ['str', "'content-type: application/json'"], ['', ' \\']],
   [['', '  --data '], ['str', "'{"]],
-  [['', '    '], ['key', '"site_name"'], ['', ': '], ['str', '"my-first-landing-page"'], ['', ',']],
+  [['', '    '], ['key', '"site_name"'], ['', ': '], ['str', '"my-website"'], ['', ',']],
   [['', '    '], ['key', '"region"'], ['', ': '], ['str', '"google-europe-west3"'], ['', ',']],
   [['', '    '], ['key', '"plan"'], ['', ': '], ['str', '"startup-4"'], ['', ',']],
   [['', '    '], ['key', '"framework"'], ['', ': '], ['str', '"next.js"']],
@@ -160,29 +160,14 @@ const TypingConsole = memo(function TypingConsole() {
       return mine === token
     }
 
-    /* 2. panel slides in from the left, cursor riding its edge */
-/* 2. panel slides in from the left with cursor riding its edge */
-const enter = async (mine) => {
-  stage.dataset.phase = 'enter'
-  
-  pointer.style.transition =
-    'transform ' + CONFIG.enterMs + 'ms cubic-bezier(.3,.82,.3,1), opacity 200ms ease'
-  pointer.style.opacity = '1'
-  movePointer(cqi() * 90, cqi() * 27) // Start from right side
-  
-  void pointer.offsetWidth
-  void win.offsetWidth
-  
-  await wait(50)
-  if (mine !== token) return false
-  
-  movePointer(cqi() * 15, cqi() * 27) // Move to panel position
-  
-  await wait(CONFIG.enterMs)
-  if (mine !== token) return false
-  pointer.style.opacity = '0'
-  return true
-}
+    /* 2. panel slides in on its own — the pointer stays parked and
+       hidden; it only appears later for the highlight step. */
+    const enter = async (mine) => {
+      stage.dataset.phase = 'enter'
+      void win.offsetWidth // commit the parked position, then transition
+      await wait(CONFIG.enterMs)
+      return mine === token
+    }
 
     /* 3. panel expands downward while the code types into it */
     const openAndType = async (mine) => {
@@ -231,25 +216,36 @@ const enter = async (mine) => {
       const w = cRect.width // ends at the last one
       const selLeft = cRect.left - lRect.left
 
+      // The arrow's tip sits a little in from the svg's top-left corner;
+      // offset every move by that so the tip — not the box — lands on the text.
+      const tipX = cqi() * 0.5
+      const tipY = cqi() * 0.55
+
       parkPointer()
       pointer.style.transition =
         'transform ' + CONFIG.cursorInMs + 'ms cubic-bezier(.33,.9,.3,1), opacity 220ms ease'
       pointer.style.opacity = '1'
       void pointer.offsetWidth
-      movePointer(x0, y0 - cqi() * 0.6)
+      movePointer(x0 - tipX, y0 - tipY) // tip lands on the first character
       await wait(CONFIG.cursorInMs)
       if (mine !== token) return false
 
-      // Drag right. Band and cursor share a duration, so the selection
-      // edge tracks the arrow instead of lagging behind it.
+      // The band and the arrow run on one shared timeline, started in the
+      // same frame, so the selection's right edge stays pinned to the tip
+      // for the whole sweep — it grows as the cursor drags, not before it.
+      const sweep = 'cubic-bezier(.42, 0, .3, 1)'
       const sel = document.createElement('div')
       sel.className = 'tc-sel'
       sel.style.left = selLeft + 'px'
+      sel.style.width = '0px'
+      sel.style.transition = 'none'
       line.insertBefore(sel, line.firstChild)
-      void sel.offsetWidth
+      void sel.offsetWidth // commit the collapsed band
 
-      pointer.style.transition = 'transform ' + CONFIG.selectMs + 'ms cubic-bezier(.42,0,.3,1)'
-      movePointer(x0 + w, y0 - cqi() * 0.6)
+      sel.style.transition = 'width ' + CONFIG.selectMs + 'ms ' + sweep
+      pointer.style.transition = 'transform ' + CONFIG.selectMs + 'ms ' + sweep
+      void sel.offsetWidth
+      movePointer(x0 + w - tipX, y0 - tipY)
       sel.style.width = w + 'px'
 
       await wait(CONFIG.selectMs + CONFIG.holdSelMs)

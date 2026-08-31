@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
+import useReveal from '@/hooks/useReveal'
 
 function AnimatedLabel({ text }) {
   return text.split('').map((char, index) => (
@@ -15,6 +16,7 @@ function AnimatedLabel({ text }) {
 export default function Services() {
   const { t } = useTranslation('home')
   const [openIndex, setOpenIndex] = useState(null)
+  const revealRef = useReveal()
 
   const services = [
     {
@@ -114,7 +116,8 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="services-section"
+      className="services-section reveal"
+      ref={revealRef}
     >
       <div className="services-header">
         <p

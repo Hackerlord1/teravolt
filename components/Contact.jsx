@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Lottie from 'lottie-react'
 import { successTickAnimation } from '@/lib/animations/success-tick'
+import useReveal from '@/hooks/useReveal'
 
 function AnimatedLabel({ text }) {
   return text.split('').map((char, index) => {
@@ -20,6 +21,7 @@ function AnimatedLabel({ text }) {
 
 export default function Contact() {
   const { t } = useTranslation('home')
+  const revealRef = useReveal()
 
   const [loading, setLoading] = useState(false)
   const [feedback, setFeedback] = useState('')
@@ -68,7 +70,9 @@ export default function Contact() {
         body: JSON.stringify(data),
       })
 
-      if (response.ok) {
+      const result = await response.json().catch(() => ({}))
+
+      if (response.ok && result.success) {
         showFeedback(
           t('contact.success'),
           'success'
@@ -97,7 +101,8 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="section"
+      className="section reveal"
+      ref={revealRef}
     >
       <p className="section-label">
         {t('contact.label')}

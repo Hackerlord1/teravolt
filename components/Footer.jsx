@@ -1,8 +1,10 @@
 'use client'
 import { useTranslation } from 'react-i18next'
+import useReveal from '@/hooks/useReveal'
 
 export default function Footer() {
   const { t, ready } = useTranslation('home')
+  const revealRef = useReveal()
   const socials = [
     {
       id: 'twitter',
@@ -92,7 +94,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="footer">
+    <footer className="footer reveal" ref={revealRef}>
       <p>
         © 2026{' '}
         <strong>

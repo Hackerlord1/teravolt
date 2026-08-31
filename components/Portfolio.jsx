@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
+import useReveal from '@/hooks/useReveal'
 
 const projects = [
   {
@@ -81,6 +82,7 @@ function AnimatedLabel({ text }) {
 export default function Portfolio() {
   const router = useRouter()
   const { t } = useTranslation('home')
+  const revealRef = useReveal()
 
   const visibleProjects = projects.slice(0, VISIBLE_COUNT)
 
@@ -89,7 +91,8 @@ export default function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="portfolio-section"
+      className="portfolio-section reveal"
+      ref={revealRef}
     >
       <div className="portfolio-header">
         <p

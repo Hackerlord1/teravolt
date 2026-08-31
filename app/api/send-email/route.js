@@ -79,6 +79,7 @@ export async function POST(req) {
 
     // ✅ Honeypot — real users never fill this hidden field
     if (clean(body.company)) {
+      console.warn('Honeypot triggered — dropping submission (company field was filled)')
       return Response.json({ success: true, message: 'Email sent successfully!' })
     }
 
@@ -129,7 +130,7 @@ export async function POST(req) {
       : 'New Contact Message'
 
     const resend = new Resend(process.env.RESEND_API_KEY)
-    const data = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: FROM,
       to: [RECIPIENT],
       replyTo: replyToEmail || undefined,
@@ -137,9 +138,20 @@ export async function POST(req) {
       html,
     })
 
+    // Resend does NOT throw on API-level rejections (unverified sending
+    // domain, sandbox recipient limits, bad key scope, …) — it returns
+    // `error`. Surface it instead of reporting a false success.
+    if (error) {
+      console.error('RESEND ERROR:', JSON.stringify(error))
+      return Response.json(
+        { success: false, error: 'Failed to send email. Please try again later.' },
+        { status: 502 }
+      )
+    }
+
     return Response.json({
       success: true,
-      id: data?.data?.id ?? null,
+      id: data?.id ?? null,
       message: 'Email sent successfully!',
     })
   } catch (error) {

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import PlanModal from './PlanModal'
 import useCurrency from '@/hooks/useCurrency'
 import CurrencySwitcher from '@/components/CurrencySwitcher'
+import useReveal from '@/hooks/useReveal'
 
 const PAGE_OPTIONS = [
   1, 2, 3, 4, 5,
@@ -50,6 +51,7 @@ function getTranslationArray(
 export default function Pricing() {
   const { t } = useTranslation('home')
   const { currencyInfo, loading, changeCurrency, formatPrice } = useCurrency()
+  const revealRef = useReveal()
 
   const [pageIndex, setPageIndex] =
     useState(0)
@@ -177,7 +179,8 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="pricing-section"
+      className="pricing-section reveal-block"
+      ref={revealRef}
     >
       {selectedPlan && (
         <PlanModal

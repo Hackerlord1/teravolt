@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import useReveal from '@/hooks/useReveal'
 
 const tools = [
   {
@@ -178,6 +179,7 @@ const INITIAL_COUNT = 9
 export default function About() {
   const { t } = useTranslation('home')
   const [showAll, setShowAll] = useState(false)
+  const revealRef = useReveal()
 
   const visibleTools = showAll
     ? tools
@@ -190,7 +192,8 @@ export default function About() {
   return (
     <section
       id="about"
-      className="section about-section"
+      className="section about-section reveal"
+      ref={revealRef}
     >
       <div className="about-label-wrap">
         <p
