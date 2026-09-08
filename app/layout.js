@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar'
 import BackToTop from '@/components/BackToTop'
 import Footer from '@/components/Footer'
 import I18nProvider from '@/providers/I18nProvider'
+import ContentGate from '@/providers/ContentGate'
 
 const SITE_URL = 'https://teravoltdigital.website'
 const SITE_NAME = 'Teravolt Digital'
@@ -70,19 +71,33 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Apply the saved/system theme before first paint so dark-mode
+            visitors never see the page (header included) morph from the
+            light palette after hydration. Must stay inlined and tiny. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('teravolt-theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)}catch(e){}})();",
+          }}
+        />
+      </head>
       <body>
         <I18nProvider>
-          {/* ✅ NAVBAR */}
+          {/* ✅ NAVBAR — outside the content gate: rendered with the first
+             paint and never participates in the load-in effect */}
           <Navbar />
 
           {/* ✅ MAIN CONTENT — each route provides its own <main> landmark */}
-          {children}
+          <ContentGate>
+            {children}
 
-          {/* ✅ FOOTER */}
-          <Footer />
+            {/* ✅ FOOTER */}
+            <Footer />
 
-          {/* ✅ BACK TO TOP */}
-          <BackToTop />
+            {/* ✅ BACK TO TOP */}
+            <BackToTop />
+          </ContentGate>
         </I18nProvider>
       </body>
     </html>

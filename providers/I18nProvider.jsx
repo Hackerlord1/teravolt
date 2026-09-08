@@ -1,11 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import i18n, {
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
 } from '@/lib/i18n'
+
+const I18nReadyContext = createContext(true)
+
+export function useI18nReady() {
+  return useContext(I18nReadyContext)
+}
 
 export default function I18nProvider({
   children,
@@ -57,15 +63,9 @@ export default function I18nProvider({
 
   return (
     <I18nextProvider i18n={i18n}>
-      <div
-        style={{
-          visibility: ready
-            ? 'visible'
-            : 'hidden',
-        }}
-      >
+      <I18nReadyContext.Provider value={ready}>
         {children}
-      </div>
+      </I18nReadyContext.Provider>
     </I18nextProvider>
   )
 }
