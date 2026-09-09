@@ -1,9 +1,26 @@
 import './globals.css'
+import { Space_Grotesk, Space_Mono } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import BackToTop from '@/components/BackToTop'
 import Footer from '@/components/Footer'
 import I18nProvider from '@/providers/I18nProvider'
 import ContentGate from '@/providers/ContentGate'
+
+// Self-hosted at build time instead of the old Google Fonts @import:
+// preloaded, served same-origin, and with metric-adjusted fallbacks so the
+// font swap causes no layout shift (the phone "header stretch" bug).
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-grotesk',
+  display: 'swap',
+})
+
+const spaceMono = Space_Mono({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-spacemono',
+  display: 'swap',
+})
 
 const SITE_URL = 'https://teravoltdigital.website'
 const SITE_NAME = 'Teravolt Digital'
@@ -70,7 +87,10 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${spaceMono.variable}`}
+    >
       <head>
         {/* Apply the saved/system theme before first paint so dark-mode
             visitors never see the page (header included) morph from the

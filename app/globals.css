@@ -1,7 +1,6 @@
-/* =============================
-   IMPORTS
-   ============================= */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+/* Space Grotesk & Space Mono are self-hosted via next/font (see app/layout.js).
+   The old Google Fonts @import caused a late font swap on phones — the whole
+   page re-laid out (header included) once the remote fonts finally arrived. */
 
 /* =============================
    FONT FACES
@@ -59,8 +58,10 @@ a:hover {
   --border: #e0d8cc;
 
   /* Fonts */
-  --font-main: 'Space Grotesk', sans-serif;
-  --font-mono: 'Space Mono', monospace;
+  /* next/font injects --font-grotesk/--font-spacemono on <html>; the
+     quoted names are metric-adjusted fallbacks for the brief swap. */
+  --font-main: var(--font-grotesk, 'Space Grotesk'), sans-serif;
+  --font-mono: var(--font-spacemono, 'Space Mono'), monospace;
   --font-glitz: 'Glitz', sans-serif;
   --font-hellcross: 'Hellcross', sans-serif;
 
