@@ -293,11 +293,13 @@ function SmartLink({
   )
 }
 
-function ThemeToggle({ dark, onToggle, mounted }) {
+// Visuals come from <html data-theme> in CSS (set before first paint), so the
+// knob is already in place on load; `dark` here only drives the ARIA state.
+function ThemeToggle({ dark, onToggle }) {
   return (
     <button
       type="button"
-      className={`theme-track ${dark ? 'theme-track--dark' : 'theme-track--light'}`}
+      className="theme-track"
       onClick={onToggle}
       aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'}
       aria-pressed={dark}
@@ -307,9 +309,7 @@ function ThemeToggle({ dark, onToggle, mounted }) {
         <span className="theme-track-sun">☀️</span>
       </span>
       <span className="theme-track-thumb" aria-hidden="true">
-        <span className="theme-track-thumb-icon">
-          {mounted ? (dark ? '🌙' : '☀️') : '🌙'}
-        </span>
+        <span className="theme-track-thumb-icon" />
       </span>
     </button>
   )
@@ -470,7 +470,7 @@ export default function Navbar() {
 
         {/* Right side */}
         <div className="nav-right">
-          <ThemeToggle dark={dark} onToggle={() => setDark((current) => !current)} mounted={mounted} />
+          <ThemeToggle dark={dark} onToggle={() => setDark((current) => !current)} />
 
           {/* Desktop Connect Button - using connect-btn class */}
           <a href="/#contact" onClick={handleConnect} className="connect-btn connect-btn--desktop">
@@ -563,7 +563,7 @@ export default function Navbar() {
             <span className="nav-overlay-theme-label">Teravolt</span>
             {/* Language Switcher - Mobile */}
             <LangSwitcher currentLang={lang} onChange={changeLang} />
-            <ThemeToggle dark={dark} onToggle={() => setDark((current) => !current)} mounted={mounted} />
+            <ThemeToggle dark={dark} onToggle={() => setDark((current) => !current)} />
           </div>
 
           {/* Mobile CTA - using nav-overlay-cta class */}

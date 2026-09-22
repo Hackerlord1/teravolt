@@ -191,6 +191,8 @@ export default function Portfolio() {
                   src={project.image} 
                   alt={projectTitle}
                   className="portfolio-card-img"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 

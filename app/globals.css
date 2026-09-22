@@ -177,6 +177,21 @@ nav, main, footer {
   z-index: 1;
 }
 
+/* Page content wrapper (providers/ContentGate.jsx). Anything wider than the
+   screen — the hero console panel parked off to the right before it slides
+   in, the `{` glyph, the parked cursor — must be clipped HERE. On phones,
+   `overflow-x: hidden` on body does not stop the browser widening the layout
+   viewport, and the fixed header sizes itself against that wider viewport.
+   `clip` (unlike `hidden`) creates no scroll container, so sticky still works. */
+.content-gate {
+  overflow-x: clip;
+}
+
+/* Saved non-English language still loading — see ContentGate.jsx */
+[data-i18n-pending] .content-gate {
+  visibility: hidden;
+}
+
 /* =============================
    SHARED KEYFRAMES
    ============================= */
@@ -752,6 +767,10 @@ nav, main, footer {
 
 /* =============================
    THEME TOGGLE
+   Styled from <html data-theme>, which the inline script in app/layout.js
+   sets before first paint — NOT from React state. React only learns the
+   theme after hydration, so state-driven classes made the knob visibly
+   slide across (and swap icon) on every load for dark-mode visitors.
    ============================= */
 .theme-track {
   position: relative;
@@ -769,24 +788,24 @@ nav, main, footer {
   overflow: hidden;
 }
 
-.theme-track--light {
+:root:not([data-theme='dark']) .theme-track {
   background: #f0e9df;
   border-color: #e0d8cc;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
 }
 
-.theme-track--dark {
+[data-theme='dark'] .theme-track {
   background: #1a1a2e;
   border-color: #333355;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 0 12px rgba(124,111,255,0.15);
 }
 
-.theme-track--light:hover {
+:root:not([data-theme='dark']) .theme-track:hover {
   border-color: #f5a623;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.06), 0 0 0 3px rgba(245,166,35,0.12);
 }
 
-.theme-track--dark:hover {
+[data-theme='dark'] .theme-track:hover {
   border-color: #7c6fff;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 0 0 3px rgba(124,111,255,0.15);
 }
@@ -814,8 +833,8 @@ nav, main, footer {
   transition: opacity 0.3s ease;
 }
 
-.theme-track--light .theme-track-moon,
-.theme-track--dark .theme-track-sun {
+:root:not([data-theme='dark']) .theme-track-moon,
+[data-theme='dark'] .theme-track-sun {
   opacity: 0.7;
 }
 
@@ -835,7 +854,7 @@ nav, main, footer {
   box-shadow: 0 2px 8px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
-.theme-track--dark .theme-track-thumb {
+[data-theme='dark'] .theme-track-thumb {
   transform: translateX(32px);
   background: radial-gradient(circle at 35% 35%, #4a4a6a 0%, #1a1a2e 100%);
   box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 8px rgba(124,111,255,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
@@ -848,15 +867,19 @@ nav, main, footer {
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.theme-track--dark .theme-track-thumb-icon {
+[data-theme='dark'] .theme-track-thumb-icon {
   transform: rotate(360deg);
 }
 
-.theme-track--light .theme-track-thumb-icon {
-  transform: rotate(0deg);
+.theme-track-thumb-icon::before {
+  content: '☀️';
 }
 
-.theme-track--dark::before {
+[data-theme='dark'] .theme-track-thumb-icon::before {
+  content: '🌙';
+}
+
+[data-theme='dark'] .theme-track::before {
   content: '· · ·';
   position: absolute;
   left: 6px;
@@ -869,10 +892,6 @@ nav, main, footer {
   z-index: 1;
   transition: opacity 0.4s ease;
   opacity: 1;
-}
-
-.theme-track--light::before {
-  opacity: 0;
 }
 
 /* =============================
@@ -964,7 +983,16 @@ nav, main, footer {
   overflow: hidden;
   opacity: 0;
   padding-top: 4.5rem;
-  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  /* Closed, the box is still ~4.5rem tall (max-height can't shrink past the
+     padding), so it must be taken out of the page entirely — otherwise it
+     swallows taps across the top of the screen and its links stay in the tab
+     order. The delay keeps it visible while it collapses. */
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease,
+    visibility 0s linear 0.45s;
   box-shadow: none;
 }
 
@@ -972,6 +1000,9 @@ nav, main, footer {
   max-height: 100vh;
   opacity: 1;
   overflow-y: auto;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12), 0 8px 20px rgba(0, 0, 0, 0.06);
 }
 
@@ -3630,7 +3661,7 @@ input::placeholder, textarea::placeholder { color: var(--gray); }
   /* Theme Toggle */
   .theme-track { width: 52px; height: 28px; }
   .theme-track-thumb { width: 20px; height: 20px; top: 3px; left: 3px; }
-  .theme-track--dark .theme-track-thumb { transform: translateX(26px); }
+  [data-theme='dark'] .theme-track-thumb { transform: translateX(26px); }
   .theme-track-thumb-icon { font-size: 0.7rem; }
 
   /* 404 */

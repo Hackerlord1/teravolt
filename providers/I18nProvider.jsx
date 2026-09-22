@@ -1,23 +1,15 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import i18n, {
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
 } from '@/lib/i18n'
 
-const I18nReadyContext = createContext(true)
-
-export function useI18nReady() {
-  return useContext(I18nReadyContext)
-}
-
 export default function I18nProvider({
   children,
 }) {
-  const [ready, setReady] = useState(false)
-
   useEffect(() => {
     let active = true
 
@@ -49,8 +41,12 @@ export default function I18nProvider({
       document.documentElement.lang =
         initialLanguage
 
+      // Reveal the content hidden by the inline script in app/layout.js
+      // (see providers/ContentGate.jsx)
       if (active) {
-        setReady(true)
+        document.documentElement.removeAttribute(
+          'data-i18n-pending'
+        )
       }
     }
 
@@ -63,9 +59,7 @@ export default function I18nProvider({
 
   return (
     <I18nextProvider i18n={i18n}>
-      <I18nReadyContext.Provider value={ready}>
-        {children}
-      </I18nReadyContext.Provider>
+      {children}
     </I18nextProvider>
   )
 }

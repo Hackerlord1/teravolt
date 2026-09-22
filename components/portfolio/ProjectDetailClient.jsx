@@ -223,6 +223,8 @@ export default function ProjectDetailClient({
                             <img
                               src={image}
                               alt={`${project.title} screenshot ${index + 2}`}
+                              loading="lazy"
+                              decoding="async"
                               style={{
                                 objectFit:
                                   'cover',

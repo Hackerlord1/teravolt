@@ -1,9 +1,17 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import { useTranslation } from 'react-i18next'
-import Lottie from 'lottie-react'
 import { successTickAnimation } from '@/lib/animations/success-tick'
+
+// lottie-web is ~300 KB and only needed once a message has been sent, so
+// fetch it on demand instead of with the homepage. The placeholder keeps
+// the feedback text from shifting when the tick arrives.
+const Lottie = dynamic(() => import('lottie-react'), {
+  ssr: false,
+  loading: () => <span style={{ display: 'inline-block', width: 24, height: 24 }} />,
+})
 
 export default function PlanModal({
   plan,

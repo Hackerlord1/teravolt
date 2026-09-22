@@ -90,15 +90,20 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className={`${spaceGrotesk.variable} ${spaceMono.variable}`}
+      // The inline script below sets data-theme / data-i18n-pending on
+      // <html> before React hydrates; that difference is intentional.
+      suppressHydrationWarning
     >
       <head>
         {/* Apply the saved/system theme before first paint so dark-mode
             visitors never see the page (header included) morph from the
-            light palette after hydration. Must stay inlined and tiny. */}
+            light palette after hydration. Also flag a saved non-English
+            language, so only those visitors wait for their translations
+            (see providers/ContentGate.jsx). Must stay inlined and tiny. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var t=localStorage.getItem('teravolt-theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)}catch(e){}})();",
+              "(function(){var d=document.documentElement;try{var t=localStorage.getItem('teravolt-theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.setAttribute('data-theme',t)}catch(e){}try{var l=(localStorage.getItem('lang')||'').split('-')[0].toLowerCase();if(l&&l!=='en')d.setAttribute('data-i18n-pending','')}catch(e){}})();",
           }}
         />
       </head>
