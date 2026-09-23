@@ -2367,18 +2367,6 @@ input::placeholder, textarea::placeholder { color: var(--gray); }
 .sidebar-social-btn span {
   font-size: 0.62rem;
 }
-.sidebar-social-btn:hover {
-  width: 115px;
-  border-radius: 6px;
-  border-color: transparent;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
-}
-.sidebar-social-btn:hover span {
-  width: 65px;
-  margin-left: 6px;
-  opacity: 1;
-}
 
 /* Footer social sizes */
 .footer-social-btn {
@@ -2392,17 +2380,6 @@ input::placeholder, textarea::placeholder { color: var(--gray); }
 }
 .footer-social-btn span {
   font-size: 0.68rem;
-}
-.footer-social-btn:hover {
-  width: 140px;
-  border-radius: 8px;
-  border-color: transparent;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-.footer-social-btn:hover span {
-  width: 80px;
-  margin-left: 8px;
-  opacity: 1;
 }
 
 /* Social float sizes */
@@ -2420,16 +2397,48 @@ input::placeholder, textarea::placeholder { color: var(--gray); }
 .social-float-btn span {
   font-size: 0.7rem;
 }
-.social-float-btn:hover {
-  width: 140px;
-  border-radius: 8px;
-  border-color: transparent;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.06);
-}
-.social-float-btn:hover span {
-  width: 80px;
-  margin-left: 8px;
-  opacity: 1;
+
+/* Expand-to-label on hover — pointer devices only.
+   A touch screen keeps :hover applied after a tap, so on phones these
+   buttons used to stay stretched (or, with the old `width: auto` override,
+   collapse to the bare icon) and shove the rest of the row sideways. */
+@media (hover: hover) and (pointer: fine) {
+  .sidebar-social-btn:hover {
+    width: 115px;
+    border-radius: 6px;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+  .sidebar-social-btn:hover span {
+    width: 65px;
+    margin-left: 6px;
+    opacity: 1;
+  }
+
+  .footer-social-btn:hover {
+    width: 140px;
+    border-radius: 8px;
+    border-color: transparent;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  .footer-social-btn:hover span {
+    width: 80px;
+    margin-left: 8px;
+    opacity: 1;
+  }
+
+  .social-float-btn:hover {
+    width: 140px;
+    border-radius: 8px;
+    border-color: transparent;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+  .social-float-btn:hover span {
+    width: 80px;
+    margin-left: 8px;
+    opacity: 1;
+  }
 }
 
 /* =============================
@@ -2563,10 +2572,11 @@ input::placeholder, textarea::placeholder { color: var(--gray); }
 #footer-tiktok:hover span,
 .social-btn--tiktok:hover span { color: #ffffff; }
 
-/* WhatsApp hover */
+/* WhatsApp hover — solid green: the icon below turns white, which was
+   invisible against the old near-white background. */
 #footer-whatsapp:hover,
 .social-btn--whatsapp:hover {
-  background: #e5eee8;
+  background: #25D366;
   border-color: #25D366;
 }
 #footer-whatsapp:hover svg,
@@ -2677,6 +2687,9 @@ input::placeholder, textarea::placeholder { color: var(--gray); }
 .footer-socials {
   display: flex;
   align-items: center;
+  justify-content: center;
+  /* Wrap rather than run off the edge on very narrow phones */
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
@@ -2875,7 +2888,7 @@ input::placeholder, textarea::placeholder { color: var(--gray); }
 .footer-links { display: flex; gap: 2rem; list-style: none; }
 .footer-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
 .footer-links a:hover { color: var(--orange); }
-.footer-socials { display: flex; align-items: center; gap: 0.5rem; }
+/* .footer-socials lives in the SOCIAL CONTAINERS section above */
 
 /* =============================
    BACK TO TOP
@@ -3640,9 +3653,8 @@ input::placeholder, textarea::placeholder { color: var(--gray); }
   .sidebar-toggle { top: 5.5rem; left: 0.8rem; padding: 0.5rem 1rem; font-size: 0.68rem; }
   .blog-sidebar { width: 280px; }
 
-  /* Social buttons — disable expand on mobile */
-  .footer-social-btn:hover, .social-float-btn:hover, .sidebar-social-btn:hover { width: auto !important; border-radius: inherit !important; }
-  .footer-social-btn:hover span, .social-float-btn:hover span, .sidebar-social-btn:hover span { width: 0 !important; margin-left: 0 !important; opacity: 0 !important; }
+  /* Social buttons — the expand-on-hover is already limited to pointer
+     devices, so phones keep these at their plain icon size. */
   .footer-social-btn { width: 38px; height: 38px; }
   .footer-social-btn svg { width: 15px; height: 15px; }
   .social-float { position: fixed; left: 0; bottom: 0; right: 0; flex-direction: row; justify-content: center; gap: 0.5rem; padding: 0.6rem 1rem; background: var(--bg); border-top: 1px solid var(--border); z-index: 998; }
